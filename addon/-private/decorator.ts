@@ -6,11 +6,7 @@ import TrackedObject from './object';
 import { TrackedMap, TrackedWeakMap } from './map';
 import { TrackedSet, TrackedWeakSet } from './set';
 
-export default function tracked(
-  target: object,
-  key: string,
-  desc: PropertyDescriptor
-) {
+function tracked(target: object, key: string, desc: PropertyDescriptor) {
   let initializer = (desc as any).initializer;
   let trackedDesc = glimmerTracked(target, key, desc);
   let { get: originalGet, set: originalSet } = trackedDesc;
@@ -58,3 +54,5 @@ export default function tracked(
 
   return trackedDesc;
 }
+
+export default (tracked as unknown) as PropertyDecorator;
