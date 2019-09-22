@@ -3,7 +3,7 @@
 ## Installation
 
 * `git clone <repository-url>`
-* `cd tracked-primitives`
+* `cd tracked-built-ins`
 * `yarn install`
 
 ## Linting
