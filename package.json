@@ -1,13 +1,13 @@
 {
   "name": "tracked-built-ins",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Tracked versions of JavaScript's built-in classes!",
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
+  "repository": "https://github.com/pzuraq/tracked-built-ins",
   "license": "MIT",
-  "author": "",
+  "author": "Chris Hewell Garrett",
   "directories": {
     "doc": "doc",
     "test": "tests"
