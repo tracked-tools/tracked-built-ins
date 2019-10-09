@@ -115,7 +115,7 @@ module('TrackedObject', function(hooks) {
 
   module('USE_PROXY: true', hooks => {
     hooks.beforeEach(() => setTrackedBuiltInsConfig({ USE_PROXY: true }));
-    hooks.afterEach(() => setTrackedBuiltInsConfig({ USE_PROXY: true }));
+    hooks.afterEach(() => setTrackedBuiltInsConfig({ USE_PROXY: false }));
 
     test('from', assert => {
       let obj = new TrackedObject({ foo: 123 });
@@ -136,8 +136,7 @@ module('TrackedObject', function(hooks) {
         update() {
           this.obj.foo = 123;
         }
-      },
-      true
+      }
     );
   });
 });
