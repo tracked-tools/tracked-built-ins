@@ -20,6 +20,7 @@ function patchObjectDescriptor(obj: object, keyName: string, desc: PropertyDescr
   }
   if (typeof desc.get === 'function' || typeof desc.set === 'function') {
     Object.defineProperty(obj, keyName, desc);
+    return;
   }
   const key = `${setterPropertyPrefix}${keyName}`;
   defineHiddenProperty(obj, key, desc.value);
