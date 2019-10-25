@@ -11,7 +11,7 @@ function tracked(target: object, key: string, desc: PropertyDescriptor) {
   let trackedDesc = glimmerTracked(target, key, desc);
   let { get: originalGet, set: originalSet } = trackedDesc;
 
-  let defaultAssigned = new WeakMap();
+  let defaultAssigned = new WeakSet();
 
   function set(this: any, value: unknown) {
     if (typeof value === 'object' && value !== null) {
@@ -43,7 +43,7 @@ function tracked(target: object, key: string, desc: PropertyDescriptor) {
 
       set.call(this, defaultValue);
 
-      defaultAssigned.set(this, true);
+      defaultAssigned.add(this);
     }
 
     return originalGet!.call(this);
