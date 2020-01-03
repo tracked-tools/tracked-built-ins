@@ -5,6 +5,6 @@ export function setTrackedBuiltInsConfig(settings: {
   USE_PROXY?: boolean;
   STRICT_PROXY_ACCESS?: boolean;
 }) {
-  USE_PROXY = settings.USE_PROXY || false;
-  STRICT_PROXY_ACCESS = settings.STRICT_PROXY_ACCESS || false;
+  USE_PROXY = (settings && settings.USE_PROXY) || false;
+  STRICT_PROXY_ACCESS = (settings && settings.STRICT_PROXY_ACCESS) || false;
 }
