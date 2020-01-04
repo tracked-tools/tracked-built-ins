@@ -70,7 +70,14 @@ export class TrackedMap<K = any, V = any> extends Map<K, V> {
 }
 
 if (typeof Symbol !== undefined) {
-  TrackedMap.prototype[Symbol.iterator] = TrackedMap.prototype.entries;
+  let originalIterator = TrackedMap.prototype[Symbol.iterator];
+
+  Object.defineProperty(TrackedMap.prototype, Symbol.iterator, {
+    get() {
+      consume(this);
+      return originalIterator;
+    }
+  });
 }
 
 export class TrackedWeakMap<K extends object = object, V = any> extends WeakMap<

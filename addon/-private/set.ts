@@ -64,7 +64,14 @@ export class TrackedSet<T = any> extends Set<T> {
 }
 
 if (typeof Symbol !== undefined) {
-  TrackedSet.prototype[Symbol.iterator] = TrackedSet.prototype.entries;
+  let originalIterator = TrackedSet.prototype[Symbol.iterator];
+
+  Object.defineProperty(TrackedSet.prototype, Symbol.iterator, {
+    get() {
+      consume(this);
+      return originalIterator;
+    }
+  });
 }
 
 export class TrackedWeakSet<T extends object = object> extends WeakSet<T> {
