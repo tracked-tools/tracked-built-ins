@@ -1,38 +1,44 @@
-import { get, notifyPropertyChange } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
-let CURRENT_ID = 0;
+export class Tag {
+  @tracked private tag: undefined;
+
+  consume() {
+    // read the tag value
+    this.tag;
+  }
+
+  dirty() {
+    // write the tag value
+    this.tag = this.tag;
+  }
+}
 
 const OBJECT_TAGS = new WeakMap();
-const NON_OBJECT_TAGS = new Map();
+const SELF = {};
 
-export function toTrackableKey(key: unknown): string {
-  let tag;
+function getOrCreateTag(obj: object, key: unknown) {
+  let tags = OBJECT_TAGS.get(obj);
 
-  if (typeof key === 'object' && key !== null) {
-    tag = OBJECT_TAGS.get(key);
+  if (tags === undefined) {
+    tags = new Map();
+    OBJECT_TAGS.set(obj, tags);
+  }
 
-    if (tag === undefined) {
-      tag = '__TAG__' + CURRENT_ID++;
-      OBJECT_TAGS.set(key, tag);
-    }
-  } else {
-    tag = NON_OBJECT_TAGS.get(key);
+  let tag = tags.get(key);
 
-    if (tag === undefined) {
-      tag = '__TAG__' + CURRENT_ID++;
-      NON_OBJECT_TAGS.set(key, tag);
-    }
+  if (tag === undefined) {
+    tag = new Tag();
+    tags.set(key, tag);
   }
 
   return tag;
 }
 
-export function consume(obj: any, key: unknown = obj) {
-  get(obj, toTrackableKey(key));
+export function consume(obj: object, key: unknown = SELF) {
+  getOrCreateTag(obj, key).consume();
 }
 
-export function dirty(obj: any, key: unknown = obj) {
-  notifyPropertyChange(obj, toTrackableKey(key));
+export function dirty(obj: object, key: unknown = SELF) {
+  getOrCreateTag(obj, key).dirty();
 }
-
-export const SUPPORTS_PROXY = typeof Proxy === 'function';
