@@ -5,6 +5,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import { reactivityTest } from '../helpers/reactivity';
 import { eachReactivityTest } from '../helpers/each-reactivity';
+import { eachInReactivityTest } from '../helpers/each-in-reactivity';
 
 module('TrackedSet', function(hooks) {
   setupRenderingTest(hooks);
@@ -312,6 +313,29 @@ module('TrackedSet', function(hooks) {
   );
 
   eachReactivityTest(
+    'add existing value',
+    class extends Component {
+      collection = new TrackedSet(['foo', 123]);
+
+      update() {
+        this.collection.add('foo');
+      }
+    },
+    false
+  );
+
+  eachInReactivityTest(
+    'add',
+    class extends Component {
+      collection = new TrackedSet(['foo', 123]);
+
+      update() {
+        this.collection.add('bar');
+      }
+    }
+  );
+
+  eachInReactivityTest(
     'add existing value',
     class extends Component {
       collection = new TrackedSet(['foo', 123]);
