@@ -4,6 +4,7 @@ import { TrackedMap } from 'tracked-built-ins';
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import { reactivityTest } from '../helpers/reactivity';
+//import { eachReactivityTest } from '../helpers/each-reactivity';
 
 module('TrackedMap', function(hooks) {
   setupRenderingTest(hooks);
@@ -331,4 +332,35 @@ module('TrackedMap', function(hooks) {
       }
     }
   );
+
+  /* TODO
+   *
+   * You can't currently #each over a built-in Map in Ember--even though it has
+   * an iterator that yields tuples (two-element arrays containing key-value
+   * pairs) so it should ostensibly work. If and when that changes, we can
+   * enable these tests...
+   *
+  eachReactivityTest(
+    'set',
+    class extends Component {
+      collection = new TrackedMap([['foo', 123]]);
+
+      update() {
+        this.collection.set('bar', 456);
+      }
+    }
+  );
+
+  eachReactivityTest(
+    'set existing value',
+    class extends Component {
+      collection = new TrackedMap([['foo', 123]]);
+
+      update() {
+        this.collection.set('foo', 789);
+      }
+    }
+  );
+   *
+   */
 });
