@@ -5,9 +5,11 @@ This addon provides tracked versions of JavaScript's built-ins:
 
 ```js
 import {
+  TrackedObject,
+  TrackedArray,
   TrackedMap,
-  TrackedWeakMap,
   TrackedSet,
+  TrackedWeakMap,
   TrackedWeakSet,
 } from 'tracked-built-ins';
 ```
@@ -25,9 +27,11 @@ import { tracked } from 'tracked-built-ins';
 class Foo {
   @tracked value = 123;
 
+  obj = tracked({});
+  arr = tracked([]);
   map = tracked(Map);
-  weakMap = tracked(WeakMap);
   set = tracked(Set);
+  weakMap = tracked(WeakMap);
   weakSet = tracked(WeakSet);
 }
 ```
@@ -38,6 +42,64 @@ Installation
 ```
 ember install tracked-built-ins
 ```
+
+Usage
+------------------------------------------------------------------------------
+
+See the MDN documentation for each class to learn more about it:
+
+- [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
+- [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+- [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+- [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
+- [WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
+- [WeakSet](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet)
+
+All public APIs are the same, with a few exceptions:
+
+1. `new TrackedArray()` should receive an _array_ instead of variable number of
+   arguments. This decision was due to the confusing nature of `new Array()` in
+   general, and for symmetry with the other `new` APIs.
+
+   ```js
+   // bad
+   new TrackedArray(123);
+   new TrackedArray('foo', 'bar', 'baz');
+
+   // good
+   new TrackedArray([123]);
+   new TrackedArray(['foo', 'bar', 'baz']);
+   ```
+
+2. `new TrackedObject()` returns a _copy_ of the object passed back to it,
+   whereas `new Object()` will return the _original_ object. This is to prevent
+   accidentally mutating the original object.
+
+   ```js
+   let original = {};
+   let obj = new TrackedObject(original);
+
+   obj.foo = 123;
+   original.foo; // undefined;
+   ```
+
+3. Static `Array` and `Object` methods that do not create a new Array/Object
+   have been omitted. In general, you should use the original static methods for
+   these features, since autotracking has nothing to do with them. The static
+   methods that are supported are:
+
+   - `Array`
+     - `from`
+     - `of`
+   - `Object`
+     - `fromEntries`
+
+   `Object.create` has also been omitted, even though it creates an instance,
+   because manual prototype manipulation is an advanced use case in general that
+   is not currently supported.
+
+All types will also register as `instanceof` their base type, so they can be
+used as fully transparent replacements in most circumstances.
 
 Compatibility
 ------------------------------------------------------------------------------

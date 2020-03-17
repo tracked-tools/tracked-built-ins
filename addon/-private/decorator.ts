@@ -1,28 +1,38 @@
-import { DEBUG } from "@glimmer/env";
-import { tracked as glimmerTracked } from "@glimmer/tracking";
+import { tracked as glimmerTracked } from '@glimmer/tracking';
+import { assert } from '@ember/debug';
 
 import {
   TrackedMap,
   TrackedWeakMap,
   TrackedSet,
   TrackedWeakSet
-} from "tracked-maps-and-sets";
+} from 'tracked-maps-and-sets';
+import TrackedArray from './array';
+import TrackedObject from './object';
 
 export default function tracked<T>(
-  obj: Set<T> | { new (): Set<T> }
+  obj: T[] | typeof Array
+): TrackedArray<T>;
+
+export default function tracked<T>(
+  obj: Set<T> | typeof Set
 ): TrackedSet<T>;
 
 export default function tracked<T, U>(
-  obj: Map<T, U> | { new (): Map<T, U> }
+  obj: Map<T, U> | typeof Map
 ): TrackedMap<T, U>;
 
 export default function tracked<T extends object>(
-  obj: WeakSet<T> | { new (): WeakSet<T> }
+  obj: WeakSet<T> | typeof WeakSet
 ): TrackedWeakSet<T>;
 
 export default function tracked<T extends object, U>(
-  obj: WeakMap<T, U> | { new (): WeakMap<T, U> }
+  obj: WeakMap<T, U> | typeof WeakMap
 ): TrackedWeakMap<T, U>;
+
+export default function tracked<T extends object>(
+  obj: T | typeof Object
+): T;
 
 export default function tracked(
   obj: object,
@@ -39,7 +49,15 @@ export default function tracked(
     return glimmerTracked(obj, key as string, desc);
   }
 
+  if (Array.isArray(obj)) {
+    return new TrackedArray(obj);
+  }
+
   switch (obj) {
+    case Object:
+      return new TrackedObject();
+    case Array:
+      return new TrackedArray();
     case Map:
       return new TrackedMap();
     case WeakMap:
@@ -58,19 +76,18 @@ export default function tracked(
     return new TrackedSet(obj);
   } else if (obj instanceof WeakSet) {
     return new TrackedWeakSet();
+  } else {
+    assert(`You must either use tracked as a field decorator, or to wrap built-in class instances:
+
+      class Example {
+        @tracked field = 123;
+
+        map = tracked(Map);
+        map = tracked(new Map());
+      }`,
+      typeof obj === 'object' && obj !== null
+    );
+
+    return new TrackedObject(obj);
   }
-
-  if (DEBUG) {
-    throw new Error(`You must either use tracked as a field decorator, or to wrap built-in class instances:
-
-    class Example {
-      @tracked field = 123;
-
-      map = tracked(Map);
-      map = tracked(new Map());
-    }
-    `);
-  }
-
-  return;
 }
