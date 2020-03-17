@@ -1,23 +1,53 @@
-import { DEBUG } from '@glimmer/env';
-import { tracked as glimmerTracked } from '@glimmer/tracking';
+import { DEBUG } from "@glimmer/env";
+import { tracked as glimmerTracked } from "@glimmer/tracking";
 
-import { TrackedMap, TrackedWeakMap, TrackedSet, TrackedWeakSet } from 'tracked-maps-and-sets';
+import {
+  TrackedMap,
+  TrackedWeakMap,
+  TrackedSet,
+  TrackedWeakSet
+} from "tracked-maps-and-sets";
 
-export default function tracked(target: object, key: string | symbol, desc: PropertyDescriptor): void;
-export default function tracked<T, U>(obj: Map<T, U>): TrackedMap<T, U>;
-export default function tracked<T extends object, U>(obj: WeakMap<T, U>): TrackedWeakMap<T, U>;
-export default function tracked<T>(obj: Set<T>): TrackedSet<T>;
-export default function tracked<T extends object>(obj: WeakSet<T>): TrackedWeakSet<T>;
-export default function tracked(obj: object, key?: string | symbol, desc?: PropertyDescriptor) {
+export default function tracked<T>(
+  obj: Set<T> | { new (): Set<T> }
+): TrackedSet<T>;
+
+export default function tracked<T, U>(
+  obj: Map<T, U> | { new (): Map<T, U> }
+): TrackedMap<T, U>;
+
+export default function tracked<T extends object>(
+  obj: WeakSet<T> | { new (): WeakSet<T> }
+): TrackedWeakSet<T>;
+
+export default function tracked<T extends object, U>(
+  obj: WeakMap<T, U> | { new (): WeakMap<T, U> }
+): TrackedWeakMap<T, U>;
+
+export default function tracked(
+  obj: object,
+  key: string | symbol,
+  desc: PropertyDescriptor
+): void;
+
+export default function tracked(
+  obj: object,
+  key?: string | symbol,
+  desc?: PropertyDescriptor
+) {
   if (key !== undefined && desc !== undefined) {
     return glimmerTracked(obj, key as string, desc);
   }
 
   switch (obj) {
-    case Map: return new TrackedMap();
-    case WeakMap: return new TrackedWeakMap();
-    case Set: return new TrackedSet();
-    case WeakSet: return new TrackedWeakSet();
+    case Map:
+      return new TrackedMap();
+    case WeakMap:
+      return new TrackedWeakMap();
+    case Set:
+      return new TrackedSet();
+    case WeakSet:
+      return new TrackedWeakSet();
   }
 
   if (obj instanceof Map) {
