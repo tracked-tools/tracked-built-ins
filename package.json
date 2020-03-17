@@ -23,8 +23,10 @@
     "postpublish": "ember ts:clean"
   },
   "dependencies": {
+    "@typescript-eslint/parser": "^2.24.0",
     "ember-cli-babel": "^7.7.3",
-    "ember-cli-typescript": "^3.0.0"
+    "ember-cli-typescript": "^3.0.0",
+    "tracked-maps-and-sets": "^1.0.1"
   },
   "devDependencies": {
     "@ember/optional-features": "^0.7.0",
@@ -64,7 +66,7 @@
     "typescript": "^3.6.3"
   },
   "engines": {
-    "node": "8.* || >= 10.*"
+    "node": "10.* || >= 12.*"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"

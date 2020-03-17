@@ -1,3 +1,7 @@
 export { default as tracked } from './-private/decorator';
-export { TrackedMap, TrackedWeakMap } from './-private/map';
-export { TrackedSet, TrackedWeakSet } from './-private/set';
+export {
+  TrackedMap,
+  TrackedWeakMap,
+  TrackedSet,
+  TrackedWeakSet
+} from 'tracked-maps-and-sets';
