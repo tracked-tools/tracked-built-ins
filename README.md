@@ -1,7 +1,7 @@
 tracked-built-ins
 ==============================================================================
 
-This addon provides tracked versions of JavaScript's built-in built-ins:
+This addon provides tracked versions of JavaScript's built-ins:
 
 ```js
 import {
@@ -23,10 +23,12 @@ automatically shallow-wraps the native versions of these classes:
 import { tracked } from 'tracked-built-ins';
 
 class Foo {
-  @tracked map = new Map();
-  @tracked weakMap = new WeakMap();
-  @tracked set = new Set();
-  @tracked weakSet = new WeakSet();
+  @tracked value = 123;
+
+  map = tracked(Map);
+  weakMap = tracked(WeakMap);
+  set = tracked(Set);
+  weakSet = tracked(WeakSet);
 }
 ```
 

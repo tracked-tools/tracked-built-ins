@@ -1,47 +1,46 @@
+import { DEBUG } from '@glimmer/env';
 import { tracked as glimmerTracked } from '@glimmer/tracking';
 
-import { TrackedMap, TrackedWeakMap } from './map';
-import { TrackedSet, TrackedWeakSet } from './set';
+import { TrackedMap, TrackedWeakMap, TrackedSet, TrackedWeakSet } from 'tracked-maps-and-sets';
 
-function tracked(target: object, key: string, desc: PropertyDescriptor) {
-  let initializer = (desc as any).initializer;
-  let trackedDesc = glimmerTracked(target, key, desc);
-  let { get: originalGet, set: originalSet } = trackedDesc;
-
-  let defaultAssigned = new WeakSet();
-
-  function set(this: any, value: unknown) {
-    if (typeof value === 'object' && value !== null) {
-      if (value instanceof Map) {
-        value = new TrackedMap(value);
-      } else if (value instanceof WeakMap) {
-        value = new TrackedWeakMap();
-      } else if (value instanceof Set) {
-        value = new TrackedSet(value);
-      } else if (value instanceof WeakSet) {
-        value = new TrackedWeakSet();
-      }
-    }
-
-    return originalSet!.call(this, value);
+export default function tracked(target: object, key: string | symbol, desc: PropertyDescriptor): void;
+export default function tracked<T, U>(obj: Map<T, U>): TrackedMap<T, U>;
+export default function tracked<T extends object, U>(obj: WeakMap<T, U>): TrackedWeakMap<T, U>;
+export default function tracked<T>(obj: Set<T>): TrackedSet<T>;
+export default function tracked<T extends object>(obj: WeakSet<T>): TrackedWeakSet<T>;
+export default function tracked(obj: object, key?: string | symbol, desc?: PropertyDescriptor) {
+  if (key !== undefined && desc !== undefined) {
+    return glimmerTracked(obj, key as string, desc);
   }
 
-  function get(this: any) {
-    if (!defaultAssigned.has(this)) {
-      let defaultValue = initializer();
-
-      set.call(this, defaultValue);
-
-      defaultAssigned.add(this);
-    }
-
-    return originalGet!.call(this);
+  switch (obj) {
+    case Map: return new TrackedMap();
+    case WeakMap: return new TrackedWeakMap();
+    case Set: return new TrackedSet();
+    case WeakSet: return new TrackedWeakSet();
   }
 
-  trackedDesc.get = get;
-  trackedDesc.set = set;
+  if (obj instanceof Map) {
+    return new TrackedMap(obj);
+  } else if (obj instanceof WeakMap) {
+    return new TrackedWeakMap();
+  } else if (obj instanceof Set) {
+    return new TrackedSet(obj);
+  } else if (obj instanceof WeakSet) {
+    return new TrackedWeakSet();
+  }
 
-  return trackedDesc;
+  if (DEBUG) {
+    throw new Error(`You must either use tracked as a field decorator, or to wrap built-in class instances:
+
+    class Example {
+      @tracked field = 123;
+
+      map = tracked(Map);
+      map = tracked(new Map());
+    }
+    `);
+  }
+
+  return;
 }
-
-export default (tracked as unknown) as PropertyDecorator;
