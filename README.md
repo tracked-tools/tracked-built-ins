@@ -1,6 +1,10 @@
 tracked-built-ins
 ==============================================================================
 
+> **IMPORTANT: This addon does _NOT_ support IE 11 or older browsers. If you
+> need to support them, consider using [tracked-maps and sets](https://github.com/pzuraq/tracked-maps-and-sets)
+> instead.**
+
 This addon provides tracked versions of JavaScript's built-ins:
 
 ```js
