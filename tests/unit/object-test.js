@@ -82,4 +82,55 @@ module('TrackedObject', function(hooks) {
       }
     }
   );
+
+  reactivityTest(
+    'in operator works',
+    class extends Component {
+      obj = new TrackedObject();
+
+      get value() {
+        return 'foo' in this.obj;
+      }
+
+      update() {
+        this.obj.foo = 123;
+      }
+    }
+  );
+
+  reactivityTest(
+    'for in works',
+    class extends Component {
+      obj = new TrackedObject();
+
+      get value() {
+        let keys = [];
+
+        for (let key in this.obj) {
+          keys.push(key);
+        }
+
+        return keys;
+      }
+
+      update() {
+        this.obj.foo = 123;
+      }
+    }
+  );
+
+  reactivityTest(
+    'Object.keys works',
+    class extends Component {
+      obj = new TrackedObject();
+
+      get value() {
+        return Object.keys(this.obj);
+      }
+
+      update() {
+        this.obj.foo = 123;
+      }
+    }
+  );
 });

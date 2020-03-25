@@ -1,18 +1,34 @@
 import { consumeKey, dirtyKey } from 'tracked-maps-and-sets/-private/util';
 import { notifyPropertyChange } from '@ember/object';
 
-function createProxy<T>(obj: { [key: string]: T } = {}) {
+const COLLECTION = Symbol();
+
+function createProxy(obj = {}) {
+
   return new Proxy(obj, {
     get(target, prop) {
       consumeKey(target, prop);
 
-      return (target as any)[prop];
+      return target[prop];
+    },
+
+    has(target, prop) {
+      consumeKey(target, prop);
+
+      return prop in target;
+    },
+
+    ownKeys(target) {
+      consumeKey(target, COLLECTION);
+
+      return Reflect.ownKeys(target);
     },
 
     set(target, prop, value, receiver) {
-      (target as any)[prop] = value;
+      target[prop] = value;
 
       dirtyKey(target, prop);
+      dirtyKey(target, COLLECTION);
 
       // We need to notify this way to make {{each-in}} update
       notifyPropertyChange(receiver, '_SOME_PROP_');
@@ -27,7 +43,7 @@ function createProxy<T>(obj: { [key: string]: T } = {}) {
 }
 
 export default class TrackedObject {
-  static fromEntries(entries: Iterable<readonly [PropertyKey, T]>): { [k in PropertyKey]: T } {
+  static fromEntries(entries) {
     return createProxy(Object.fromEntries(entries));
   }
 
