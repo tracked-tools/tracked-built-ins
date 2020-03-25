@@ -37,7 +37,7 @@ export default function tracked<T extends object>(
 export default function tracked(
   obj: object,
   key: string | symbol,
-  desc: PropertyDescriptor
+  desc?: PropertyDescriptor
 ): void;
 
 export default function tracked(
