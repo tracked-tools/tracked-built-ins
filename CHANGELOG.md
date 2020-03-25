@@ -1,3 +1,13 @@
+## v1.0.1 (2020-03-25)
+
+#### :bug: Bug Fix
+* [#22](https://github.com/pzuraq/tracked-built-ins/pull/22) [BUGFIX] Ensure key operators work for TrackedObject ([@pzuraq](https://github.com/pzuraq))
+* [#20](https://github.com/pzuraq/tracked-built-ins/pull/20) Update decorator.ts ([@speigg](https://github.com/speigg))
+
+#### Committers: 2
+- Chris Garrett ([@pzuraq](https://github.com/pzuraq))
+- Gheric Speiginer ([@speigg](https://github.com/speigg))
+
 ## v1.0.0 (2020-03-18)
 
 #### :boom: Breaking Change
