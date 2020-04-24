@@ -1,3 +1,11 @@
+## v1.0.2 (2020-04-24)
+
+#### :bug: Bug Fix
+* [#25](https://github.com/pzuraq/tracked-built-ins/pull/25) [BUGFIX] Fixes the mandatory setter bug ([@pzuraq](https://github.com/pzuraq))
+
+#### Committers: 1
+- Chris Garrett ([@pzuraq](https://github.com/pzuraq))
+
 ## v1.0.1 (2020-03-25)
 
 #### :bug: Bug Fix
