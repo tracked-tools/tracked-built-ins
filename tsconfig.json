@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2019",
+    "target": "es2015",
+    "module": "es2015",
     "allowJs": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
@@ -14,43 +15,12 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noEmitOnError": false,
-    "noEmit": true,
     "inlineSourceMap": true,
     "inlineSources": true,
-    "baseUrl": ".",
-    "module": "es6",
     "experimentalDecorators": true,
-    "paths": {
-      "dummy/tests/*": [
-        "tests/*"
-      ],
-      "dummy/*": [
-        "tests/dummy/app/*",
-        "app/*"
-      ],
-      "tracked-built-ins": [
-        "addon"
-      ],
-      "tracked-built-ins/*": [
-        "addon/*"
-      ],
-      "tracked-built-ins/test-support": [
-        "addon-test-support"
-      ],
-      "tracked-built-ins/test-support/*": [
-        "addon-test-support/*"
-      ],
-      "*": [
-        "types/*"
-      ]
-    }
+    "outDir": "addon"
   },
   "include": [
-    "app/**/*",
-    "addon/**/*",
-    "tests/**/*",
-    "types/**/*",
-    "test-support/**/*",
-    "addon-test-support/**/*"
+    "src/**/*"
   ]
 }

@@ -1,9 +1,14 @@
+'use strict';
+
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2018,
-    sourceType: 'module'
+    sourceType: 'module',
+    ecmaFeatures: {
+      legacyDecorators: true
+    }
   },
   plugins: [
     'ember'
@@ -16,6 +21,7 @@ module.exports = {
     browser: true
   },
   rules: {
+    'ember/no-jquery': 'error'
   },
   overrides: [
     // node files
@@ -24,7 +30,7 @@ module.exports = {
         '.eslintrc.js',
         '.template-lintrc.js',
         'ember-cli-build.js',
-        'index.js',
+        'ember-addon-main.js',
         'testem.js',
         'blueprints/*/index.js',
         'config/**/*.js',

@@ -3,8 +3,10 @@
 /vendor/
 
 # compiled output
+/addon/
 /dist/
 /tmp/
+/commonjs/
 
 # dependencies
 /bower_components/
