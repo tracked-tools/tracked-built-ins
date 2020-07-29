@@ -50,6 +50,15 @@ const proxyHandler = {
     return true;
   },
 
+  deleteProperty(target, prop) {
+    if (prop in target) {
+      delete target[prop];
+      dirtyKey(target, prop);
+      dirtyKey(target, COLLECTION);
+    }
+    return true;
+  },
+
   getPrototypeOf() {
     return TrackedObject.prototype;
   },

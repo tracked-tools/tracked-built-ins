@@ -148,4 +148,19 @@ module('TrackedObject', function (hooks) {
       }
     }
   );
+
+  reactivityTest(
+    'delete works',
+    class extends Component {
+      obj = new TrackedObject({foo: 1});
+
+      get value() {
+        return this.obj.foo;
+      }
+
+      update() {
+        delete this.obj.foo;
+      }
+    }
+  );
 });
