@@ -50,6 +50,17 @@ const proxyHandler = {
     return true;
   },
 
+  deleteProperty(target, prop, receiver) {
+    if (!(prop in target)) { return; }
+
+    delete target[prop];
+
+    dirtyKey(target, COLLECTION);
+
+    // We need to notify this way to make {{each-in}} update
+    notifyPropertyChange(receiver, '_SOME_PROP_');
+  },
+
   getPrototypeOf() {
     return TrackedObject.prototype;
   },
