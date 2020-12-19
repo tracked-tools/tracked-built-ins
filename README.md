@@ -1,4 +1,4 @@
-tracked-built-ins
+tracked-built-ins [![Build Status](https://travis-ci.com/pzuraq/tracked-built-ins.svg?branch=master)](https://travis-ci.com/pzuraq/tracked-built-ins)
 ==============================================================================
 
 > **IMPORTANT: This addon does _NOT_ support IE 11 or older browsers. If you
