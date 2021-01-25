@@ -3,7 +3,7 @@ import {
   consumeTag,
   dirtyTag,
   consumeCollection,
-  dirtyCollection
+  dirtyCollection,
 } from 'tracked-maps-and-sets/-private/util';
 
 const ARRAY_GETTER_METHODS = new Set<string | symbol | number>([
@@ -107,9 +107,33 @@ function createArrayProxy<T>(arr: T[]) {
   });
 }
 
-export default class TrackedArray<T = unknown> {
-  static from<T>(it: Iterable<T>) {
-    return createArrayProxy(Array.from(it));
+class TrackedArray<T = unknown> {
+  /**
+   * Creates an array from an iterable object.
+   * @param iterable An iterable object to convert to an array.
+   */
+  static from<T>(iterable: Iterable<T> | ArrayLike<T>): TrackedArray<T>;
+
+  /**
+   * Creates an array from an iterable object.
+   * @param iterable An iterable object to convert to an array.
+   * @param mapfn A mapping function to call on every element of the array.
+   * @param thisArg Value of 'this' used to invoke the mapfn.
+   */
+  static from<T, U>(
+    iterable: Iterable<T> | ArrayLike<T>,
+    mapfn: (v: T, k: number) => U,
+    thisArg?: any
+  ): TrackedArray<U>;
+
+  static from<T, U>(
+    iterable: Iterable<T> | ArrayLike<T>,
+    mapfn?: (v: T, k: number) => U,
+    thisArg?: any
+  ): TrackedArray<T> | TrackedArray<U> {
+    return mapfn
+      ? createArrayProxy(Array.from(iterable, mapfn, thisArg))
+      : createArrayProxy(Array.from(iterable));
   }
 
   static of<T>(...arr: T[]) {
@@ -120,6 +144,10 @@ export default class TrackedArray<T = unknown> {
     return createArrayProxy(arr.slice());
   }
 }
+
+interface TrackedArray<T = unknown> extends Array<T> {}
+
+export default TrackedArray;
 
 // Ensure instanceof works correctly
 Object.setPrototypeOf(TrackedArray.prototype, Array.prototype);
