@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import hbs from 'htmlbars-inline-precompile';
 import { TrackedObject } from 'tracked-built-ins';
 import { render, settled } from '@ember/test-helpers';
+import type { TestContext } from 'ember-test-helpers';
 
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -44,7 +45,9 @@ module('TrackedObject', function (hooks) {
     assert.deepEqual(Object.keys(obj), ['foo']);
   });
 
-  test('it works when used directly in a template', async function(assert) {
+  test('it works when used directly in a template', async function (this: TestContext & {
+    obj: Record<PropertyKey, unknown>;
+  }, assert) {
     this.obj = new TrackedObject({ foo: 123 });
 
     await render(hbs`{{this.obj.foo}}`);
@@ -60,7 +63,7 @@ module('TrackedObject', function (hooks) {
   eachInReactivityTest(
     '{{each-in}} works with new items',
     class extends Component {
-      collection = new TrackedObject({
+      collection = new TrackedObject<Record<string, number>>({
         foo: 123,
       });
 

@@ -88,6 +88,6 @@ export default function tracked(
       typeof obj === 'object' && obj !== null
     );
 
-    return new TrackedObject(obj);
+    return new TrackedObject(obj as Record<PropertyKey, unknown>);
   }
 }

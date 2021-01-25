@@ -6,11 +6,13 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: [
-    'ember'
+    'ember',
+    '@typescript-eslint',
   ],
   extends: [
     'eslint:recommended',
-    'plugin:ember/recommended'
+    'plugin:ember/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
   env: {
     browser: true
