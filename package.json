@@ -15,8 +15,9 @@
   "scripts": {
     "build": "ember build",
     "lint": "npm-run-all lint:*",
-    "lint:hbs": "ember-template-lint .",
-    "lint:js": "eslint .",
+    "lint:template-lint": "ember-template-lint .",
+    "lint:eslint": "eslint .",
+    "lint:tsc": "tsc --noEmit",
     "start": "ember serve",
     "test": "npm-run-all lint:* test:*",
     "test:ember": "ember test",
