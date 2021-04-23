@@ -44,9 +44,9 @@ export default function tracked(
   obj: object,
   key?: string | symbol,
   desc?: PropertyDescriptor
-) {
+): unknown {
   if (key !== undefined && desc !== undefined) {
-    return glimmerTracked(obj, key as string, desc);
+    return glimmerTracked(obj, key, desc);
   }
 
   if (Array.isArray(obj)) {
@@ -88,6 +88,6 @@ export default function tracked(
       typeof obj === 'object' && obj !== null
     );
 
-    return new TrackedObject(obj);
+    return new TrackedObject(obj as Record<PropertyKey, unknown>);
   }
 }
