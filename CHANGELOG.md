@@ -1,3 +1,15 @@
+## v1.1.1 (2021-04-23)
+
+#### :bug: Bug Fix
+* [#42](https://github.com/pzuraq/tracked-built-ins/pull/42) [Bug]: resolve error in build without browsers in targets.js file ([@snewcomer](https://github.com/snewcomer))
+
+#### :house: Internal
+* [#65](https://github.com/pzuraq/tracked-built-ins/pull/65) chore: bump to latest release-it-lerna-changelog ([@chriskrycho](https://github.com/chriskrycho))
+
+#### Committers: 2
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+- Scott Newcomer ([@snewcomer](https://github.com/snewcomer))
+
 ## v1.1.0 (2021-04-23)
 
 #### :rocket: Enhancement
