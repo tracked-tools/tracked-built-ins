@@ -1,5 +1,5 @@
 interface Collection {
-  new (...args: any[]): {
+  new (...args: unknown[]): {
     collection: Array<unknown> | Record<PropertyKey, unknown>;
   };
 }

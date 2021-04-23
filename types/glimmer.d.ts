@@ -5,7 +5,7 @@ declare module '@glimmer/env' {
 declare module '@glimmer/tracking' {
   export function tracked(
     target: object,
-    key: string,
+    key: string | symbol,
     desc: PropertyDescriptor
   ): PropertyDescriptor;
 }

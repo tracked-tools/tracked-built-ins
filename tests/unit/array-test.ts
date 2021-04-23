@@ -413,7 +413,7 @@ module('TrackedArray', function(hooks) {
           get value() {
             // @ts-ignore -- this can't be represented easily in TS, and we
             // don't actually care that it is; we're *just* testing reactivity.
-            return this.arr[method](() => {});
+            return this.arr[method](() => {/* no op */});
           }
 
           update() {
@@ -430,7 +430,7 @@ module('TrackedArray', function(hooks) {
           get value() {
             // @ts-ignore -- this can't be represented easily in TS, and we
             // don't actually care that it is; we're *just* testing reactivity.
-            return this.arr[method](() => {});
+            return this.arr[method](() => {/* no op */});
           }
 
           update() {
@@ -464,7 +464,7 @@ module('TrackedArray', function(hooks) {
           arr = new TrackedArray(['foo', 'bar']);
 
           get value() {
-            return this.arr.forEach(() => {});
+            return this.arr.forEach(() => {/* no op */});
           }
 
           update() {
