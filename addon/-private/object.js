@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { consumeKey, dirtyKey } from 'tracked-maps-and-sets/-private/util';
 import { notifyPropertyChange } from '@ember/object';
 import { DEBUG } from '@glimmer/env';
