@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import { consumeKey, dirtyKey } from 'tracked-maps-and-sets/-private/util';
 import { notifyPropertyChange } from '@ember/object';
 import { DEBUG } from '@glimmer/env';
@@ -8,7 +7,7 @@ const COLLECTION = Symbol();
 if (DEBUG) {
   // patch mandatory setter
   // eslint-disable-next-line no-undef
-  let utils = Ember.__loader.require('@ember/-internals/utils')
+  let utils = globalThis.Ember.__loader.require('@ember/-internals/utils')
   let originalSetupMandatorySetter = utils.setupMandatorySetter;
 
   utils.setupMandatorySetter = (tag, obj, keyName) => {
