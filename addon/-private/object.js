@@ -4,21 +4,6 @@ import { DEBUG } from '@glimmer/env';
 
 const COLLECTION = Symbol();
 
-if (DEBUG) {
-  // patch mandatory setter
-  // eslint-disable-next-line no-undef
-  let utils = Ember.__loader.require('@ember/-internals/utils')
-  let originalSetupMandatorySetter = utils.setupMandatorySetter;
-
-  utils.setupMandatorySetter = (tag, obj, keyName) => {
-    if (obj instanceof TrackedObject) {
-      return;
-    }
-
-    return originalSetupMandatorySetter(tag, obj, keyName);
-  }
-}
-
 const proxyHandler = {
   get(target, prop) {
     consumeKey(target, prop);
