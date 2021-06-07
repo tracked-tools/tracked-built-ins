@@ -1,3 +1,4 @@
+// @ts-ignore
 import { notifyPropertyChange } from "@ember/object";
 import { createTagsCache } from "./tags-cache";
 
@@ -25,6 +26,7 @@ function createProxy(obj = {}) {
 
       if (currentValue !== value) propsTags.dirty(p);
 
+      // We need to notify this way to make {{each-in}} update
       notifyPropertyChange(receiver, "_SOME_PROP_");
 
       return result;
@@ -44,9 +46,13 @@ function createProxy(obj = {}) {
       const result = Reflect.defineProperty(target, p, attributes);
       const value = Reflect.get(target, p);
 
+
       keysTags.dirty(OBJECT_KEYS);
       keysTags.dirty(p);
       if (value !== undefined) propsTags.dirty(p);
+
+      // We need to notify this way to make {{each-in}} update
+      notifyPropertyChange(target, "_SOME_PROP_");
 
       return result;
     },
@@ -55,9 +61,13 @@ function createProxy(obj = {}) {
       const currentValue = Reflect.get(target, p);
       const result = Reflect.deleteProperty(target, p);
 
+
       keysTags.dirty(OBJECT_KEYS);
       keysTags.dirty(p);
       if (currentValue !== undefined) propsTags.dirty(p);
+
+      // We need to notify this way to make {{each-in}} update
+      notifyPropertyChange(target, "_SOME_PROP_");
 
       return result;
     },
