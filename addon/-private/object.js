@@ -1,47 +1,71 @@
-import { consumeKey, dirtyKey } from 'tracked-maps-and-sets/-private/util';
-import { notifyPropertyChange } from '@ember/object';
-import { DEBUG } from '@glimmer/env';
+import { notifyPropertyChange } from "@ember/object";
+import { createTagsCache } from "./tags-cache";
 
-const COLLECTION = Symbol();
-
-const proxyHandler = {
-  get(target, prop) {
-    consumeKey(target, prop);
-
-    return target[prop];
-  },
-
-  has(target, prop) {
-    consumeKey(target, prop);
-
-    return prop in target;
-  },
-
-  ownKeys(target) {
-    consumeKey(target, COLLECTION);
-
-    return Reflect.ownKeys(target);
-  },
-
-  set(target, prop, value, receiver) {
-    target[prop] = value;
-
-    dirtyKey(target, prop);
-    dirtyKey(target, COLLECTION);
-
-    // We need to notify this way to make {{each-in}} update
-    notifyPropertyChange(receiver, '_SOME_PROP_');
-
-    return true;
-  },
-
-  getPrototypeOf() {
-    return TrackedObject.prototype;
-  },
-};
+const OBJECT_KEYS = Symbol("objectKeys");
 
 function createProxy(obj = {}) {
-  return new Proxy(obj, proxyHandler);
+  const propsTags = createTagsCache();
+  const keysTags = createTagsCache();
+
+  return new Proxy(obj, {
+    get(target, p) {
+      propsTags.track(p);
+      return Reflect.get(target, p);
+    },
+
+    set(target, p, value, receiver) {
+      const isNewKey = !Reflect.has(target, p);
+      const currentValue = Reflect.get(target, p);
+      const result = Reflect.set(target, p, value);
+
+      if (isNewKey) {
+        keysTags.dirty(OBJECT_KEYS);
+        keysTags.dirty(p);
+      }
+
+      if (currentValue !== value) propsTags.dirty(p);
+
+      notifyPropertyChange(receiver, "_SOME_PROP_");
+
+      return result;
+    },
+
+    has(target, p) {
+      keysTags.track(p);
+      return Reflect.has(target, p);
+    },
+
+    ownKeys(target) {
+      keysTags.track(OBJECT_KEYS);
+      return Reflect.ownKeys(target);
+    },
+
+    defineProperty(target, p, attributes) {
+      const result = Reflect.defineProperty(target, p, attributes);
+      const value = Reflect.get(target, p);
+
+      keysTags.dirty(OBJECT_KEYS);
+      keysTags.dirty(p);
+      if (value !== undefined) propsTags.dirty(p);
+
+      return result;
+    },
+
+    deleteProperty(target, p) {
+      const currentValue = Reflect.get(target, p);
+      const result = Reflect.deleteProperty(target, p);
+
+      keysTags.dirty(OBJECT_KEYS);
+      keysTags.dirty(p);
+      if (currentValue !== undefined) propsTags.dirty(p);
+
+      return result;
+    },
+
+    getPrototypeOf() {
+      return TrackedObject.prototype;
+    },
+  });
 }
 
 export default class TrackedObject {
