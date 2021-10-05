@@ -93,7 +93,7 @@ class TrackedArray<T = unknown> {
         let index = convertToInt(prop);
 
         if (index !== null) {
-          self.storageFor(index);
+          self.readStorageFor(index);
           getValue(self.collection)
 
           return target[index];
@@ -143,7 +143,7 @@ class TrackedArray<T = unknown> {
 
   private storages: Map<number, TrackedStorage<null>> = new Map();
 
-  private storageFor(key: number): TrackedStorage<null> {
+  private readStorageFor(key: number) {
     const storages = this.storages;
     let storage = storages.get(key);
 
@@ -152,7 +152,7 @@ class TrackedArray<T = unknown> {
       storages.set(key, storage);
     }
 
-    return storage;
+    getValue(storage);
   }
 
   private dirtyStorageFor(key: number): void {
