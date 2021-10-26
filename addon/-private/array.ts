@@ -123,7 +123,7 @@ class TrackedArray<T = unknown> {
         let index = convertToInt(prop);
 
         if (index !== null) {
-          self.dirtyStorageFor(index);
+          self.#dirtyStorageFor(index);
           setValue(self.collection, null)
         } else if (prop === 'length') {
           setValue(self.collection, null)
