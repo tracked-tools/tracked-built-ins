@@ -141,7 +141,7 @@ class TrackedArray<T = unknown> {
 
   #collection = createStorage(null, () => false);
 
-  #storages: Map<number, TrackedStorage<null>> = new Map();
+  #storages = new Map<number, TrackedStorage<null>>();
 
   #readStorageFor(index: number) {
     const storages = this.#storages;
