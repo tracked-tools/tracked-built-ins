@@ -36,19 +36,19 @@ module('decorator', function(hooks) {
     let weakMap = tracked(new WeakMap());
     let weakSet = tracked(new WeakSet());
 
-    assert.ok(obj instanceof TrackedObject);
-    assert.ok(arr instanceof TrackedArray);
-    assert.ok(map instanceof TrackedMap);
-    assert.ok(set instanceof TrackedSet);
-    assert.ok(weakMap instanceof TrackedWeakMap);
-    assert.ok(weakSet instanceof TrackedWeakSet);
+    assert.ok(obj instanceof TrackedObject, 'obj instanceof TrackedObject');
+    assert.ok(arr instanceof TrackedArray, 'arr instanceof TrackedArray');
+    assert.ok(map instanceof TrackedMap, 'map instanceof TrackedMap');
+    assert.ok(set instanceof TrackedSet, 'set instanceof TrackedSet');
+    assert.ok(weakMap instanceof TrackedWeakMap, 'weakMap instanceof TrackedWeakMap');
+    assert.ok(weakSet instanceof TrackedWeakSet, 'weakSet instanceof TrackedWeakSet');
 
-    assert.ok(obj instanceof Object);
-    assert.ok(arr instanceof Array);
-    assert.ok(map instanceof Map);
-    assert.ok(set instanceof Set);
-    assert.ok(weakMap instanceof WeakMap);
-    assert.ok(weakSet instanceof WeakSet);
+    assert.ok(obj instanceof Object, 'obj instanceof Object');
+    assert.ok(arr instanceof Array, 'arr instanceof Array');
+    assert.ok(map instanceof Map, 'map instanceof Map');
+    assert.ok(set instanceof Set, 'set instanceof Set');
+    assert.ok(weakMap instanceof WeakMap, 'weakMap instanceof WeakMap');
+    assert.ok(weakSet instanceof WeakSet, 'weakSet instanceof WeakSet');
   });
 
   test('it works to wrap built-ins by constructor', assert => {
