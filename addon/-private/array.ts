@@ -94,17 +94,17 @@ class TrackedArray<T = unknown> {
 
         if (index !== null) {
           self.#readStorageFor(index);
-          getValue(self.collection)
+          getValue(self.#collection)
 
           return target[index];
         } else if (prop === 'length') {
-          getValue(self.collection)
+          getValue(self.#collection)
         } else if (ARRAY_GETTER_METHODS.has(prop)) {
           let fn = boundFns.get(prop);
 
           if (fn === undefined) {
             fn = (...args: unknown[]) => {
-              getValue(self.collection)
+              getValue(self.#collection)
               return (target as any)[prop](...args);
             };
 
@@ -124,9 +124,9 @@ class TrackedArray<T = unknown> {
 
         if (index !== null) {
           self.#dirtyStorageFor(index);
-          setValue(self.collection, null)
+          setValue(self.#collection, null)
         } else if (prop === 'length') {
-          setValue(self.collection, null)
+          setValue(self.#collection, null)
         }
 
         return true;
@@ -139,11 +139,11 @@ class TrackedArray<T = unknown> {
   }
 
 
-  private collection = createStorage(null, () => false);
+  #collection = createStorage(null, () => false);
 
-  private storages: Map<number, TrackedStorage<null>> = new Map();
+  #storages: Map<number, TrackedStorage<null>> = new Map();
 
-  private readStorageFor(index: number) {
+  #readStorageFor(index: number) {
     const storages = this.#storages;
     let storage = storages.get(index);
 
@@ -155,7 +155,7 @@ class TrackedArray<T = unknown> {
     getValue(storage);
   }
 
-  private dirtyStorageFor(index: number): void {
+  #dirtyStorageFor(index: number): void {
     const storage = this.#storages.get(index);
 
     if (storage) {

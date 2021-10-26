@@ -25,19 +25,19 @@ export default class TrackedObject {
 
     return new Proxy(clone, {
       get(target, prop, receiver) {
-        self.readStorageFor(prop);
+        self.#readStorageFor(prop);
 
         return target[prop];
       },
 
       has(target, prop) {
-        self.readStorageFor(prop);
+        self.#readStorageFor(prop);
 
         return prop in target;
       },
 
       ownKeys(target) {
-        getValue(self.collection);
+        getValue(self.#collection);
 
         return Reflect.ownKeys(target);
       },
@@ -46,7 +46,7 @@ export default class TrackedObject {
         target[prop] = value;
 
         self.#dirtyStorageFor(prop);
-        setValue(self.collection, null);
+        setValue(self.#collection, null);
 
         return true;
       },
@@ -58,27 +58,26 @@ export default class TrackedObject {
   }
 
   // @private
-  storages = new Map();
+  #storages = new Map();
 
   // @private
-  collection = createStorage(null, () => false);
+  #collection = createStorage(null, () => false);
 
   // @private
-  readStorageFor(key) {
-    const { storages } = this;
-    let storage = storages.get(key);
+  #readStorageFor(key) {
+    let storage = this.#storages.get(key);
 
     if (storage === undefined) {
       storage = createStorage(null, () => false);
-      storages.set(key, storage);
+      this.#storages.set(key, storage);
     }
 
     getValue(storage);
   }
 
   // @private
-  dirtyStorageFor(key) {
-    const storage = this.storages.get(key);
+  #dirtyStorageFor(key) {
+    const storage = this.#storages.get(key);
 
     if (storage) {
       setValue(storage, null);
