@@ -7,19 +7,11 @@
 // that properties within the getter have the correct type in TS.
 
 import {
-  createTag,
-  consumeTag,
-  dirtyTag,
-  consumeCollection,
-  dirtyCollection,
-} from 'tracked-maps-and-sets/-private/util';
-
-// SEMVER: this relies on the non-user-constructible `Tag` API, which ultimately
-// comes from Glimmer itself. In the future, we should rely on a publicly
-// exported type for this rather than relying on this inference (as this can
-// technically break under us!). For now, this is "safe" for us to absorb
-// internally as a "friend" API, but we have to uphold the invariant ourselves.
-type Tag = ReturnType<typeof createTag>;
+  TrackedStorage,
+  createStorage,
+  getValue,
+  setValue,
+} from 'ember-tracked-storage-polyfill';
 
 const ARRAY_GETTER_METHODS = new Set<string | symbol | number>([
   Symbol.iterator,
@@ -56,72 +48,6 @@ function convertToInt(prop: number | string | symbol): number | null {
   return num % 1 === 0 ? num : null;
 }
 
-function createArrayProxy<T>(arr: T[]): TrackedArray<T> {
-  let indexTags: Tag[] = [];
-
-  let boundFns = new Map();
-
-  return new Proxy(arr, {
-    get(target, prop, receiver) {
-      let index = convertToInt(prop);
-
-      if (index !== null) {
-        let tag = indexTags[index];
-
-        if (tag === undefined) {
-          tag = indexTags[index] = createTag();
-        }
-
-        consumeTag(tag);
-        consumeCollection(receiver);
-
-        return target[index];
-      } else if (prop === 'length') {
-        consumeCollection(receiver);
-      } else if (ARRAY_GETTER_METHODS.has(prop)) {
-        let fn = boundFns.get(prop);
-
-        if (fn === undefined) {
-          fn = (...args: unknown[]) => {
-            consumeCollection(receiver);
-            return (target as any)[prop](...args);
-          };
-
-          boundFns.set(prop, fn);
-        }
-
-        return fn;
-      }
-
-      return (target as any)[prop];
-    },
-
-    set(target, prop, value, receiver) {
-      (target as any)[prop] = value;
-
-      let index = convertToInt(prop);
-
-      if (index !== null) {
-        let tag = indexTags[index];
-
-        if (tag !== undefined) {
-          dirtyTag(tag);
-        }
-
-        dirtyCollection(receiver);
-      } else if (prop === 'length') {
-        dirtyCollection(receiver);
-      }
-
-      return true;
-    },
-
-    getPrototypeOf() {
-      return TrackedArray.prototype;
-    },
-  });
-}
-
 class TrackedArray<T = unknown> {
   /**
    * Creates an array from an iterable object.
@@ -147,16 +73,94 @@ class TrackedArray<T = unknown> {
     thisArg?: unknown
   ): TrackedArray<T> | TrackedArray<U> {
     return mapfn
-      ? createArrayProxy(Array.from(iterable, mapfn, thisArg))
-      : createArrayProxy(Array.from(iterable));
+      ? new TrackedArray(Array.from(iterable, mapfn, thisArg))
+      : new TrackedArray(Array.from(iterable));
   }
 
   static of<T>(...arr: T[]): TrackedArray<T> {
-    return createArrayProxy(arr);
+    return new TrackedArray(arr);
   }
 
   constructor(arr: T[] = []) {
-    return createArrayProxy(arr.slice());
+    let clone = arr.slice();
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    let self = this;
+
+    let boundFns = new Map();
+
+    return new Proxy(clone, {
+      get(target, prop, _receiver) {
+        let index = convertToInt(prop);
+
+        if (index !== null) {
+          self.#readStorageFor(index);
+          getValue(self.#collection)
+
+          return target[index];
+        } else if (prop === 'length') {
+          getValue(self.#collection)
+        } else if (ARRAY_GETTER_METHODS.has(prop)) {
+          let fn = boundFns.get(prop);
+
+          if (fn === undefined) {
+            fn = (...args: unknown[]) => {
+              getValue(self.#collection)
+              return (target as any)[prop](...args);
+            };
+
+            boundFns.set(prop, fn);
+          }
+
+          return fn;
+        }
+
+        return (target as any)[prop];
+      },
+
+      set(target, prop, value, _receiver) {
+        (target as any)[prop] = value;
+
+        let index = convertToInt(prop);
+
+        if (index !== null) {
+          self.#dirtyStorageFor(index);
+          setValue(self.#collection, null)
+        } else if (prop === 'length') {
+          setValue(self.#collection, null)
+        }
+
+        return true;
+      },
+
+      getPrototypeOf() {
+        return TrackedArray.prototype;
+      },
+    }) as TrackedArray<T>;
+  }
+
+
+  #collection = createStorage(null, () => false);
+
+  #storages = new Map<number, TrackedStorage<null>>();
+
+  #readStorageFor(index: number) {
+    const storages = this.#storages;
+    let storage = storages.get(index);
+
+    if (storage === undefined) {
+      storage = createStorage(null, () => false);
+      storages.set(index, storage);
+    }
+
+    getValue(storage);
+  }
+
+  #dirtyStorageFor(index: number): void {
+    const storage = this.#storages.get(index);
+
+    if (storage) {
+      setValue(storage, null);
+    }
   }
 }
 
