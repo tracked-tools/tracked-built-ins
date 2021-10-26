@@ -93,7 +93,7 @@ class TrackedArray<T = unknown> {
         let index = convertToInt(prop);
 
         if (index !== null) {
-          self.readStorageFor(index);
+          self.#readStorageFor(index);
           getValue(self.collection)
 
           return target[index];
