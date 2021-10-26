@@ -143,13 +143,13 @@ class TrackedArray<T = unknown> {
 
   private storages: Map<number, TrackedStorage<null>> = new Map();
 
-  private readStorageFor(key: number) {
-    const storages = this.storages;
-    let storage = storages.get(key);
+  private readStorageFor(index: number) {
+    const storages = this.#storages;
+    let storage = storages.get(index);
 
     if (storage === undefined) {
       storage = createStorage(null, () => false);
-      storages.set(key, storage);
+      storages.set(index, storage);
     }
 
     getValue(storage);
