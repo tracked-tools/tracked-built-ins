@@ -155,8 +155,8 @@ class TrackedArray<T = unknown> {
     getValue(storage);
   }
 
-  private dirtyStorageFor(key: number): void {
-    const storage = this.storages.get(key);
+  private dirtyStorageFor(index: number): void {
+    const storage = this.#storages.get(index);
 
     if (storage) {
       setValue(storage, null);
