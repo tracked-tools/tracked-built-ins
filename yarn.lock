@@ -1746,7 +1746,7 @@
     mkdirp "^1.0.4"
     silent-error "^1.1.1"
 
-"@ember/test-helpers@^2.3.0", "@ember/test-helpers@^2.4.2":
+"@ember/test-helpers@^2.4.2":
   version "2.4.2"
   resolved "https://registry.npmjs.org/@ember/test-helpers/-/test-helpers-2.4.2.tgz#e5be97e316dc502d7da933461135fbcb9254726e"
   integrity sha512-++k/dXZ0IeOQLSm0Yu5QuCRe9UoptuckMhaXHY37VLb1varLHRuP8908kigVNt9c5waiocaK4jPjDBkKYRLlfA==
@@ -5681,7 +5681,7 @@ ember-cli-babel@^7.0.0, ember-cli-babel@^7.13.0, ember-cli-babel@^7.22.1, ember-
     rimraf "^3.0.1"
     semver "^5.5.0"
 
-ember-cli-babel@^7.13.2, ember-cli-babel@^7.23.1, ember-cli-babel@^7.26.5, ember-cli-babel@^7.26.6:
+ember-cli-babel@^7.13.2, ember-cli-babel@^7.23.1, ember-cli-babel@^7.26.6:
   version "7.26.6"
   resolved "https://registry.npmjs.org/ember-cli-babel/-/ember-cli-babel-7.26.6.tgz#322fbbd3baad9dd99e3276ff05bc6faef5e54b39"
   integrity sha512-040svtfj2RC35j/WMwdWJFusZaXmNoytLAMyBDGLMSlRvznudTxZjGlPV6UupmtTBApy58cEF8Fq4a+COWoEmQ==
@@ -5891,7 +5891,7 @@ ember-cli-typescript@^2.0.2:
     stagehand "^1.0.0"
     walk-sync "^1.0.0"
 
-ember-cli-typescript@^4.1.0:
+ember-cli-typescript@^4.1.0, ember-cli-typescript@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/ember-cli-typescript/-/ember-cli-typescript-4.2.1.tgz#54d08fc90318cc986f3ea562f93ce58a6cc4c24d"
   integrity sha512-0iKTZ+/wH6UB/VTWKvGuXlmwiE8HSIGcxHamwNhEC5x1mN3z8RfvsFZdQWYUzIWFN2Tek0gmepGRPTwWdBYl/A==
@@ -10963,15 +10963,6 @@ qunit@2.17.2:
     node-watch "0.7.2"
     tiny-glob "0.2.9"
 
-qunit@^2.16.0:
-  version "2.17.1"
-  resolved "https://registry.npmjs.org/qunit/-/qunit-2.17.1.tgz#1969efe4c9b776b4b8cd4fc2fb9634e8f762e177"
-  integrity sha512-Gx1tpSfYbjRe4TRKCVBLlnCaVThF5Pdnmbbv/zLFfgWKddeQHV/eNi1BG392hw4gEDh2sflMj8kmPJlT7+kVMA==
-  dependencies:
-    commander "7.1.0"
-    node-watch "0.7.1"
-    tiny-glob "0.2.9"
-
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/randombytes/-/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"
@@ -12635,16 +12626,15 @@ tr46@^2.1.0:
   dependencies:
     punycode "^2.1.1"
 
-tracked-maps-and-sets@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.npmjs.org/tracked-maps-and-sets/-/tracked-maps-and-sets-3.0.1.tgz#aa3a71aa7ef4785e784324059b21b83153df445b"
-  integrity sha512-x1IC6C6muJzpeZaQOcollKiLYSazWEtSM5EDCO5PUfbU7RTMa1x7t9SJrwqDxeasvmJCa1QftECsRtI7osOs8w==
+tracked-maps-and-sets@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/tracked-maps-and-sets/-/tracked-maps-and-sets-3.0.2.tgz#6ea1b9f2a367d24f2e9905b74b24437fbce76ea6"
+  integrity sha512-UIRcWsX1kDOcC/Q2R58weYWlw01EnmWWBwUv3okWS+zMBvsgIfYoO6veHhuNE3hgzWCEImNp46QS5CyKnw5QUA==
   dependencies:
-    "@ember/test-helpers" "^2.3.0"
     "@glimmer/tracking" "^1.0.0"
-    ember-cli-babel "^7.26.5"
+    ember-cli-babel "^7.26.6"
+    ember-cli-typescript "^4.2.1"
     ember-tracked-storage-polyfill "1.0.0"
-    qunit "^2.16.0"
 
 tree-sync@^1.2.2:
   version "1.4.0"
