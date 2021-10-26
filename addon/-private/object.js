@@ -45,7 +45,7 @@ export default class TrackedObject {
       set(target, prop, value, receiver) {
         target[prop] = value;
 
-        self.dirtyStorageFor(prop);
+        self.#dirtyStorageFor(prop);
         setValue(self.collection, null);
 
         return true;
