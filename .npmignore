@@ -25,6 +25,7 @@
 /RELEASE.md
 /testem.js
 /tests/
+/yarn-error.log
 /yarn.lock
 .gitkeep
 
