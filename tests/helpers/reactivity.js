@@ -3,7 +3,7 @@ import { render, settled } from '@ember/test-helpers';
 import { test } from 'qunit';
 
 export function reactivityTest(desc, Klass, shouldUpdate = true) {
-  test(`${desc} reactivity`, async function(assert) {
+  test(`${desc} reactivity`, async function (assert) {
     let instance;
     let count = 0;
 

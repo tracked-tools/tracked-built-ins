@@ -5,18 +5,14 @@ import {
   TrackedMap,
   TrackedWeakMap,
   TrackedSet,
-  TrackedWeakSet
+  TrackedWeakSet,
 } from 'tracked-maps-and-sets';
 import TrackedArray from './array';
 import TrackedObject from './object';
 
-export default function tracked<T>(
-  obj: T[] | typeof Array
-): TrackedArray<T>;
+export default function tracked<T>(obj: T[] | typeof Array): TrackedArray<T>;
 
-export default function tracked<T>(
-  obj: Set<T> | typeof Set
-): TrackedSet<T>;
+export default function tracked<T>(obj: Set<T> | typeof Set): TrackedSet<T>;
 
 export default function tracked<T, U>(
   obj: Map<T, U> | typeof Map
@@ -30,9 +26,7 @@ export default function tracked<T extends object, U>(
   obj: WeakMap<T, U> | typeof WeakMap
 ): TrackedWeakMap<T, U>;
 
-export default function tracked<T extends object>(
-  obj: T | typeof Object
-): T;
+export default function tracked<T extends object>(obj: T | typeof Object): T;
 
 export default function tracked(
   obj: object,
@@ -77,7 +71,8 @@ export default function tracked(
   } else if (obj instanceof WeakSet) {
     return new TrackedWeakSet();
   } else {
-    assert(`You must either use tracked as a field decorator, or to wrap built-in class instances:
+    assert(
+      `You must either use tracked as a field decorator, or to wrap built-in class instances:
 
       class Example {
         @tracked field = 123;

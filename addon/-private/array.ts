@@ -94,17 +94,17 @@ class TrackedArray<T = unknown> {
 
         if (index !== null) {
           self.#readStorageFor(index);
-          getValue(self.#collection)
+          getValue(self.#collection);
 
           return target[index];
         } else if (prop === 'length') {
-          getValue(self.#collection)
+          getValue(self.#collection);
         } else if (ARRAY_GETTER_METHODS.has(prop)) {
           let fn = boundFns.get(prop);
 
           if (fn === undefined) {
             fn = (...args: unknown[]) => {
-              getValue(self.#collection)
+              getValue(self.#collection);
               return (target as any)[prop](...args);
             };
 
@@ -124,9 +124,9 @@ class TrackedArray<T = unknown> {
 
         if (index !== null) {
           self.#dirtyStorageFor(index);
-          setValue(self.#collection, null)
+          setValue(self.#collection, null);
         } else if (prop === 'length') {
-          setValue(self.#collection, null)
+          setValue(self.#collection, null);
         }
 
         return true;
@@ -137,7 +137,6 @@ class TrackedArray<T = unknown> {
       },
     }) as TrackedArray<T>;
   }
-
 
   #collection = createStorage(null, () => false);
 

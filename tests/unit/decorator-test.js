@@ -11,10 +11,10 @@ import {
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
-module('decorator', function(hooks) {
+module('decorator', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it works as a decorator', assert => {
+  test('it works as a decorator', (assert) => {
     class Foo {
       @tracked prop = 123;
     }
@@ -28,7 +28,7 @@ module('decorator', function(hooks) {
     assert.equal(foo.prop, 456, 'prop updates correctly');
   });
 
-  test('it works to wrap built-ins by instance', assert => {
+  test('it works to wrap built-ins by instance', (assert) => {
     let obj = tracked({});
     let arr = tracked([]);
     let map = tracked(new Map());
@@ -40,8 +40,14 @@ module('decorator', function(hooks) {
     assert.ok(arr instanceof TrackedArray, 'arr instanceof TrackedArray');
     assert.ok(map instanceof TrackedMap, 'map instanceof TrackedMap');
     assert.ok(set instanceof TrackedSet, 'set instanceof TrackedSet');
-    assert.ok(weakMap instanceof TrackedWeakMap, 'weakMap instanceof TrackedWeakMap');
-    assert.ok(weakSet instanceof TrackedWeakSet, 'weakSet instanceof TrackedWeakSet');
+    assert.ok(
+      weakMap instanceof TrackedWeakMap,
+      'weakMap instanceof TrackedWeakMap'
+    );
+    assert.ok(
+      weakSet instanceof TrackedWeakSet,
+      'weakSet instanceof TrackedWeakSet'
+    );
 
     assert.ok(obj instanceof Object, 'obj instanceof Object');
     assert.ok(arr instanceof Array, 'arr instanceof Array');
@@ -51,7 +57,7 @@ module('decorator', function(hooks) {
     assert.ok(weakSet instanceof WeakSet, 'weakSet instanceof WeakSet');
   });
 
-  test('it works to wrap built-ins by constructor', assert => {
+  test('it works to wrap built-ins by constructor', (assert) => {
     let obj = tracked(Object);
     let arr = tracked(Array);
     let map = tracked(Map);
@@ -67,7 +73,7 @@ module('decorator', function(hooks) {
     assert.ok(weakSet instanceof TrackedWeakSet);
   });
 
-  test('objects, arrays, maps, and sets wrap and keep their values', assert => {
+  test('objects, arrays, maps, and sets wrap and keep their values', (assert) => {
     let obj = tracked({ foo: 123 });
     let arr = tracked([456]);
     let map = tracked(new Map([[1, 2]]));
