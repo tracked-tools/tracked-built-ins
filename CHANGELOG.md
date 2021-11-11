@@ -1,3 +1,49 @@
+
+## v2.0.0 (2021-11-11)
+
+#### :boom: Breaking Change
+* [#173](https://github.com/tracked-tools/tracked-built-ins/pull/173) Support Ember 4 and drop Ember <3.24 TLS ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#161](https://github.com/tracked-tools/tracked-built-ins/pull/161) Tracked storage implementations ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#144](https://github.com/tracked-tools/tracked-built-ins/pull/144) Breaking: drop Node 10 support ([@chriskrycho](https://github.com/chriskrycho))
+* [#98](https://github.com/tracked-tools/tracked-built-ins/pull/98) Remove mandatory setter override ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :rocket: Enhancement
+* [#189](https://github.com/tracked-tools/tracked-built-ins/pull/189) Update npmignore file ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#173](https://github.com/tracked-tools/tracked-built-ins/pull/173) Support Ember 4 and drop Ember <3.24 TLS ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#161](https://github.com/tracked-tools/tracked-built-ins/pull/161) Tracked storage implementations ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :memo: Documentation
+* [#188](https://github.com/tracked-tools/tracked-built-ins/pull/188) Update Build Status badge: Travis -> GH Actions ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#172](https://github.com/tracked-tools/tracked-built-ins/pull/172) Update README.md to align with tracked-built-ins ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* [#201](https://github.com/tracked-tools/tracked-built-ins/pull/201) Update Node and @typescript-eslint/parser, add Prettier ([@chriskrycho](https://github.com/chriskrycho))
+* [#188](https://github.com/tracked-tools/tracked-built-ins/pull/188) Update Build Status badge: Travis -> GH Actions ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#87](https://github.com/tracked-tools/tracked-built-ins/pull/87) chore(deps-dev): bump @typescript-eslint/parser from 4.22.1 to 4.23.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#86](https://github.com/tracked-tools/tracked-built-ins/pull/86) chore(deps-dev): bump @typescript-eslint/eslint-plugin from 4.22.1 to 4.23.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#85](https://github.com/tracked-tools/tracked-built-ins/pull/85) chore(deps-dev): bump eslint from 7.25.0 to 7.26.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#84](https://github.com/tracked-tools/tracked-built-ins/pull/84) chore(deps-dev): bump release-it from 14.6.1 to 14.6.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#83](https://github.com/tracked-tools/tracked-built-ins/pull/83) chore(deps): bump handlebars from 4.7.3 to 4.7.7 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#81](https://github.com/tracked-tools/tracked-built-ins/pull/81) chore(deps): bump ember-cli-babel from 7.26.4 to 7.26.5 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#82](https://github.com/tracked-tools/tracked-built-ins/pull/82) chore(deps): bump underscore from 1.9.2 to 1.13.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#79](https://github.com/tracked-tools/tracked-built-ins/pull/79) chore(deps-dev): bump @typescript-eslint/eslint-plugin from 4.22.0 to 4.22.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#80](https://github.com/tracked-tools/tracked-built-ins/pull/80) chore(deps-dev): bump @typescript-eslint/parser from 4.22.0 to 4.22.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#78](https://github.com/tracked-tools/tracked-built-ins/pull/78) chore(deps-dev): bump ember-source from 3.26.1 to 3.27.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#76](https://github.com/tracked-tools/tracked-built-ins/pull/76) chore(deps-dev): bump eslint from 7.24.0 to 7.25.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#77](https://github.com/tracked-tools/tracked-built-ins/pull/77) chore(deps-dev): bump ember-source-channel-url from 1.2.0 to 3.0.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#75](https://github.com/tracked-tools/tracked-built-ins/pull/75) chore(deps-dev): bump @typescript-eslint/eslint-plugin from 4.14.1 to 4.22.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#71](https://github.com/tracked-tools/tracked-built-ins/pull/71) chore(deps-dev): bump @types/ember from 3.16.3 to 3.16.5 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#69](https://github.com/tracked-tools/tracked-built-ins/pull/69) chore(deps-dev): bump @types/ember__test-helpers from 1.7.3 to 2.0.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#68](https://github.com/tracked-tools/tracked-built-ins/pull/68) chore(deps-dev): bump qunit-dom from 0.8.5 to 1.6.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#74](https://github.com/tracked-tools/tracked-built-ins/pull/74) chore(deps): bump ember-cli-babel from 7.26.3 to 7.26.4 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#70](https://github.com/tracked-tools/tracked-built-ins/pull/70) chore(deps-dev): bump ember-cli-uglify from 2.1.0 to 3.0.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#72](https://github.com/tracked-tools/tracked-built-ins/pull/72) chore(deps-dev): bump @typescript-eslint/parser from 4.14.1 to 4.22.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 3
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## v1.1.1 (2021-04-23)
 
 #### :bug: Bug Fix
