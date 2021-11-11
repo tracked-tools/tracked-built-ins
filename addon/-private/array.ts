@@ -89,7 +89,7 @@ class TrackedArray<T = unknown> {
     let boundFns = new Map();
 
     return new Proxy(clone, {
-      get(target, prop, _receiver) {
+      get(target, prop /*, _receiver */) {
         let index = convertToInt(prop);
 
         if (index !== null) {
@@ -117,7 +117,7 @@ class TrackedArray<T = unknown> {
         return (target as any)[prop];
       },
 
-      set(target, prop, value, _receiver) {
+      set(target, prop, value /*, _receiver */) {
         (target as any)[prop] = value;
 
         let index = convertToInt(prop);
