@@ -1,4 +1,13 @@
 
+
+## v2.0.1 (2021-12-17)
+
+#### :bug: Bug Fix
+* [#227](https://github.com/tracked-tools/tracked-built-ins/pull/227) Update to latest ember-cli-babel ([@chriskrycho](https://github.com/chriskrycho))
+
+#### Committers: 1
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+
 ## v2.0.0 (2021-11-11)
 
 #### :boom: Breaking Change
