@@ -5,7 +5,7 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "https://github.com/pzuraq/tracked-built-ins",
+  "repository": "https://github.com/tracked-tools/tracked-built-ins",
   "license": "MIT",
   "author": "Chris Hewell Garrett",
   "directories": {
