@@ -21,24 +21,11 @@
     "module": "es6",
     "experimentalDecorators": true,
     "paths": {
-      "dummy/tests/*": [
+      "test-app/tests/*": [
         "tests/*"
       ],
-      "dummy/*": [
-        "tests/dummy/app/*",
+      "test-app/*": [
         "app/*"
-      ],
-      "tracked-built-ins": [
-        "addon"
-      ],
-      "tracked-built-ins/*": [
-        "addon/*"
-      ],
-      "tracked-built-ins/test-support": [
-        "addon-test-support"
-      ],
-      "tracked-built-ins/test-support/*": [
-        "addon-test-support/*"
       ],
       "*": [
         "types/*"
@@ -47,10 +34,7 @@
   },
   "include": [
     "app/**/*",
-    "addon/**/*",
     "tests/**/*",
-    "types/**/*",
-    "test-support/**/*",
-    "addon-test-support/**/*"
+    "types/**/*"
   ]
 }

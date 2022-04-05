@@ -1,0 +1,63 @@
+{
+  "name": "tracked-built-ins",
+  "version": "2.0.1",
+  "description": "Tracked versions of JavaScript's built-in classes!",
+  "keywords": [
+    "ember-addon"
+  ],
+  "repository": "https://github.com/tracked-tools/tracked-built-ins",
+  "license": "MIT",
+  "author": "Chris Hewell Garrett",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {
+    "lint": "npm-run-all lint:*",
+    "lint:template-lint": "ember-template-lint .",
+    "lint:eslint": "eslint .",
+    "lint:tsc": "tsc --noEmit"
+  },
+  "dependencies": {
+    "ember-cli-babel": "^7.26.10",
+    "ember-cli-typescript": "^4.1.0",
+    "ember-tracked-storage-polyfill": "^1.0.0",
+    "tracked-maps-and-sets": "^3.0.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "ember-template-lint": "^3.10.0",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-ember": "^10.4.1",
+    "eslint-plugin-node": "^11.1.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.4.1"
+  },
+  "engines": {
+    "node": "12.* || >= 14.*"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md"
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true
+    }
+  },
+  "volta": {
+    "extends": "../package.json"
+  }
+}

@@ -69,8 +69,13 @@ jobs:
         if: |
           steps.cache-dependencies.outputs.cache-hit != 'true'
 
-      - name: Lint
+      - name: Lint Addon
         run: yarn lint
+        working-directory: addon
+      
+      - name: Lint Test App
+        run: yarn lint
+        working-directory: test-app
 
   test:
     name: Tests
@@ -115,6 +120,7 @@ jobs:
 
       - name: Test
         run: yarn test:ember --launch ${{ matrix.browser }}
+        working-directory: test-app
 
   floating-dependencies:
     name: Floating Dependencies
@@ -155,6 +161,7 @@ jobs:
 
       - name: Test
         run: yarn test:ember --launch ${{ matrix.browser }}
+        working-directory: test-app
 
   required-try-scenarios:
     name: Tests - ${{ matrix.ember-try-scenario }}
