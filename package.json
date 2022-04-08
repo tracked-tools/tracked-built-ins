@@ -4,6 +4,48 @@
     "addon",
     "test-app"
   ],
+  "repository": "https://github.com/tracked-tools/tracked-built-ins",
+  "scripts": {
+    "test": "cd test-app && yarn test"
+  },
+  "devDependencies": {
+    "release-it": "^14.12.5",
+    "release-it-lerna-changelog": "^4.0.1",
+    "release-it-yarn-workspaces": "^2.0.1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      },
+      "release-it-yarn-workspaces": {
+        "workspaces": [
+          "addon"
+        ],
+        "additionalManifests": {
+          "dependencyUpdates": [
+            "test-app/package.json"
+          ],
+          "versionUpdates": [
+            "package.json",
+            "test-app/package.json"
+          ]
+        }
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    },
+    "npm": false
+  },
   "volta": {
     "node": "14.18.1",
     "yarn": "1.22.10"

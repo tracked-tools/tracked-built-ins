@@ -44,19 +44,6 @@
   "prettier": {
     "singleQuote": true
   },
-  "release-it": {
-    "plugins": {
-      "release-it-lerna-changelog": {
-        "infile": "CHANGELOG.md"
-      }
-    },
-    "git": {
-      "tagName": "v${version}"
-    },
-    "github": {
-      "release": true
-    }
-  },
   "volta": {
     "extends": "../package.json"
   }
