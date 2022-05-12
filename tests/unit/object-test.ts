@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import hbs from 'htmlbars-inline-precompile';
 import { TrackedObject } from 'tracked-built-ins';
 import { render, settled } from '@ember/test-helpers';
-import type { TestContext } from 'ember-test-helpers';
+import type { TestContext } from '@ember/test-helpers';
 
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
