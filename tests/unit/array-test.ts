@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { TrackedArray } from 'tracked-built-ins';
+import { expectTypeOf } from 'expect-type';
 
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -43,6 +44,10 @@ const ARRAY_SETTER_METHODS = [
   'splice',
   'unshift',
 ];
+
+// We can use a `TrackedArray<T>` anywhere we can use an `Array<T>` (but not
+// vice versa).
+expectTypeOf<TrackedArray<unknown>>().toMatchTypeOf<Array<unknown>>();
 
 module('TrackedArray', function (hooks) {
   setupRenderingTest(hooks);
