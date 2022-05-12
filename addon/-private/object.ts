@@ -6,8 +6,10 @@ import {
 } from 'ember-tracked-storage-polyfill';
 
 export default class TrackedObject {
-  static fromEntries(entries) {
-    return new TrackedObject(Object.fromEntries(entries));
+  static fromEntries<T>(entries: Iterable<readonly [PropertyKey, T]>): T {
+    // SAFETY: this is valid because the constructor simply produces a proxy for
+    // the type `T`.
+    return new TrackedObject(Object.fromEntries(entries)) as unknown as T;
   }
 
   constructor(obj = {}) {
@@ -24,7 +26,7 @@ export default class TrackedObject {
     let self = this;
 
     return new Proxy(clone, {
-      get(target, prop, receiver) {
+      get(target, prop /*, receiver*/) {
         self.#readStorageFor(prop);
 
         return target[prop];
@@ -42,7 +44,7 @@ export default class TrackedObject {
         return Reflect.ownKeys(target);
       },
 
-      set(target, prop, value, receiver) {
+      set(target, prop, value /*, receiver */) {
         target[prop] = value;
 
         self.#dirtyStorageFor(prop);
@@ -57,14 +59,11 @@ export default class TrackedObject {
     });
   }
 
-  // @private
-  #storages = new Map();
+  #storages = new Map<PropertyKey, TrackedStorage<null>>();
 
-  // @private
   #collection = createStorage(null, () => false);
 
-  // @private
-  #readStorageFor(key) {
+  #readStorageFor(key: PropertyKey): void {
     let storage = this.#storages.get(key);
 
     if (storage === undefined) {
@@ -75,8 +74,7 @@ export default class TrackedObject {
     getValue(storage);
   }
 
-  // @private
-  #dirtyStorageFor(key) {
+  #dirtyStorageFor(key: PropertyKey): void {
     const storage = this.#storages.get(key);
 
     if (storage) {
@@ -84,3 +82,18 @@ export default class TrackedObject {
     }
   }
 }
+
+export default interface TrackedObject {
+  fromEntries<T>(entries: Iterable<readonly [PropertyKey, T]>): {
+    PropertyKey: T;
+  };
+
+  new <T extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>>(
+    obj?: T
+  ): T;
+}
+
+const x = new TrackedObject();
+const y = new Object();
+
+Object.setPrototypeOf(TrackedObject.prototype, Object.prototype);
