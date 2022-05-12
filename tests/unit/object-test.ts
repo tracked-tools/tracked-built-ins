@@ -3,11 +3,16 @@ import hbs from 'htmlbars-inline-precompile';
 import { TrackedObject } from 'tracked-built-ins';
 import { render, settled } from '@ember/test-helpers';
 import type { TestContext } from '@ember/test-helpers';
+import { expectTypeOf } from 'expect-type';
 
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import { reactivityTest } from '../helpers/reactivity';
 import { eachInReactivityTest } from '../helpers/collection-reactivity';
+
+// The whole point here is that Object *is* the thing we are matching, ESLint!
+// eslint-disable-next-line @typescript-eslint/ban-types
+expectTypeOf<TrackedObject>().toMatchTypeOf<Object>();
 
 module('TrackedObject', function (hooks) {
   setupRenderingTest(hooks);
@@ -17,6 +22,7 @@ module('TrackedObject', function (hooks) {
     let obj = new TrackedObject(original);
 
     assert.ok(obj instanceof TrackedObject);
+    expectTypeOf(obj).toEqualTypeOf<{ foo: number }>();
     assert.deepEqual(Object.keys(obj), ['foo']);
     assert.equal(obj.foo, 123);
 
@@ -28,10 +34,12 @@ module('TrackedObject', function (hooks) {
   test('preserves getters', (assert) => {
     let obj = new TrackedObject({
       foo: 123,
-      get bar() {
+      get bar(): number {
         return this.foo;
       },
     });
+
+    expectTypeOf(obj).toEqualTypeOf<{ foo: number; readonly bar: number }>();
 
     obj.foo = 456;
     assert.equal(obj.foo, 456, 'object updated correctly');
@@ -39,7 +47,13 @@ module('TrackedObject', function (hooks) {
   });
 
   test('fromEntries', (assert) => {
-    let obj = TrackedObject.fromEntries(Object.entries({ foo: 123 }));
+    const entries = Object.entries({ foo: 123 });
+    let obj = TrackedObject.fromEntries(entries);
+    // We will lose the specific key, becuase `Object.entries` does not preserve
+    // it, but the type produced by `TrackedObject.fromEntries` should match the
+    // type produced by `Object.fromEntries`.
+    let underlying = Object.fromEntries(entries);
+    expectTypeOf(obj).toEqualTypeOf(underlying);
 
     assert.ok(obj instanceof TrackedObject);
     assert.deepEqual(Object.keys(obj), ['foo']);
