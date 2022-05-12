@@ -1,5 +1,5 @@
 interface ReactiveObject<T> {
-  new (...args: unknown[]): {
+  new (...args: never[]): {
     value: T;
   };
 }
