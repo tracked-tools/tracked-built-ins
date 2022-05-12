@@ -1,9 +1,6 @@
 tracked-built-ins [![GitHub Actions Build Status](https://github.com/tracked-tools/tracked-built-ins/workflows/CI/badge.svg)](https://github.com/tracked-tools/tracked-built-ins/actions/workflows/CI.yml?query=branch%3Amaster)
 ==============================================================================
 
-**Note:** This addon does _NOT_ support IE 11 or older browsers. If you need to support them,
-consider using [tracked-maps and sets](https://github.com/pzuraq/tracked-maps-and-sets) instead.
-
 This addon provides tracked versions of JavaScript's built-ins:
 
 ```js
@@ -38,6 +35,9 @@ class Foo {
   weakSet = tracked(WeakSet);
 }
 ```
+
+**Note:** This addon does _NOT_ support IE 11 or older browsers. If you need to support them,
+consider using [tracked-maps and sets](https://github.com/pzuraq/tracked-maps-and-sets) instead.
 
 Installation
 ------------------------------------------------------------------------------
@@ -110,6 +110,17 @@ Compatibility
 * Ember.js v3.24 (LTS) or above
 * Ember CLI v3.23 or above
 * Node.js v12 or above
+
+### TypeScript
+
+This project follows the current draft of [the Semantic Versioning for TypeScript Types][semver] specification.
+
+- **Currently supported TypeScript versions:** v4.4, v4.5, and v4.6
+- **Compiler support policy:** [simple majors][sm]
+- **Public API:** all published types not in a `-private` module are public
+
+[semver]: https://www.semver-ts.org/
+[sm]: https://www.semver-ts.org/#simple-majors
 
 Contributing
 ------------------------------------------------------------------------------
