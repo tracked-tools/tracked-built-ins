@@ -3,16 +3,22 @@
     "target": "es2019",
     "allowJs": true,
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
+
+    // Don't be viral!
+    "allowSyntheticDefaultImports": false,
+    "esModuleInterop": false,
+
+    // strictness
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    // lint-style rules
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
+
     "noEmitOnError": false,
     "noEmit": true,
     "inlineSourceMap": true,
