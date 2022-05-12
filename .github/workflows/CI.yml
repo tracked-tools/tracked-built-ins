@@ -167,3 +167,36 @@ jobs:
         env:
           EMBER_TRY_SCENARIO: ${{ matrix.ember-try-scenario }}
         run: node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO
+
+  typescript-compatibility:
+    name: TS Compatibility
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ts-version:
+          - '4.4'
+          - '4.5'
+          - '4.6'
+          - 'next'
+
+    continue-on-error: ${{ matrix.ts-version == 'next' }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '${{ env.NODE_VERSION }}'
+          cache: 'yarn'
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install TS version under test
+        run: yarn add --dev typescript@${{ matrix.ts-version }}
+
+      - name: Type check
+        run: yarn tsc --noEmit
