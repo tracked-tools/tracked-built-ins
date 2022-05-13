@@ -1,12 +1,8 @@
 import { tracked as glimmerTracked } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
 
-import {
-  TrackedMap,
-  TrackedWeakMap,
-  TrackedSet,
-  TrackedWeakSet,
-} from 'tracked-maps-and-sets';
+import { TrackedMap, TrackedWeakMap } from './map';
+import { TrackedSet, TrackedWeakSet } from './set';
 import TrackedArray from './array';
 import TrackedObject from './object';
 
