@@ -78,6 +78,14 @@ module('TrackedArray', function (hooks) {
     assert.equal(arr.length, 123);
   });
 
+  test('Can clear array by setting length to 0', (assert) => {
+    let arr = new TrackedArray([123]);
+    arr.length = 0;
+
+    assert.equal(arr.length, 0);
+    assert.equal(arr[0], undefined);
+  });
+
   module('methods', () => {
     test('isArray', (assert) => {
       let arr = new TrackedArray();
