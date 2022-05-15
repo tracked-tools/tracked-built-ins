@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 import hbs from 'htmlbars-inline-precompile';
 import { render, settled, findAll } from '@ember/test-helpers';
 import { test } from 'qunit';

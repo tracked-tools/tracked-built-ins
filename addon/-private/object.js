@@ -1,5 +1,4 @@
 import {
-  TrackedStorage,
   createStorage,
   getValue,
   setValue,
@@ -24,7 +23,7 @@ export default class TrackedObject {
     let self = this;
 
     return new Proxy(clone, {
-      get(target, prop, receiver) {
+      get(target, prop) {
         self.#readStorageFor(prop);
 
         return target[prop];
@@ -42,7 +41,7 @@ export default class TrackedObject {
         return Reflect.ownKeys(target);
       },
 
-      set(target, prop, value, receiver) {
+      set(target, prop, value) {
         target[prop] = value;
 
         self.#dirtyStorageFor(prop);
