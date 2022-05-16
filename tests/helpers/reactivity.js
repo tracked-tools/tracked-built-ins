@@ -10,6 +10,7 @@ export function reactivityTest(desc, Klass, shouldUpdate = true) {
     class TestComponent extends Klass {
       constructor() {
         super(...arguments);
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         instance = this;
       }
 
