@@ -34,35 +34,24 @@ module.exports = {
   overrides: [
     // JS files where TS rules don't make sense
     {
-      files: ['addon/**/*.js', 'tests/**/*.js'],
+      files: ['addon/**/*.js'],
       rules: {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
-      },
-    },
-    // tests
-    {
-      files: ['tests/**/*-test.ts'],
-      rules: {
-        '@typescript-eslint/ban-ts-comment': 'off',
       },
     },
     // node files
     {
       files: [
         '.eslintrc.js',
-        '.template-lintrc.js',
-        'ember-cli-build.js',
+        '.prettierrc.js',
         'index.js',
-        'testem.js',
         'blueprints/*/index.js',
         'config/**/*.js',
-        'tests/dummy/config/**/*.js',
       ],
       excludedFiles: [
         'addon/**',
         'addon-test-support/**',
         'app/**',
-        'tests/dummy/app/**',
       ],
       parserOptions: {
         sourceType: 'script',

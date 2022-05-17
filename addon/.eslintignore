@@ -1,0 +1,9 @@
+# compiled output
+/dist/
+
+# dependencies
+/node_modules/
+
+# misc
+/coverage/
+!.*
