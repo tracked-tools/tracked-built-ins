@@ -107,7 +107,7 @@ used as fully transparent replacements in most circumstances.
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.28 (LTS) or above
+* Ember.js v3.24 (LTS) or above
 * Ember CLI v3.23 or above
 * Node.js v14 or above
 
