@@ -5,6 +5,7 @@
 
 #### :boom: Breaking Change
 * [#330](https://github.com/tracked-tools/tracked-built-ins/pull/330) Drop support for Node 12 ([@chriskrycho](https://github.com/chriskrycho))
+* for supporting Ember v4, **now requires ember-auto-import v2** 
 
 #### :rocket: Enhancement
 * [#315](https://github.com/tracked-tools/tracked-built-ins/pull/315) Adopt SemVer spec strictness guidelines ([@chriskrycho](https://github.com/chriskrycho))
