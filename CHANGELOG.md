@@ -1,5 +1,32 @@
 
 
+
+## v3.0.0 (2022-05-17)
+
+#### :boom: Breaking Change
+* [#330](https://github.com/tracked-tools/tracked-built-ins/pull/330) Drop support for Node 12 ([@chriskrycho](https://github.com/chriskrycho))
+
+#### :rocket: Enhancement
+* [#315](https://github.com/tracked-tools/tracked-built-ins/pull/315) Adopt SemVer spec strictness guidelines ([@chriskrycho](https://github.com/chriskrycho))
+* [#314](https://github.com/tracked-tools/tracked-built-ins/pull/314) Add type tests and fix a types bug they exposed ([@chriskrycho](https://github.com/chriskrycho))
+* [#313](https://github.com/tracked-tools/tracked-built-ins/pull/313) Introduce TS support policy with TS 4.4–4.6 ([@chriskrycho](https://github.com/chriskrycho))
+* [#307](https://github.com/tracked-tools/tracked-built-ins/pull/307) Use Ember v4 types ([@chriskrycho](https://github.com/chriskrycho))
+
+#### :bug: Bug Fix
+* [#314](https://github.com/tracked-tools/tracked-built-ins/pull/314) Add type tests and fix a types bug they exposed ([@chriskrycho](https://github.com/chriskrycho))
+
+#### :memo: Documentation
+* [#241](https://github.com/tracked-tools/tracked-built-ins/pull/241) Update repository url in package.json ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* [#305](https://github.com/tracked-tools/tracked-built-ins/pull/305) Additional `TrackedArray` test to ensure that clearing the array by setting `length = 0` is possible. ([@ksrb](https://github.com/ksrb))
+* [#321](https://github.com/tracked-tools/tracked-built-ins/pull/321) Directly integrate tracked maps and sets ([@chriskrycho](https://github.com/chriskrycho))
+
+#### Committers: 3
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+- Kevin Suen ([@ksrb](https://github.com/ksrb))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 ## v2.0.1 (2021-12-17)
 
 #### :bug: Bug Fix
