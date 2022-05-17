@@ -45,7 +45,7 @@ module.exports = {
         './.eslintrc.js',
         './.prettierrc.js',
         './config/**/*.js',
-        './index.js',
+        './addon-main.js',
       ],
       parserOptions: {
         sourceType: 'script',

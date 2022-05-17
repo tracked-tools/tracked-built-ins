@@ -26,29 +26,10 @@
     "baseUrl": ".",
     "module": "es6",
     "experimentalDecorators": true,
-    "paths": {
-      "tracked-built-ins": [
-        "addon"
-      ],
-      "tracked-built-ins/*": [
-        "addon/*"
-      ],
-      "tracked-built-ins/test-support": [
-        "addon-test-support"
-      ],
-      "tracked-built-ins/test-support/*": [
-        "addon-test-support/*"
-      ],
-      "*": [
-        "types/*"
-      ]
-    }
+    "paths": {}
   },
   "include": [
-    "app/**/*",
-    "addon/**/*",
+    "src/**/*",
     "types/**/*",
-    "test-support/**/*",
-    "addon-test-support/**/*"
   ]
 }
