@@ -10,7 +10,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:ember/recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier',
+    'plugin:prettier/recommended',
   ],
   env: {
     browser: true,
@@ -34,35 +34,18 @@ module.exports = {
   overrides: [
     // JS files where TS rules don't make sense
     {
-      files: ['addon/**/*.js', 'tests/**/*.js'],
+      files: ['addon/**/*.js'],
       rules: {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
-      },
-    },
-    // tests
-    {
-      files: ['tests/**/*-test.ts'],
-      rules: {
-        '@typescript-eslint/ban-ts-comment': 'off',
       },
     },
     // node files
     {
       files: [
-        '.eslintrc.js',
-        '.template-lintrc.js',
-        'ember-cli-build.js',
-        'index.js',
-        'testem.js',
-        'blueprints/*/index.js',
-        'config/**/*.js',
-        'tests/dummy/config/**/*.js',
-      ],
-      excludedFiles: [
-        'addon/**',
-        'addon-test-support/**',
-        'app/**',
-        'tests/dummy/app/**',
+        './.eslintrc.js',
+        './.prettierrc.js',
+        './config/**/*.js',
+        './index.js',
       ],
       parserOptions: {
         sourceType: 'script',
@@ -72,14 +55,13 @@ module.exports = {
         node: true,
       },
       plugins: ['node'],
-      rules: Object.assign(
-        {},
-        require('eslint-plugin-node').configs.recommended.rules,
-        {
-          // add your custom rules and overrides for node files here
-          '@typescript-eslint/no-var-requires': 'off',
-        }
-      ),
+      extends: ['plugin:node/recommended'],
+      rules: {
+        // this can be removed once the following is fixed
+        // https://github.com/mysticatea/eslint-plugin-node/issues/77
+        'node/no-unpublished-require': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
+      },
     },
   ],
 };
