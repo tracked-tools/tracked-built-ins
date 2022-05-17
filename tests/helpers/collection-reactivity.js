@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 import hbs from 'htmlbars-inline-precompile';
 import { render, settled, findAll } from '@ember/test-helpers';
 import { test } from 'qunit';
@@ -12,7 +13,7 @@ function compareResults(assert, items) {
 }
 
 export function eachReactivityTest(desc, Klass) {
-  test(`${desc} #each reactivity`, async function(assert) {
+  test(`${desc} #each reactivity`, async function (assert) {
     let instance;
 
     class TestComponent extends Klass {
@@ -40,18 +41,24 @@ export function eachReactivityTest(desc, Klass) {
 
     await render(hbs`<TestComponent/>`);
 
-    compareResults(assert, Array.from(instance.collection).map((v, i) => [i, v]));
+    compareResults(
+      assert,
+      Array.from(instance.collection).map((v, i) => [i, v])
+    );
 
     instance.update();
 
     await settled();
 
-    compareResults(assert, Array.from(instance.collection).map((v, i) => [i, v]));
+    compareResults(
+      assert,
+      Array.from(instance.collection).map((v, i) => [i, v])
+    );
   });
 }
 
 export function eachInReactivityTest(desc, Klass) {
-  test(`${desc} #each-in reactivity`, async function(assert) {
+  test(`${desc} #each-in reactivity`, async function (assert) {
     let instance;
 
     class TestComponent extends Klass {
@@ -81,12 +88,22 @@ export function eachInReactivityTest(desc, Klass) {
 
     let { collection } = instance;
 
-    compareResults(assert, Symbol.iterator in collection ? Array.from(collection) : Object.entries(collection));
+    compareResults(
+      assert,
+      Symbol.iterator in collection
+        ? Array.from(collection)
+        : Object.entries(collection)
+    );
 
     instance.update();
 
     await settled();
 
-    compareResults(assert, Symbol.iterator in collection ? Array.from(collection) : Object.entries(collection));
+    compareResults(
+      assert,
+      Symbol.iterator in collection
+        ? Array.from(collection)
+        : Object.entries(collection)
+    );
   });
 }

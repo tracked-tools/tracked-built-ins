@@ -1,10 +1,14 @@
 import Component from '@glimmer/component';
 import { TrackedArray } from 'tracked-built-ins';
+import { expectTypeOf } from 'expect-type';
 
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import { reactivityTest } from '../helpers/reactivity';
-import { eachReactivityTest, eachInReactivityTest } from '../helpers/collection-reactivity';
+import {
+  eachReactivityTest,
+  eachInReactivityTest,
+} from '../helpers/collection-reactivity';
 
 const ARRAY_GETTER_METHODS = [
   'concat',
@@ -41,43 +45,55 @@ const ARRAY_SETTER_METHODS = [
   'unshift',
 ];
 
-module('TrackedArray', function(hooks) {
+// We can use a `TrackedArray<T>` anywhere we can use an `Array<T>` (but not
+// vice versa).
+expectTypeOf<TrackedArray<unknown>>().toMatchTypeOf<Array<unknown>>();
+
+module('TrackedArray', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('Can get values on array directly', assert => {
+  test('Can get values on array directly', (assert) => {
     let arr = new TrackedArray(['foo']);
 
     assert.equal(arr[0], 'foo');
   });
 
-  test('Can get length on array directly', assert => {
+  test('Can get length on array directly', (assert) => {
     let arr = new TrackedArray(['foo']);
 
     assert.equal(arr.length, 1);
   });
 
-  test('Can set values on array directly', assert => {
+  test('Can set values on array directly', (assert) => {
     let arr = new TrackedArray();
     arr[0] = 123;
 
     assert.equal(arr[0], 123);
   });
 
-  test('Can set length on array directly', assert => {
+  test('Can set length on array directly', (assert) => {
     let arr = new TrackedArray();
     arr.length = 123;
 
     assert.equal(arr.length, 123);
   });
 
+  test('Can clear array by setting length to 0', (assert) => {
+    let arr = new TrackedArray([123]);
+    arr.length = 0;
+
+    assert.equal(arr.length, 0);
+    assert.equal(arr[0], undefined);
+  });
+
   module('methods', () => {
-    test('isArray', assert => {
+    test('isArray', (assert) => {
       let arr = new TrackedArray();
 
       assert.ok(Array.isArray(arr));
     });
 
-    test('length', assert => {
+    test('length', (assert) => {
       let arr = new TrackedArray();
 
       assert.equal(arr.length, 0);
@@ -87,7 +103,7 @@ module('TrackedArray', function(hooks) {
       assert.equal(arr.length, 101);
     });
 
-    test('concat', assert => {
+    test('concat', (assert) => {
       let arr = new TrackedArray();
       let arr2 = arr.concat([1], new TrackedArray([2]));
 
@@ -95,14 +111,14 @@ module('TrackedArray', function(hooks) {
       assert.notOk(arr2 instanceof TrackedArray);
     });
 
-    test('copyWithin', assert => {
+    test('copyWithin', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
       arr.copyWithin(1, 0, 1);
 
       assert.deepEqual(arr, [1, 1, 3]);
     });
 
-    test('entries', assert => {
+    test('entries', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
       let iter = arr.entries();
 
@@ -112,14 +128,14 @@ module('TrackedArray', function(hooks) {
       assert.equal(iter.next().done, true);
     });
 
-    test('every', assert => {
+    test('every', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
 
-      assert.ok(arr.every(v => typeof v === 'number'));
-      assert.notOk(arr.every(v => v !== 2));
+      assert.ok(arr.every((v) => typeof v === 'number'));
+      assert.notOk(arr.every((v) => v !== 2));
     });
 
-    test('fill', assert => {
+    test('fill', (assert) => {
       let arr = new TrackedArray();
       arr.length = 100;
       arr.fill(123);
@@ -136,71 +152,76 @@ module('TrackedArray', function(hooks) {
       assert.ok(isCorrect);
     });
 
-    test('filter', assert => {
+    test('filter', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
-      let arr2 = arr.filter(v => v > 1);
+      let arr2 = arr.filter((v) => v > 1);
 
       assert.deepEqual(arr2, [2, 3]);
       assert.notOk(arr2 instanceof TrackedArray);
     });
 
-    test('find', assert => {
+    test('find', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
 
-      assert.equal(arr.find(v => v > 1), 2);
+      assert.equal(
+        arr.find((v) => v > 1),
+        2
+      );
     });
 
-    test('findIndex', assert => {
+    test('findIndex', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
 
-      assert.equal(arr.findIndex(v => v > 1), 1);
+      assert.equal(
+        arr.findIndex((v) => v > 1),
+        1
+      );
     });
 
-    test('flat', assert => {
+    test('flat', (assert) => {
       let arr = new TrackedArray([1, 2, [3]]);
 
       assert.deepEqual(arr.flat(), [1, 2, 3]);
       assert.deepEqual(arr, [1, 2, [3]]);
     });
 
-    test('flatMap', assert => {
+    test('flatMap', (assert) => {
       let arr = new TrackedArray([1, 2, [3]]);
 
-      assert.deepEqual(arr.flatMap(v => (typeof v === 'number' ? v + 1 : v)), [
-        2,
-        3,
-        3,
-      ]);
+      assert.deepEqual(
+        arr.flatMap((v) => (typeof v === 'number' ? v + 1 : v)),
+        [2, 3, 3]
+      );
       assert.deepEqual(arr, [1, 2, [3]]);
     });
 
-    test('forEach', assert => {
+    test('forEach', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
 
       arr.forEach((v, i) => assert.equal(v, i + 1));
     });
 
-    test('includes', assert => {
+    test('includes', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
 
       assert.equal(arr.includes(1), true);
       assert.equal(arr.includes(5), false);
     });
 
-    test('indexOf', assert => {
+    test('indexOf', (assert) => {
       let arr = new TrackedArray([1, 2, 1]);
 
       assert.equal(arr.indexOf(1), 0);
       assert.equal(arr.indexOf(5), -1);
     });
 
-    test('join', assert => {
+    test('join', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
 
       assert.equal(arr.join(','), '1,2,3');
     });
 
-    test('keys', assert => {
+    test('keys', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
       let iter = arr.keys();
 
@@ -210,22 +231,22 @@ module('TrackedArray', function(hooks) {
       assert.equal(iter.next().done, true);
     });
 
-    test('lastIndexOf', assert => {
+    test('lastIndexOf', (assert) => {
       let arr = new TrackedArray([3, 2, 3]);
 
       assert.equal(arr.lastIndexOf(3), 2);
       assert.equal(arr.lastIndexOf(5), -1);
     });
 
-    test('map', assert => {
+    test('map', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
-      let arr2 = arr.map(v => v + 1);
+      let arr2 = arr.map((v) => v + 1);
 
       assert.deepEqual(arr2, [2, 3, 4]);
       assert.notOk(arr2 instanceof TrackedArray);
     });
 
-    test('pop', assert => {
+    test('pop', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
       let val = arr.pop();
 
@@ -233,7 +254,7 @@ module('TrackedArray', function(hooks) {
       assert.equal(val, 3);
     });
 
-    test('push', assert => {
+    test('push', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
       let val = arr.push(4);
 
@@ -241,26 +262,32 @@ module('TrackedArray', function(hooks) {
       assert.equal(val, 4);
     });
 
-    test('reduce', assert => {
+    test('reduce', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
 
-      assert.equal(arr.reduce((s, v) => s + v, ''), '123');
+      assert.equal(
+        arr.reduce((s, v) => s + v, ''),
+        '123'
+      );
     });
 
-    test('reduceRight', assert => {
+    test('reduceRight', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
 
-      assert.equal(arr.reduceRight((s, v) => s + v, ''), '321');
+      assert.equal(
+        arr.reduceRight((s, v) => s + v, ''),
+        '321'
+      );
     });
 
-    test('reverse', assert => {
+    test('reverse', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
       arr.reverse();
 
       assert.deepEqual(arr, [3, 2, 1]);
     });
 
-    test('shift', assert => {
+    test('shift', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
       let val = arr.shift();
 
@@ -268,7 +295,7 @@ module('TrackedArray', function(hooks) {
       assert.equal(val, 1);
     });
 
-    test('slice', assert => {
+    test('slice', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
       let arr2 = arr.slice();
 
@@ -277,14 +304,14 @@ module('TrackedArray', function(hooks) {
       assert.deepEqual(arr, arr2);
     });
 
-    test('some', assert => {
+    test('some', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
 
-      assert.ok(arr.some(v => v > 1));
-      assert.notOk(arr.some(v => v < 1));
+      assert.ok(arr.some((v) => v > 1));
+      assert.notOk(arr.some((v) => v < 1));
     });
 
-    test('sort', assert => {
+    test('sort', (assert) => {
       let arr = new TrackedArray([3, 1, 2]);
       let arr2 = arr.sort();
 
@@ -292,7 +319,7 @@ module('TrackedArray', function(hooks) {
       assert.deepEqual(arr, [1, 2, 3]);
     });
 
-    test('sort (with method)', assert => {
+    test('sort (with method)', (assert) => {
       let arr = new TrackedArray([3, 1, 2, 2]);
       let arr2 = arr.sort((a, b) => {
         if (a > b) return -1;
@@ -304,7 +331,7 @@ module('TrackedArray', function(hooks) {
       assert.deepEqual(arr, [3, 2, 2, 1]);
     });
 
-    test('splice', assert => {
+    test('splice', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
       let arr2 = arr.splice(1, 1);
 
@@ -313,7 +340,7 @@ module('TrackedArray', function(hooks) {
       assert.deepEqual(arr2, [2]);
     });
 
-    test('unshift', assert => {
+    test('unshift', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
       let val = arr.unshift(0);
 
@@ -321,7 +348,7 @@ module('TrackedArray', function(hooks) {
       assert.equal(val, 4);
     });
 
-    test('values', assert => {
+    test('values', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
       let iter = arr.values();
 
@@ -331,13 +358,13 @@ module('TrackedArray', function(hooks) {
       assert.equal(iter.next().done, true);
     });
 
-    test('of', assert => {
+    test('of', (assert) => {
       let arr = TrackedArray.of(1, 2, 3);
 
       assert.deepEqual(arr, [1, 2, 3]);
     });
 
-    test('from', assert => {
+    test('from', (assert) => {
       let arr = TrackedArray.from([1, 2, 3]);
 
       assert.deepEqual(arr, [1, 2, 3]);
@@ -404,14 +431,18 @@ module('TrackedArray', function(hooks) {
       }
     );
 
-    ARRAY_GETTER_METHODS.forEach(method => {
+    ARRAY_GETTER_METHODS.forEach((method) => {
       reactivityTest(
         `${method} individual index`,
         class extends Component {
           arr = new TrackedArray(['foo', 'bar']);
 
           get value() {
-            return this.arr[method](() => {});
+            // @ts-ignore -- this can't be represented easily in TS, and we
+            // don't actually care that it is; we're *just* testing reactivity.
+            return this.arr[method](() => {
+              /* no op */
+            });
           }
 
           update() {
@@ -426,7 +457,11 @@ module('TrackedArray', function(hooks) {
           arr = new TrackedArray(['foo', 'bar']);
 
           get value() {
-            return this.arr[method](() => {});
+            // @ts-ignore -- this can't be represented easily in TS, and we
+            // don't actually care that it is; we're *just* testing reactivity.
+            return this.arr[method](() => {
+              /* no op */
+            });
           }
 
           update() {
@@ -436,7 +471,7 @@ module('TrackedArray', function(hooks) {
       );
     });
 
-    ARRAY_SETTER_METHODS.forEach(method => {
+    ARRAY_SETTER_METHODS.forEach((method) => {
       reactivityTest(
         `${method} individual index`,
         class extends Component {
@@ -447,6 +482,8 @@ module('TrackedArray', function(hooks) {
           }
 
           update() {
+            // @ts-ignore -- this can't be represented easily in TS, and we
+            // don't actually care that it is; we're *just* testing reactivity.
             this.arr[method](undefined);
           }
         }
@@ -458,10 +495,14 @@ module('TrackedArray', function(hooks) {
           arr = new TrackedArray(['foo', 'bar']);
 
           get value() {
-            return this.arr.forEach(() => {});
+            return this.arr.forEach(() => {
+              /* no op */
+            });
           }
 
           update() {
+            // @ts-ignore -- this can't be represented easily in TS, and we
+            // don't actually care that it is; we're *just* testing reactivity.
             this.arr[method](undefined);
           }
         }

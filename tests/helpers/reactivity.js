@@ -3,13 +3,14 @@ import { render, settled } from '@ember/test-helpers';
 import { test } from 'qunit';
 
 export function reactivityTest(desc, Klass, shouldUpdate = true) {
-  test(`${desc} reactivity`, async function(assert) {
+  test(`${desc} reactivity`, async function (assert) {
     let instance;
     let count = 0;
 
     class TestComponent extends Klass {
       constructor() {
         super(...arguments);
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         instance = this;
       }
 
@@ -26,7 +27,7 @@ export function reactivityTest(desc, Klass, shouldUpdate = true) {
       hbs`<div class="test">{{this.value}}</div>`
     );
 
-    await render(hbs`{{test-component}}`);
+    await render(hbs`<TestComponent/>`);
 
     assert.equal(count, 1);
 

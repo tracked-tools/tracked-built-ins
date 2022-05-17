@@ -1,76 +1,12 @@
-import { consumeKey, dirtyKey } from 'tracked-maps-and-sets/-private/util';
-import { notifyPropertyChange } from '@ember/object';
-import { DEBUG } from '@glimmer/env';
-
-const COLLECTION = Symbol();
-
-if (DEBUG) {
-  // patch mandatory setter
-  // eslint-disable-next-line no-undef
-  let utils = Ember.__loader.require('@ember/-internals/utils')
-  let originalSetupMandatorySetter = utils.setupMandatorySetter;
-
-  utils.setupMandatorySetter = (tag, obj, keyName) => {
-    if (obj instanceof TrackedObject) {
-      return;
-    }
-
-    return originalSetupMandatorySetter(tag, obj, keyName);
-  }
-}
-
-const proxyHandler = {
-  get(target, prop) {
-    consumeKey(target, prop);
-
-    return target[prop];
-  },
-
-  has(target, prop) {
-    consumeKey(target, prop);
-
-    return prop in target;
-  },
-
-  ownKeys(target) {
-    consumeKey(target, COLLECTION);
-
-    return Reflect.ownKeys(target);
-  },
-
-  set(target, prop, value, receiver) {
-    target[prop] = value;
-
-    dirtyKey(target, prop);
-    dirtyKey(target, COLLECTION);
-
-    // We need to notify this way to make {{each-in}} update
-    notifyPropertyChange(receiver, '_SOME_PROP_');
-
-    return true;
-  },
-
-  deleteProperty(target, prop) {
-    if (prop in target) {
-      delete target[prop];
-      dirtyKey(target, prop);
-      dirtyKey(target, COLLECTION);
-    }
-    return true;
-  },
-
-  getPrototypeOf() {
-    return TrackedObject.prototype;
-  },
-};
-
-function createProxy(obj = {}) {
-  return new Proxy(obj, proxyHandler);
-}
+import {
+  createStorage,
+  getValue,
+  setValue,
+} from 'ember-tracked-storage-polyfill';
 
 export default class TrackedObject {
   static fromEntries(entries) {
-    return createProxy(Object.fromEntries(entries));
+    return new TrackedObject(Object.fromEntries(entries));
   }
 
   constructor(obj = {}) {
@@ -83,6 +19,77 @@ export default class TrackedObject {
       Object.defineProperty(clone, prop, descs[prop]);
     }
 
-    return createProxy(clone);
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    let self = this;
+
+    return new Proxy(clone, {
+      get(target, prop) {
+        self.#readStorageFor(prop);
+
+        return target[prop];
+      },
+
+      has(target, prop) {
+        self.#readStorageFor(prop);
+
+        return prop in target;
+      },
+
+      ownKeys(target) {
+        getValue(self.#collection);
+
+        return Reflect.ownKeys(target);
+      },
+
+      set(target, prop, value) {
+        target[prop] = value;
+
+        self.#dirtyStorageFor(prop);
+        self.#dirtyCollection();
+
+        return true;
+      },
+
+      deleteProperty(target, prop) {
+        if (prop in target) {
+          delete target[prop];
+          self.#dirtyStorageFor(prop);
+          self.#dirtyCollection();
+        }
+
+        return true;
+      },
+
+      getPrototypeOf() {
+        return TrackedObject.prototype;
+      },
+    });
+  }
+
+  #storages = new Map();
+
+  #collection = createStorage(null, () => false);
+
+  #readStorageFor(key) {
+    let storage = this.#storages.get(key);
+
+    if (storage === undefined) {
+      storage = createStorage(null, () => false);
+      this.#storages.set(key, storage);
+    }
+
+    getValue(storage);
+  }
+
+  #dirtyStorageFor(key) {
+    const storage = this.#storages.get(key);
+
+    if (storage) {
+      setValue(storage, null);
+    }
+  }
+
+  #dirtyCollection() {
+    setValue(this.#collection, null);
   }
 }
