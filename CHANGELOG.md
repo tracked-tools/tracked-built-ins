@@ -1,6 +1,22 @@
 
 
 
+
+## v3.1.0 (2022-05-17)
+
+#### :rocket: Enhancement
+* [#30](https://github.com/tracked-tools/tracked-built-ins/pull/30) Trigger update after calling `delete` on an object property ([@lifeart](https://github.com/lifeart))
+
+#### :bug: Bug Fix
+* [#331](https://github.com/tracked-tools/tracked-built-ins/pull/331) Ignore generated types in repo ([@chriskrycho](https://github.com/chriskrycho))
+
+#### :house: Internal
+* [#331](https://github.com/tracked-tools/tracked-built-ins/pull/331) Ignore generated types in repo ([@chriskrycho](https://github.com/chriskrycho))
+
+#### Committers: 2
+- Alex Kanunnikov ([@lifeart](https://github.com/lifeart))
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+
 ## v3.0.0 (2022-05-17)
 
 #### :boom: Breaking Change
