@@ -45,7 +45,17 @@ export default class TrackedObject {
         target[prop] = value;
 
         self.#dirtyStorageFor(prop);
-        setValue(self.#collection, null);
+        self.#dirtyCollection();
+
+        return true;
+      },
+
+      deleteProperty(target, prop) {
+        if (prop in target) {
+          delete target[prop];
+          self.#dirtyStorageFor(prop);
+          self.#dirtyCollection();
+        }
 
         return true;
       },
@@ -56,13 +66,10 @@ export default class TrackedObject {
     });
   }
 
-  // @private
   #storages = new Map();
 
-  // @private
   #collection = createStorage(null, () => false);
 
-  // @private
   #readStorageFor(key) {
     let storage = this.#storages.get(key);
 
@@ -74,12 +81,15 @@ export default class TrackedObject {
     getValue(storage);
   }
 
-  // @private
   #dirtyStorageFor(key) {
     const storage = this.#storages.get(key);
 
     if (storage) {
       setValue(storage, null);
     }
+  }
+
+  #dirtyCollection() {
+    setValue(this.#collection, null);
   }
 }
