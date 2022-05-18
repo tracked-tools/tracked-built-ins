@@ -1,0 +1,11 @@
+# compiled output
+/dist/
+
+# misc
+/.eslintcache
+/.eslintignore
+/.eslintrc.js
+/.gitignore
+/yarn-error.log
+/yarn.lock
+.gitkeep
