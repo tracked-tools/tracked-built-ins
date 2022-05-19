@@ -68,7 +68,7 @@ module('TrackedObject', function (hooks) {
 
     assert.dom().hasText('123');
 
-    this.obj.foo = 456;
+    this.obj['foo'] = 456;
     await settled();
 
     assert.dom().hasText('456');
@@ -82,7 +82,7 @@ module('TrackedObject', function (hooks) {
       });
 
       update() {
-        this.collection.bar = 456;
+        this.collection['bar'] = 456;
       }
     }
   );
@@ -106,11 +106,11 @@ module('TrackedObject', function (hooks) {
       obj = new TrackedObject();
 
       get value() {
-        return this.obj.foo;
+        return this.obj['foo'];
       }
 
       update() {
-        this.obj.foo = 123;
+        this.obj['foo'] = 123;
       }
     }
   );
@@ -125,7 +125,7 @@ module('TrackedObject', function (hooks) {
       }
 
       update() {
-        this.obj.foo = 123;
+        this.obj['foo'] = 123;
       }
     }
   );
@@ -146,7 +146,7 @@ module('TrackedObject', function (hooks) {
       }
 
       update() {
-        this.obj.foo = 123;
+        this.obj['foo'] = 123;
       }
     }
   );
@@ -161,7 +161,7 @@ module('TrackedObject', function (hooks) {
       }
 
       update() {
-        this.obj.foo = 123;
+        this.obj['foo'] = 123;
       }
     }
   );
