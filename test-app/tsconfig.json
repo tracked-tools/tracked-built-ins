@@ -5,10 +5,6 @@
     "paths": {
       "test-app/tests/*": ["tests/*"],
       "test-app/*": ["app/*"],
-      "tracked-built-ins": ["../addon/addon"],
-      "tracked-built-ins/*": ["../addon/addon/*"],
-      "tracked-built-ins/test-support": ["../addon/addon-test-support"],
-      "tracked-built-ins/test-support/*": ["../addon/addon-test-support/*"],
       "*": ["types/*"]
     }
   },
