@@ -1497,10 +1497,10 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
-"@tsconfig/ember@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@tsconfig/ember/-/ember-1.0.0.tgz#e982a5d47b03bb0ac5a93d011596f8520e046d96"
-  integrity sha512-2FXPaVQLJxDHzfkHYVH2R3YC62/e1/k3kQ/1KyzET8/MhJoJeL9F+wmPxASm8v2QYBj8Ct+COS+ZTknrfJ/SAQ==
+"@tsconfig/ember@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@tsconfig/ember/-/ember-1.0.1.tgz#d7556d81f108438c17e4030acb4e1be6b2974e88"
+  integrity sha512-aPzLw5BfQxsFPrh5fNDOK4SbSkp2q5fMlrKVeniVjMz1lAcyOh2eH5THkKKcBi1YN1/fbMdAWN/dKGW6lg2+8g==
 
 "@types/body-parser@*":
   version "1.19.2"

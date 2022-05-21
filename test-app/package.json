@@ -31,7 +31,7 @@
     "@embroider/test-setup": "^1.6.0",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
-    "@tsconfig/ember": "^1.0.0",
+    "@tsconfig/ember": "^1.0.1",
     "@types/ember-qunit": "^5.0.0",
     "@types/ember-resolver": "^5.0.11",
     "@types/ember__application": "^4.0.0",
