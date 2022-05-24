@@ -1036,13 +1036,14 @@
     ember-cli-version-checker "^5.1.2"
     semver "^7.3.5"
 
-"@embroider/addon-dev@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@embroider/addon-dev/-/addon-dev-1.6.0.tgz#2e4a85b9efe18e99ee08d740321c0b71502ef934"
-  integrity sha512-ePQuzzKngJy48mqRe8Mdik4CLPLlZonI3IV4+lVDBY5tCcpGS7SWE1NJmVgjML+nt1q+dT6/CqU/waH2ujOwRw==
+"@embroider/addon-dev@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@embroider/addon-dev/-/addon-dev-1.7.0.tgz#2703a78a9ba16f0564968c3a4aba94ec2d3c8d93"
+  integrity sha512-QJmnPjVLHH2M43g1Zhrdsj1bqsWF95dK01Noe9go8ygK5N5/MOgMRjobIoljJ4obo5YRbUEc7Q05qKZjjwZVtA==
   dependencies:
-    "@embroider/shared-internals" "^1.6.0"
+    "@embroider/shared-internals" "^1.7.0"
     "@rollup/pluginutils" "^4.1.1"
+    assert-never "^1.2.1"
     fs-extra "^10.0.0"
     minimatch "^3.0.4"
     rollup-plugin-copy-assets "^2.0.3"
@@ -1086,7 +1087,7 @@
     semver "^7.3.5"
     typescript-memoize "^1.0.1"
 
-"@embroider/shared-internals@^1.0.0", "@embroider/shared-internals@^1.6.0", "@embroider/shared-internals@^1.7.0":
+"@embroider/shared-internals@^1.0.0", "@embroider/shared-internals@^1.7.0":
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/@embroider/shared-internals/-/shared-internals-1.7.0.tgz#824675aef9a403b13772bc282ba23052ad08f55b"
   integrity sha512-DLE/QH27VHbLFqLeqLaVY3N6QnRgftYxxa5poYvLpdG/o0sbYuyUxrI7nxLOtXRR9RqtdrssV+Y/w5f/TE0yTQ==
