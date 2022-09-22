@@ -55,14 +55,14 @@
 ## v2.0.0 (2021-11-11)
 
 #### :boom: Breaking Change
-* [#173](https://github.com/tracked-tools/tracked-built-ins/pull/173) Support Ember 4 and drop Ember <3.24 TLS ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#173](https://github.com/tracked-tools/tracked-built-ins/pull/173) Support Ember 4 and drop Ember <3.24 LTS ([@SergeAstapov](https://github.com/SergeAstapov))
 * [#161](https://github.com/tracked-tools/tracked-built-ins/pull/161) Tracked storage implementations ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
 * [#144](https://github.com/tracked-tools/tracked-built-ins/pull/144) Breaking: drop Node 10 support ([@chriskrycho](https://github.com/chriskrycho))
 * [#98](https://github.com/tracked-tools/tracked-built-ins/pull/98) Remove mandatory setter override ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
 
 #### :rocket: Enhancement
 * [#189](https://github.com/tracked-tools/tracked-built-ins/pull/189) Update npmignore file ([@SergeAstapov](https://github.com/SergeAstapov))
-* [#173](https://github.com/tracked-tools/tracked-built-ins/pull/173) Support Ember 4 and drop Ember <3.24 TLS ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#173](https://github.com/tracked-tools/tracked-built-ins/pull/173) Support Ember 4 and drop Ember <3.24 LTS ([@SergeAstapov](https://github.com/SergeAstapov))
 * [#161](https://github.com/tracked-tools/tracked-built-ins/pull/161) Tracked storage implementations ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
 
 #### :memo: Documentation
