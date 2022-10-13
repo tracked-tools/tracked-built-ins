@@ -16,9 +16,9 @@
     "test": "cd test-app && yarn test:ember"
   },
   "devDependencies": {
-    "release-it": "^14.14.3",
-    "release-it-lerna-changelog": "^4.0.1",
-    "release-it-yarn-workspaces": "^2.0.1"
+    "@release-it-plugins/lerna-changelog": "^5.0.0",
+    "@release-it-plugins/workspaces": "^3.2.0",
+    "release-it": "^15.5.0"
   },
   "volta": {
     "node": "14.19.2",
@@ -32,11 +32,11 @@
       "before:init": "cp README.md LICENSE.md addon/"
     },
     "plugins": {
-      "release-it-lerna-changelog": {
+      "@release-it-plugins/lerna-changelog": {
         "infile": "CHANGELOG.md",
         "launchEditor": false
       },
-      "release-it-yarn-workspaces": {
+      "@release-it-plugins/workspaces": {
         "workspaces": [
           "addon"
         ],
