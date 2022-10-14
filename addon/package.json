@@ -50,7 +50,7 @@
     "@babel/plugin-proposal-private-methods": "^7.17.12",
     "@babel/preset-typescript": "^7.17.12",
     "@embroider/addon-dev": "^1.7.0",
-    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-babel": "^6.0.0",
     "@tsconfig/ember": "^1.0.1",
     "@types/ember__debug": "^4.0.1",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
