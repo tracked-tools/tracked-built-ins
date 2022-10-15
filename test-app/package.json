@@ -43,7 +43,7 @@
     "@typescript-eslint/parser": "^5.26.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^2.4.2",
-    "ember-cli": "~4.3.0",
+    "ember-cli": "~4.7.0",
     "ember-cli-babel": "^7.26.11",
     "ember-cli-dependency-checker": "^3.3.1",
     "ember-cli-htmlbars": "^6.0.1",
