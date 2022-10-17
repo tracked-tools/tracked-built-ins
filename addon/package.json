@@ -57,7 +57,7 @@
     "@typescript-eslint/parser": "^5.26.0",
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-ember": "^10.6.1",
+    "eslint-plugin-ember": "^11.0.6",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "expect-type": "^0.13.0",
