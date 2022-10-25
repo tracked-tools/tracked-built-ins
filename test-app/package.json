@@ -36,7 +36,7 @@
     "@types/ember-resolver": "^5.0.11",
     "@types/ember__application": "^4.0.0",
     "@types/ember__debug": "^4.0.1",
-    "@types/ember__test-helpers": "^2.6.1",
+    "@types/ember__test-helpers": "^2.8.2",
     "@types/qunit": "^2.19.3",
     "@types/rsvp": "^4.0.4",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
