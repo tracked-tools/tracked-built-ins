@@ -6,14 +6,10 @@
   },
   "license": "MIT",
   "author": "Chris Hewell Garrett",
-  "workspaces": [
-    "addon",
-    "test-app"
-  ],
   "scripts": {
-    "prepare": "cd addon && yarn build",
+    "prepare": "cd addon && pnpm run build",
     "release": "release-it",
-    "test": "cd test-app && yarn test:ember"
+    "test": "cd test-app && pnpm run test:ember"
   },
   "devDependencies": {
     "@release-it-plugins/lerna-changelog": "^5.0.0",
@@ -21,9 +17,9 @@
     "release-it": "^15.5.0"
   },
   "volta": {
-    "node": "14.19.2",
-    "yarn": "1.22.18"
+    "node": "14.19.2"
   },
+  "packageManager": "pnpm@7.14.0",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },

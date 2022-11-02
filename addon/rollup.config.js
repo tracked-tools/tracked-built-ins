@@ -29,31 +29,19 @@ export default {
     //
     // By default, this will load the actual babel config from the file
     // babel.config.json.
-    // typescript(),
     typescript({
-      // can be changed to swc or other transpilers later
-      // but we need the ember plugins converted first
-      // (template compilation and co-location)
       transpiler: 'babel',
       browserslist: false,
-      // NOTE: babel config must be CJS if in the same directory as CWD
-      //       https://github.com/wessberg/rollup-plugin-ts/issues/167
-      //       otherwise ESM babel.config.js can be imported and set here
-      // babelConfig,
-      // setting this true greatly improves performance, but
-      // at the cost of safety (and no declarations output in your dist directory).
-      // transpileOnly: false,
-      tsconfig: {
-        fileName: 'tsconfig.json',
-        hook: (config) => ({ ...config, declaration: true }),
-      },
+      transpileOnly: false,
     }),
 
+    // TODO: Remove after converting object.js -> ts
     del({
       targets: ['dist/-private/object.d.d.ts', 'dist/-private/object.d.js'],
       hook: 'writeBundle',
     }),
 
+    // TODO: Remove after converting object.js -> ts
     copy({
       targets: [
         {
@@ -68,13 +56,6 @@ export default {
     // `dependencies` and `peerDependencies` as well as standard Ember-provided
     // package names.
     addon.dependencies(),
-
-    // Ensure that standalone .hbs files are properly integrated as Javascript.
-    addon.hbs(),
-
-    // addons are allowed to contain imports of .css files, which we want rollup
-    // to leave alone and keep in the published output.
-    addon.keepAssets(['**/*.css']),
 
     // Remove leftover build artifacts when starting a new build.
     addon.clean(),
