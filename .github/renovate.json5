@@ -1,0 +1,21 @@
+{
+  extends: [
+    "config:base",
+    ":disableRateLimiting",
+    ":preserveSemverRanges",
+    "helpers:pinGitHubActionDigests"
+  ],
+  lockFileMaintenance: {
+    enabled: true,
+  },
+  labels: ["dependencies", "renovatebot"],
+  packageRules: [
+    {
+      extends: ["group:allNonMajor", "schedule:weekly"],
+      lockFileMaintenance: {
+        enabled: true,
+      },
+      depTypeList: ["devDependencies"],
+    },
+  ],
+}
