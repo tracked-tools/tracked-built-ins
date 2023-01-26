@@ -38,6 +38,13 @@ const ARRAY_GETTER_METHODS = new Set<string | symbol | number>([
   'values',
 ]);
 
+// For these methods, `Array` itself immediately gets the `.length` to return
+// after invoking them.
+const ARRAY_WRITE_THEN_READ_METHODS = new Set<string | symbol>([
+  'push',
+  'unshift',
+]);
+
 function convertToInt(prop: number | string | symbol): number | null {
   if (typeof prop === 'symbol') return null;
 
@@ -86,7 +93,14 @@ class TrackedArray<T = unknown> {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     let self = this;
 
-    let boundFns = new Map();
+    let boundFns = new Map<string | symbol, (...args: any[]) => any>();
+
+    /**
+      Flag to track whether we have *just* intercepted a call to `.push()` or
+      `.unshift()`, since in those cases (and only those cases!) the `Array`
+      itself checks `.length` to return from the function call.
+     */
+    let nativelyAccessingLengthFromPushOrUnshift = false;
 
     return new Proxy(clone, {
       get(target, prop /*, _receiver */) {
@@ -97,13 +111,38 @@ class TrackedArray<T = unknown> {
           getValue(self.#collection);
 
           return target[index];
-        } else if (prop === 'length') {
-          getValue(self.#collection);
-        } else if (ARRAY_GETTER_METHODS.has(prop)) {
+        }
+
+        if (prop === 'length') {
+          // If we are reading `.length`, it may be a normal user-triggered
+          // read, or it may be a read triggered by Array itself. In the latter
+          // case, it is because we have just done `.push()` or `.unshift()`; in
+          // that case it is safe not to mark this as a *read* operation, since
+          // calling `.push()` or `.unshift()` cannot otherwise be part of a
+          // "read" operation safely, and if done during an *existing* read
+          // (e.g. if the user has already checked `.length` *prior* to this),
+          // that will still trigger the mutation-after-consumption assertion.
+          if (nativelyAccessingLengthFromPushOrUnshift) {
+            nativelyAccessingLengthFromPushOrUnshift = false;
+          } else {
+            getValue(self.#collection);
+          }
+
+          return target[prop];
+        }
+
+        // Here, track that we are doing a `.push()` or `.unshift()` by setting
+        // the flag to `true` so that when the `.length` is read by `Array` (see
+        // immediately above), it knows not to dirty the collection.
+        if (ARRAY_WRITE_THEN_READ_METHODS.has(prop)) {
+          nativelyAccessingLengthFromPushOrUnshift = true;
+        }
+
+        if (ARRAY_GETTER_METHODS.has(prop)) {
           let fn = boundFns.get(prop);
 
           if (fn === undefined) {
-            fn = (...args: unknown[]) => {
+            fn = (...args) => {
               getValue(self.#collection);
               return (target as any)[prop](...args);
             };
@@ -143,12 +182,11 @@ class TrackedArray<T = unknown> {
   #storages = new Map<number, TrackedStorage<null>>();
 
   #readStorageFor(index: number) {
-    const storages = this.#storages;
-    let storage = storages.get(index);
+    let storage = this.#storages.get(index);
 
     if (storage === undefined) {
       storage = createStorage(null, () => false);
-      storages.set(index, storage);
+      this.#storages.set(index, storage);
     }
 
     getValue(storage);
@@ -163,14 +201,14 @@ class TrackedArray<T = unknown> {
   }
 }
 
-// This rule is correctly in the general case, but it doesn't understand
-// declaration merging, which is how we're using the interface here. This
-// declaration says that `TrackedArray` acts just like `Array<T>`, but also has
-// the properties declared via the `class` declaration above -- but without the
-// cost of a subclass, which is much slower that the proxied array behavior.
-// That is: a `TrackedArray` *is* an `Array`, just with a proxy in front of
-// accessors and setters, rather than a subclass of an `Array` which would be
-// de-optimized by the browsers.
+// This rule is correct in the general case, but it doesn't understand
+// declaration merging, which is how we're using the interface here. This says
+// `TrackedArray` acts just like `Array<T>`, but also has the properties
+// declared via the `class` declaration above -- but without the cost of a
+// subclass, which is much slower that the proxied array behavior. That is: a
+// `TrackedArray` *is* an `Array`, just with a proxy in front of accessors and
+// setters, rather than a subclass of an `Array` which would be de-optimized by
+// the browsers.
 //
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface TrackedArray<T = unknown> extends Array<T> {}
