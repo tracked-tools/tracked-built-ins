@@ -2,6 +2,27 @@
 
 
 
+
+## v3.2.0 (2023-01-30)
+
+#### :rocket: Enhancement
+* [#332](https://github.com/tracked-tools/tracked-built-ins/pull/332) Convert to v2 addon ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :bug: Bug Fix
+* [#397](https://github.com/tracked-tools/tracked-built-ins/pull/397) Fix incorrect mutation-after-consumption assertions for Array `push` and `unshift` ([@chriskrycho](https://github.com/chriskrycho))
+
+#### :house: Internal
+* [#393](https://github.com/tracked-tools/tracked-built-ins/pull/393) Switch package manager to pnpm ([@dgeb](https://github.com/dgeb))
+* [#394](https://github.com/tracked-tools/tracked-built-ins/pull/394) Update htmlbars imports ([@dgeb](https://github.com/dgeb))
+* [#378](https://github.com/tracked-tools/tracked-built-ins/pull/378) Add ember-lts-4.4 ember-try scenario ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#336](https://github.com/tracked-tools/tracked-built-ins/pull/336) Switch to using `@tsconfig/ember` ([@chriskrycho](https://github.com/chriskrycho))
+
+#### Committers: 4
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+- Dan Gebhardt ([@dgeb](https://github.com/dgeb))
+- James Herdman ([@jherdman](https://github.com/jherdman))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 ## v3.1.0 (2022-05-17)
 
 #### :rocket: Enhancement

@@ -1,6 +1,6 @@
 {
   "name": "test-app",
-  "version": "2.0.1",
+  "version": "3.2.0",
   "private": true,
   "description": "Test app for tracked-built-ins addon",
   "repository": "",
@@ -71,7 +71,7 @@
     "prettier": "^2.6.2",
     "qunit": "^2.19.1",
     "qunit-dom": "^2.0.0",
-    "tracked-built-ins": "workspace:*",
+    "tracked-built-ins": "3.2.0",
     "typescript": "4.9.4",
     "webpack": "^5.74.0"
   },
