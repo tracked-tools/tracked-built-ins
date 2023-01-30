@@ -7,7 +7,7 @@
   "license": "MIT",
   "author": "Chris Hewell Garrett",
   "scripts": {
-    "prepublishOnly": "cd addon && pnpm run build",
+    "prepare": "cd addon && pnpm run build",
     "release": "release-it",
     "test": "cd test-app && pnpm run test:ember"
   },
