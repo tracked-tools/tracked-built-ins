@@ -7,17 +7,18 @@
   "license": "MIT",
   "author": "Chris Hewell Garrett",
   "scripts": {
-    "prepare": "cd addon && pnpm run build",
+    "prepublishOnly": "cd addon && pnpm run build",
     "release": "release-it",
     "test": "cd test-app && pnpm run test:ember"
   },
   "devDependencies": {
     "@release-it-plugins/lerna-changelog": "^5.0.0",
     "@release-it-plugins/workspaces": "^3.2.0",
-    "release-it": "^15.5.0"
+    "release-it": "^15.5.0",
+    "typescript": "^4.9.4"
   },
   "volta": {
-    "node": "14.19.2"
+    "node": "16.19.0"
   },
   "packageManager": "pnpm@7.14.0",
   "publishConfig": {
