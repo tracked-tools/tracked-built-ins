@@ -2,6 +2,15 @@
 
 
 
+
+## v3.1.1 (2023-01-31)
+
+#### :bug: Bug Fix
+* [#402](https://github.com/tracked-tools/tracked-built-ins/pull/402) Backport: Introduce flag for length access after push/unshift ([@chriskrycho](https://github.com/chriskrycho))
+
+#### Committers: 1
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+
 ## v3.1.0 (2022-05-17)
 
 #### :rocket: Enhancement
