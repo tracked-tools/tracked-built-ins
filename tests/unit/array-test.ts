@@ -387,6 +387,48 @@ module('TrackedArray', function (hooks) {
       }
     );
 
+    reactivityTest(
+      'Can push into a newly created TrackedArray during construction',
+      class extends Component {
+        arr = new TrackedArray<string>();
+
+        // eslint-disable-next-line @typescript-eslint/ban-types
+        constructor(owner: unknown, args: {}) {
+          super(owner, args);
+          this.arr.push('hello');
+        }
+
+        get value() {
+          return this.arr[0];
+        }
+
+        update() {
+          this.arr[0] = 'goodbye';
+        }
+      }
+    );
+
+    reactivityTest(
+      'Can unshift into a newly created TrackedArray during construction',
+      class extends Component {
+        arr = new TrackedArray<string>();
+
+        // eslint-disable-next-line @typescript-eslint/ban-types
+        constructor(owner: unknown, args: {}) {
+          super(owner, args);
+          this.arr.unshift('hello');
+        }
+
+        get value() {
+          return this.arr[0];
+        }
+
+        update() {
+          this.arr[0] = 'goodbye';
+        }
+      }
+    );
+
     eachReactivityTest(
       '{{each}} works with new items',
       class extends Component {
