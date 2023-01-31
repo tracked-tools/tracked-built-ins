@@ -1,8 +1,3 @@
-
-
-
-
-
 ## v3.2.0 (2023-01-30)
 
 #### :rocket: Enhancement
@@ -22,6 +17,14 @@
 - Dan Gebhardt ([@dgeb](https://github.com/dgeb))
 - James Herdman ([@jherdman](https://github.com/jherdman))
 - Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
+## v3.1.1 (2023-01-31)
+
+#### :bug: Bug Fix
+* [#402](https://github.com/tracked-tools/tracked-built-ins/pull/402) Backport: Introduce flag for length access after push/unshift ([@chriskrycho](https://github.com/chriskrycho))
+
+#### Committers: 1
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
 
 ## v3.1.0 (2022-05-17)
 
