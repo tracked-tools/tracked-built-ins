@@ -14,7 +14,6 @@ const ARRAY_GETTER_METHODS = [
   'concat',
   'entries',
   'every',
-  'fill',
   'filter',
   'find',
   'findIndex',
@@ -36,6 +35,7 @@ const ARRAY_GETTER_METHODS = [
 
 const ARRAY_SETTER_METHODS = [
   'copyWithin',
+  'fill',
   'pop',
   'push',
   'reverse',
