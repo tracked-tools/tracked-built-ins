@@ -178,7 +178,7 @@ module('TrackedMap', function (hooks) {
       update() {
         this.map.set('foo', 123);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -193,7 +193,7 @@ module('TrackedMap', function (hooks) {
       update() {
         this.map.set('foo', 123);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -209,7 +209,7 @@ module('TrackedMap', function (hooks) {
         this.map.set('bar', 123);
       }
     },
-    false
+    false,
   );
 
   reactivityTest(
@@ -224,7 +224,7 @@ module('TrackedMap', function (hooks) {
       update() {
         this.map.set('foo', 123);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -239,7 +239,7 @@ module('TrackedMap', function (hooks) {
       update() {
         this.map.set('foo', 123);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -254,7 +254,7 @@ module('TrackedMap', function (hooks) {
       update() {
         this.map.set('foo', 123);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -269,7 +269,7 @@ module('TrackedMap', function (hooks) {
       update() {
         this.map.set('foo', 123);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -287,7 +287,7 @@ module('TrackedMap', function (hooks) {
       update() {
         this.map.set('foo', 123);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -302,7 +302,7 @@ module('TrackedMap', function (hooks) {
       update() {
         this.map.set('foo', 123);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -317,7 +317,7 @@ module('TrackedMap', function (hooks) {
       update() {
         this.map.delete('foo');
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -336,7 +336,7 @@ module('TrackedMap', function (hooks) {
         this.map.delete('bar');
       }
     },
-    false
+    false,
   );
 
   reactivityTest(
@@ -351,7 +351,7 @@ module('TrackedMap', function (hooks) {
       update() {
         this.map.clear();
       }
-    }
+    },
   );
 
   eachReactivityTest(
@@ -361,7 +361,7 @@ module('TrackedMap', function (hooks) {
       update() {
         this.collection.set('bar', 456);
       }
-    }
+    },
   );
   eachReactivityTest(
     'set existing value',
@@ -370,7 +370,7 @@ module('TrackedMap', function (hooks) {
       update() {
         this.collection.set('foo', 789);
       }
-    }
+    },
   );
 
   eachInReactivityTest(
@@ -381,7 +381,7 @@ module('TrackedMap', function (hooks) {
       update() {
         this.collection.set('bar', 456);
       }
-    }
+    },
   );
 
   eachInReactivityTest(
@@ -392,6 +392,6 @@ module('TrackedMap', function (hooks) {
       update() {
         this.collection.set('foo', 789);
       }
-    }
+    },
   );
 });

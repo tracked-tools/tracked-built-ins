@@ -14,7 +14,7 @@ export default class Person extends Component {
       {
         name: 'Liz',
       },
-      true
+      true,
     );
   }
 }

@@ -22,22 +22,22 @@ module('TrackedWeakMap', function (hooks) {
     assert.throws(
       // @ts-expect-error -- point is testing constructor error
       () => map.set('aoeu', 123),
-      /Invalid value used as weak map key/
+      /Invalid value used as weak map key/,
     );
     assert.throws(
       // @ts-expect-error -- point is testing constructor error
       () => map.set(true, 123),
-      /Invalid value used as weak map key/
+      /Invalid value used as weak map key/,
     );
     assert.throws(
       // @ts-expect-error -- point is testing constructor error
       () => map.set(123, 123),
-      /Invalid value used as weak map key/
+      /Invalid value used as weak map key/,
     );
     assert.throws(
       // @ts-expect-error -- point is testing constructor error
       () => map.set(undefined, 123),
-      /Invalid value used as weak map key/
+      /Invalid value used as weak map key/,
     );
   });
 
@@ -87,7 +87,7 @@ module('TrackedWeakMap', function (hooks) {
       update() {
         this.map.set(this.obj, 123);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -103,7 +103,7 @@ module('TrackedWeakMap', function (hooks) {
       update() {
         this.map.set(this.obj, 123);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -121,7 +121,7 @@ module('TrackedWeakMap', function (hooks) {
         this.map.set(this.obj2, 123);
       }
     },
-    false
+    false,
   );
 
   reactivityTest(
@@ -137,7 +137,7 @@ module('TrackedWeakMap', function (hooks) {
       update() {
         this.map.set(this.obj, 123);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -153,7 +153,7 @@ module('TrackedWeakMap', function (hooks) {
       update() {
         this.map.delete(this.obj);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -174,6 +174,6 @@ module('TrackedWeakMap', function (hooks) {
         this.map.delete(this.obj2);
       }
     },
-    false
+    false,
   );
 });
