@@ -18,7 +18,6 @@ const ARRAY_GETTER_METHODS = new Set<string | symbol | number>([
   'concat',
   'entries',
   'every',
-  'fill',
   'filter',
   'find',
   'findIndex',
@@ -41,6 +40,7 @@ const ARRAY_GETTER_METHODS = new Set<string | symbol | number>([
 // For these methods, `Array` itself immediately gets the `.length` to return
 // after invoking them.
 const ARRAY_WRITE_THEN_READ_METHODS = new Set<string | symbol>([
+  'fill',
   'push',
   'unshift',
 ]);
