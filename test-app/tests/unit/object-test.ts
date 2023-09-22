@@ -84,7 +84,7 @@ module('TrackedObject', function (hooks) {
       update() {
         this.collection['bar'] = 456;
       }
-    }
+    },
   );
 
   eachInReactivityTest(
@@ -97,7 +97,7 @@ module('TrackedObject', function (hooks) {
       update() {
         this.collection.foo = 456;
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -112,7 +112,7 @@ module('TrackedObject', function (hooks) {
       update() {
         this.obj['foo'] = 123;
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -127,7 +127,7 @@ module('TrackedObject', function (hooks) {
       update() {
         this.obj['foo'] = 123;
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -148,7 +148,7 @@ module('TrackedObject', function (hooks) {
       update() {
         this.obj['foo'] = 123;
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -163,7 +163,7 @@ module('TrackedObject', function (hooks) {
       update() {
         this.obj['foo'] = 123;
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -178,6 +178,6 @@ module('TrackedObject', function (hooks) {
       update() {
         delete this.obj.foo;
       }
-    }
+    },
   );
 });

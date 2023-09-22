@@ -24,7 +24,7 @@ export function reactivityTest(desc, Klass, shouldUpdate = true) {
     this.owner.register('component:test-component', TestComponent);
     this.owner.register(
       'template:components/test-component',
-      hbs`<div class="test">{{this.value}}</div>`
+      hbs`<div class="test">{{this.value}}</div>`,
     );
 
     await render(hbs`<TestComponent/>`);

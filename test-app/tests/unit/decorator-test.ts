@@ -49,12 +49,12 @@ module('decorator', function (hooks) {
     expectTypeOf(set).toEqualTypeOf<TrackedSet<number>>();
     assert.ok(
       weakMap instanceof TrackedWeakMap,
-      'weakMap instanceof TrackedWeakMap'
+      'weakMap instanceof TrackedWeakMap',
     );
     expectTypeOf(weakMap).toEqualTypeOf<TrackedWeakMap<object, string>>();
     assert.ok(
       weakSet instanceof TrackedWeakSet,
-      'weakSet instanceof TrackedWeakSet'
+      'weakSet instanceof TrackedWeakSet',
     );
     expectTypeOf(weakSet).toEqualTypeOf<TrackedWeakSet<object>>();
 

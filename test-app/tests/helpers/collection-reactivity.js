@@ -36,14 +36,14 @@ export function eachReactivityTest(desc, Klass) {
             <li class="test-item">{{index}}.{{value}}</li>
           {{/each}}
         </ul>
-      `
+      `,
     );
 
     await render(hbs`<TestComponent/>`);
 
     compareResults(
       assert,
-      Array.from(instance.collection).map((v, i) => [i, v])
+      Array.from(instance.collection).map((v, i) => [i, v]),
     );
 
     instance.update();
@@ -52,7 +52,7 @@ export function eachReactivityTest(desc, Klass) {
 
     compareResults(
       assert,
-      Array.from(instance.collection).map((v, i) => [i, v])
+      Array.from(instance.collection).map((v, i) => [i, v]),
     );
   });
 }
@@ -81,7 +81,7 @@ export function eachInReactivityTest(desc, Klass) {
             <li class="test-item">{{lhs}}.{{rhs}}</li>
           {{/each-in}}
         </ul>
-      `
+      `,
     );
 
     await render(hbs`<TestComponent/>`);
@@ -92,7 +92,7 @@ export function eachInReactivityTest(desc, Klass) {
       assert,
       Symbol.iterator in collection
         ? Array.from(collection)
-        : Object.entries(collection)
+        : Object.entries(collection),
     );
 
     instance.update();
@@ -103,7 +103,7 @@ export function eachInReactivityTest(desc, Klass) {
       assert,
       Symbol.iterator in collection
         ? Array.from(collection)
-        : Object.entries(collection)
+        : Object.entries(collection),
     );
   });
 }
