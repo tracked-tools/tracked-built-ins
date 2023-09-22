@@ -1,6 +1,6 @@
 {
   "name": "test-app",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "private": true,
   "description": "Test app for tracked-built-ins addon",
   "repository": "",
@@ -79,7 +79,7 @@
     "stylelint": "^15.10.3",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-prettier": "^4.0.2",
-    "tracked-built-ins": "3.2.0",
+    "tracked-built-ins": "3.3.0",
     "typescript": "4.9.4",
     "webpack": "^5.88.2"
   },

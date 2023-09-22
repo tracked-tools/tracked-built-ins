@@ -1,3 +1,21 @@
+
+## v3.3.0 (2023-09-22)
+
+#### :rocket: Enhancement
+* [#408](https://github.com/tracked-tools/tracked-built-ins/pull/408) Move Array#fill to "write then read" methods so the template correctly updates ([@locks](https://github.com/locks))
+
+#### :memo: Documentation
+* [#410](https://github.com/tracked-tools/tracked-built-ins/pull/410) Update compatibility section in README.md ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* [#409](https://github.com/tracked-tools/tracked-built-ins/pull/409) Update test-app to the latest blueprint ([@ef4](https://github.com/ef4))
+
+#### Committers: 4
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+- Edward Faulkner ([@ef4](https://github.com/ef4))
+- Ricardo Mendes ([@locks](https://github.com/locks))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 ## v3.2.0 (2023-01-30)
 
 #### :rocket: Enhancement
