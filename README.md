@@ -108,8 +108,7 @@ Compatibility
 ------------------------------------------------------------------------------
 
 * Ember.js v3.24 (LTS) or above
-* Ember CLI v3.23 or above
-* Node.js v14 or above
+* Embroider or ember-auto-import v2
 
 ### TypeScript
 
