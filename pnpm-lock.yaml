@@ -123,8 +123,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0(ember-source@5.3.0)(webpack@5.88.2)
       '@embroider/test-setup':
-        specifier: ^1.8.3
-        version: 1.8.3
+        specifier: ^3.0.1
+        version: 3.0.1
       '@glimmer/component':
         specifier: ^1.1.2
         version: 1.1.2(@babel/core@7.22.20)
@@ -2858,12 +2858,23 @@ packages:
       - supports-color
     dev: true
 
-  /@embroider/test-setup@1.8.3:
-    resolution: {integrity: sha512-BCCbBG7UWkCw+cQ401Ip6LnqTRaQDeKImxR+e7Q4oP6H4EBj7p4iGR1z6fhMy4NNyXKPB6jk3bGa9bTiiNoEAw==}
+  /@embroider/test-setup@3.0.1:
+    resolution: {integrity: sha512-t7R2f10iZDSNw3ovWAPM63GRQTu63uihpVh6CvHev5XkLt8B7tdxcxGyO6RbdF5Hu+pbsUu8sD0kAlR1gopmxg==}
     engines: {node: 12.* || 14.* || >= 16}
+    peerDependencies:
+      '@embroider/compat': ^3.0.0
+      '@embroider/core': ^3.0.0
+      '@embroider/webpack': ^3.0.0
+    peerDependenciesMeta:
+      '@embroider/compat':
+        optional: true
+      '@embroider/core':
+        optional: true
+      '@embroider/webpack':
+        optional: true
     dependencies:
       lodash: 4.17.21
-      resolve: 1.22.1
+      resolve: 1.22.6
     dev: true
 
   /@eslint-community/eslint-utils@4.4.0(eslint@8.49.0):
@@ -3797,10 +3808,10 @@ packages:
       '@types/ember__array': 4.0.3(@babel/core@7.19.6)
       '@types/ember__component': 4.0.11(@babel/core@7.19.6)
       '@types/ember__controller': 4.0.3(@babel/core@7.22.20)
-      '@types/ember__debug': 4.0.2(@babel/core@7.19.6)
+      '@types/ember__debug': 4.0.2(@babel/core@7.22.20)
       '@types/ember__engine': 4.0.3(@babel/core@7.22.20)
       '@types/ember__error': 4.0.1
-      '@types/ember__object': 4.0.5(@babel/core@7.19.6)
+      '@types/ember__object': 4.0.5(@babel/core@7.22.20)
       '@types/ember__polyfills': 4.0.1
       '@types/ember__routing': 4.0.12(@babel/core@7.19.6)
       '@types/ember__runloop': 4.0.2(@babel/core@7.19.6)
@@ -3847,9 +3858,9 @@ packages:
     dependencies:
       '@glimmer/component': 1.1.2(@babel/core@7.19.6)
       '@types/ember': 4.0.2(@babel/core@7.19.6)
-      '@types/ember-resolver': 5.0.12(@babel/core@7.19.6)
+      '@types/ember-resolver': 5.0.12(@babel/core@7.22.20)
       '@types/ember__engine': 4.0.3(@babel/core@7.22.20)
-      '@types/ember__object': 4.0.5(@babel/core@7.19.6)
+      '@types/ember__object': 4.0.5(@babel/core@7.22.20)
       '@types/ember__owner': 4.0.1
       '@types/ember__routing': 4.0.12(@babel/core@7.19.6)
     transitivePeerDependencies:
@@ -3876,7 +3887,7 @@ packages:
     resolution: {integrity: sha512-G6kbLaS3ke4QspHkgLlGY0t1v0G22hGavyphezZucj7LLk1N+r11w913CYkBg3cJsJD+TG2Wo4eVbgRcotvuvQ==}
     dependencies:
       '@types/ember': 4.0.2(@babel/core@7.19.6)
-      '@types/ember__object': 4.0.5(@babel/core@7.19.6)
+      '@types/ember__object': 4.0.5(@babel/core@7.22.20)
     transitivePeerDependencies:
       - '@babel/core'
       - supports-color
@@ -3896,7 +3907,7 @@ packages:
     resolution: {integrity: sha512-iwFf+qYBsGp9SycIb0lxGkdZPYpKxMcBoV5kCJbWyC6azuX2xPDXHx8n2lm8O9GrEFVJXfYC5bSXf33rdpy5Sw==}
     dependencies:
       '@types/ember': 4.0.2(@babel/core@7.19.6)
-      '@types/ember__object': 4.0.5(@babel/core@7.19.6)
+      '@types/ember__object': 4.0.5(@babel/core@7.22.20)
     transitivePeerDependencies:
       - '@babel/core'
       - supports-color
@@ -3989,7 +4000,7 @@ packages:
     dependencies:
       '@types/ember': 4.0.2(@babel/core@7.19.6)
       '@types/ember__controller': 4.0.3(@babel/core@7.22.20)
-      '@types/ember__object': 4.0.5(@babel/core@7.19.6)
+      '@types/ember__object': 4.0.5(@babel/core@7.22.20)
       '@types/ember__service': 4.0.1(@babel/core@7.22.20)
     transitivePeerDependencies:
       - '@babel/core'
@@ -4001,7 +4012,7 @@ packages:
     dependencies:
       '@types/ember': 4.0.2(@babel/core@7.22.20)
       '@types/ember__controller': 4.0.3(@babel/core@7.22.20)
-      '@types/ember__object': 4.0.5(@babel/core@7.19.6)
+      '@types/ember__object': 4.0.5(@babel/core@7.22.20)
       '@types/ember__service': 4.0.1(@babel/core@7.22.20)
     transitivePeerDependencies:
       - '@babel/core'
@@ -9937,7 +9948,7 @@ packages:
       heimdalljs: 0.2.6
       heimdalljs-logger: 0.1.10
       path-root: 0.1.1
-      resolve: 1.22.1
+      resolve: 1.22.6
       resolve-package-path: 1.2.7
     transitivePeerDependencies:
       - supports-color
@@ -10387,6 +10398,7 @@ packages:
     resolution: {integrity: sha512-RRjxlvLDkD1YJwDbroBHMb+cukurkDWNyHx7D3oNB5x9rb5ogcksMC5wHCadcXoo67gVr/+3GFySh3134zi6rw==}
     dependencies:
       has: 1.0.3
+    dev: true
 
   /is-core-module@2.13.0:
     resolution: {integrity: sha512-Z7dk6Qo8pOCp3l4tsX2C5ZVas4V+UxwQodwZhLopL91TX8UyyHEXafPcyoeeWuLrwzHcr3igO78wNLwHJHsMCQ==}
@@ -12129,7 +12141,7 @@ packages:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
       hosted-git-info: 2.8.9
-      resolve: 1.22.1
+      resolve: 1.22.6
       semver: 5.7.1
       validate-npm-package-license: 3.0.4
     dev: true
@@ -13199,7 +13211,7 @@ packages:
     resolution: {integrity: sha512-HFM8rkZ+i3zrV+4LQjwQ0W+ez98pApMGM3HUrN04j3CqzPOzl9nmP15Y8YXNm8QHGv/eacOVEjqhmWpkRV0NAw==}
     engines: {node: '>= 0.10'}
     dependencies:
-      resolve: 1.22.1
+      resolve: 1.22.6
     dev: true
 
   /redent@4.0.0:
@@ -13441,7 +13453,7 @@ packages:
     resolution: {integrity: sha512-fVEKHGeK85bGbVFuwO9o1aU0n3vqQGrezPc51JGu9UTXpFQfWq5qCeKxyaRUSvephs+06c5j5rPq/dzHGEo8+Q==}
     dependencies:
       path-root: 0.1.1
-      resolve: 1.22.1
+      resolve: 1.22.6
 
   /resolve-package-path@2.0.0:
     resolution: {integrity: sha512-/CLuzodHO2wyyHTzls5Qr+EFeG6RcW4u6//gjYvUfcfyuplIX1SSccU+A5A9A78Gmezkl3NBkFAMxLbzTY9TJA==}
@@ -13455,7 +13467,7 @@ packages:
     engines: {node: 10.* || >= 12}
     dependencies:
       path-root: 0.1.1
-      resolve: 1.22.1
+      resolve: 1.22.6
 
   /resolve-package-path@4.0.3:
     resolution: {integrity: sha512-SRpNAPW4kewOaNUt8VPqhJ0UMxawMwzJD8V7m1cJfdSTK9ieZwS6K7Dabsm4bmLFM96Z5Y/UznrpG5kt1im8yA==}
@@ -13487,6 +13499,7 @@ packages:
       is-core-module: 2.11.0
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
+    dev: true
 
   /resolve@1.22.6:
     resolution: {integrity: sha512-njhxM7mV12JfufShqGy3Rz8j11RPdLy4xi15UurGJeoHLfJpVXKdh3ueuOqbYUcDZnffr6X739JBo5LzyahEsw==}
