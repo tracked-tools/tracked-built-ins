@@ -68,7 +68,7 @@ module('TrackedWeakSet', function (hooks) {
       update() {
         this.set.add(this.obj);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -85,7 +85,7 @@ module('TrackedWeakSet', function (hooks) {
       update() {
         this.set.add(this.obj);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -103,7 +103,7 @@ module('TrackedWeakSet', function (hooks) {
         this.set.add(this.obj2);
       }
     },
-    false
+    false,
   );
 
   reactivityTest(
@@ -120,7 +120,7 @@ module('TrackedWeakSet', function (hooks) {
       update() {
         this.set.delete(this.obj);
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -138,6 +138,6 @@ module('TrackedWeakSet', function (hooks) {
         this.set.delete(this.obj2);
       }
     },
-    false
+    false,
   );
 });

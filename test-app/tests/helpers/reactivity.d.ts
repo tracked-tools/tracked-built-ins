@@ -7,5 +7,5 @@ interface ReactiveObject<T> {
 export function reactivityTest<T>(
   desc: string,
   Klass: ReactiveObject<T>,
-  shouldUpdate?: boolean
+  shouldUpdate?: boolean,
 ): void;

@@ -174,7 +174,7 @@ module('TrackedSet', function (hooks) {
       update() {
         this.set.add('foo');
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -189,7 +189,7 @@ module('TrackedSet', function (hooks) {
       update() {
         this.set.add('foo');
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -205,7 +205,7 @@ module('TrackedSet', function (hooks) {
         this.set.add('bar');
       }
     },
-    false
+    false,
   );
 
   reactivityTest(
@@ -220,7 +220,7 @@ module('TrackedSet', function (hooks) {
       update() {
         this.set.add('foo');
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -235,7 +235,7 @@ module('TrackedSet', function (hooks) {
       update() {
         this.set.add('foo');
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -250,7 +250,7 @@ module('TrackedSet', function (hooks) {
       update() {
         this.set.add('foo');
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -268,7 +268,7 @@ module('TrackedSet', function (hooks) {
       update() {
         this.set.add('foo');
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -283,7 +283,7 @@ module('TrackedSet', function (hooks) {
       update() {
         this.set.add('foo');
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -298,7 +298,7 @@ module('TrackedSet', function (hooks) {
       update() {
         this.set.delete('foo');
       }
-    }
+    },
   );
 
   reactivityTest(
@@ -314,7 +314,7 @@ module('TrackedSet', function (hooks) {
         this.set.delete(123);
       }
     },
-    false
+    false,
   );
 
   reactivityTest(
@@ -329,7 +329,7 @@ module('TrackedSet', function (hooks) {
       update() {
         this.set.clear();
       }
-    }
+    },
   );
 
   eachReactivityTest(
@@ -340,7 +340,7 @@ module('TrackedSet', function (hooks) {
       update() {
         this.collection.add('bar');
       }
-    }
+    },
   );
 
   eachReactivityTest(
@@ -351,7 +351,7 @@ module('TrackedSet', function (hooks) {
       update() {
         this.collection.add('foo');
       }
-    }
+    },
   );
 
   // TODO: These tests are currently unstable on release, turn back on once

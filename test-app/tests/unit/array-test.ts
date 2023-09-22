@@ -165,7 +165,7 @@ module('TrackedArray', function (hooks) {
 
       assert.equal(
         arr.find((v) => v > 1),
-        2
+        2,
       );
     });
 
@@ -174,7 +174,7 @@ module('TrackedArray', function (hooks) {
 
       assert.equal(
         arr.findIndex((v) => v > 1),
-        1
+        1,
       );
     });
 
@@ -190,7 +190,7 @@ module('TrackedArray', function (hooks) {
 
       assert.deepEqual(
         arr.flatMap((v) => (typeof v === 'number' ? v + 1 : v)),
-        [2, 3, 3]
+        [2, 3, 3],
       );
       assert.deepEqual(arr, [1, 2, [3]]);
     });
@@ -267,7 +267,7 @@ module('TrackedArray', function (hooks) {
 
       assert.equal(
         arr.reduce((s, v) => s + v, ''),
-        '123'
+        '123',
       );
     });
 
@@ -276,7 +276,7 @@ module('TrackedArray', function (hooks) {
 
       assert.equal(
         arr.reduceRight((s, v) => s + v, ''),
-        '321'
+        '321',
       );
     });
 
@@ -384,7 +384,7 @@ module('TrackedArray', function (hooks) {
         update() {
           this.arr[0] = 'bar';
         }
-      }
+      },
     );
 
     reactivityTest(
@@ -405,7 +405,7 @@ module('TrackedArray', function (hooks) {
         update() {
           this.arr[0] = 'goodbye';
         }
-      }
+      },
     );
 
     reactivityTest(
@@ -426,7 +426,7 @@ module('TrackedArray', function (hooks) {
         update() {
           this.arr[0] = 'goodbye';
         }
-      }
+      },
     );
 
     eachReactivityTest(
@@ -437,7 +437,7 @@ module('TrackedArray', function (hooks) {
         update() {
           this.collection.push(4);
         }
-      }
+      },
     );
 
     eachReactivityTest(
@@ -448,7 +448,7 @@ module('TrackedArray', function (hooks) {
         update() {
           this.collection[2] = 5;
         }
-      }
+      },
     );
 
     eachInReactivityTest(
@@ -459,7 +459,7 @@ module('TrackedArray', function (hooks) {
         update() {
           this.collection.push(4);
         }
-      }
+      },
     );
 
     eachInReactivityTest(
@@ -470,7 +470,7 @@ module('TrackedArray', function (hooks) {
         update() {
           this.collection[2] = 5;
         }
-      }
+      },
     );
 
     ARRAY_GETTER_METHODS.forEach((method) => {
@@ -490,7 +490,7 @@ module('TrackedArray', function (hooks) {
           update() {
             this.arr[0] = 'bar';
           }
-        }
+        },
       );
 
       reactivityTest(
@@ -509,7 +509,7 @@ module('TrackedArray', function (hooks) {
           update() {
             this.arr.sort();
           }
-        }
+        },
       );
     });
 
@@ -528,7 +528,7 @@ module('TrackedArray', function (hooks) {
             // don't actually care that it is; we're *just* testing reactivity.
             this.arr[method](undefined);
           }
-        }
+        },
       );
 
       reactivityTest(
@@ -547,7 +547,7 @@ module('TrackedArray', function (hooks) {
             // don't actually care that it is; we're *just* testing reactivity.
             this.arr[method](undefined);
           }
-        }
+        },
       );
     });
   });
