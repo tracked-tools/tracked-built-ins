@@ -1,7 +1,7 @@
 lockfileVersion: '6.0'
 
 settings:
-  autoInstallPeers: true
+  autoInstallPeers: false
   excludeLinksFromLockfile: false
 
 importers:
@@ -263,7 +263,7 @@ importers:
         version: 11.0.1(ember-source@5.3.0)
       ember-source:
         specifier: ~5.3.0
-        version: 5.3.0(@babel/core@7.22.20)(@glimmer/component@1.1.2)(rsvp@4.8.5)(webpack@5.88.2)
+        version: 5.3.0(@babel/core@7.22.20)(@glimmer/component@1.1.2)(webpack@5.88.2)
       ember-source-channel-url:
         specifier: ^3.0.0
         version: 3.0.0
@@ -2699,7 +2699,7 @@ packages:
       ember-auto-import: 2.6.3(webpack@5.88.2)
       ember-cli-babel: 7.26.11
       ember-cli-htmlbars: 6.3.0
-      ember-source: 5.3.0(@babel/core@7.22.20)(@glimmer/component@1.1.2)(rsvp@4.8.5)(webpack@5.88.2)
+      ember-source: 5.3.0(@babel/core@7.22.20)(@glimmer/component@1.1.2)(webpack@5.88.2)
     transitivePeerDependencies:
       - supports-color
       - webpack
@@ -4874,10 +4874,8 @@ packages:
       indent-string: 4.0.0
     dev: true
 
-  /ajv-formats@2.1.1(ajv@8.11.0):
+  /ajv-formats@2.1.1:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
-    peerDependencies:
-      ajv: ^8.0.0
     peerDependenciesMeta:
       ajv:
         optional: true
@@ -7442,7 +7440,7 @@ packages:
       ember-source: ^3.28.0 || >= 4.0.0
     dependencies:
       ember-cli-babel: 7.26.11
-      ember-source: 5.3.0(@babel/core@7.22.20)(@glimmer/component@1.1.2)(rsvp@4.8.5)(webpack@5.88.2)
+      ember-source: 5.3.0(@babel/core@7.22.20)(@glimmer/component@1.1.2)(webpack@5.88.2)
       git-repo-info: 2.1.1
     transitivePeerDependencies:
       - supports-color
@@ -7971,7 +7969,7 @@ packages:
       '@embroider/addon-shim': 1.8.6
       ember-cli-normalize-entity-name: 1.0.0
       ember-cli-string-utils: 1.1.0
-      ember-source: 5.3.0(@babel/core@7.22.20)(@glimmer/component@1.1.2)(rsvp@4.8.5)(webpack@5.88.2)
+      ember-source: 5.3.0(@babel/core@7.22.20)(@glimmer/component@1.1.2)(webpack@5.88.2)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -7987,7 +7985,7 @@ packages:
       '@embroider/addon-shim': 1.8.6
       '@embroider/macros': 1.13.1(@glint/template@1.1.0)
       ember-cli-test-loader: 3.1.0
-      ember-source: 5.3.0(@babel/core@7.22.20)(@glimmer/component@1.1.2)(rsvp@4.8.5)(webpack@5.88.2)
+      ember-source: 5.3.0(@babel/core@7.22.20)(@glimmer/component@1.1.2)(webpack@5.88.2)
       qunit: 2.19.4
     transitivePeerDependencies:
       - '@glint/template'
@@ -8004,7 +8002,7 @@ packages:
         optional: true
     dependencies:
       ember-cli-babel: 7.26.11
-      ember-source: 5.3.0(@babel/core@7.22.20)(@glimmer/component@1.1.2)(rsvp@4.8.5)(webpack@5.88.2)
+      ember-source: 5.3.0(@babel/core@7.22.20)(@glimmer/component@1.1.2)(webpack@5.88.2)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -8033,7 +8031,7 @@ packages:
       - encoding
     dev: true
 
-  /ember-source@5.3.0(@babel/core@7.22.20)(@glimmer/component@1.1.2)(rsvp@4.8.5)(webpack@5.88.2):
+  /ember-source@5.3.0(@babel/core@7.22.20)(@glimmer/component@1.1.2)(webpack@5.88.2):
     resolution: {integrity: sha512-MnsPEYo2gArYzlY0uu5bBH60oNYcgcayYQEd27nJumuaceN1sMLMu1jGQmjiQzZ4b6U5edEUNQbCIZ/9TXbASw==}
     engines: {node: '>= 16.*'}
     peerDependencies:
@@ -8081,7 +8079,7 @@ packages:
       inflection: 2.0.1
       resolve: 1.22.6
       route-recognizer: 0.3.4
-      router_js: 8.0.3(route-recognizer@0.3.4)(rsvp@4.8.5)
+      router_js: 8.0.3(route-recognizer@0.3.4)
       semver: 7.5.4
       silent-error: 1.1.1
     transitivePeerDependencies:
@@ -13786,7 +13784,7 @@ packages:
     resolution: {integrity: sha512-2+MhsfPhvauN1O8KaXpXAOfR/fwe8dnUXVM+xw7yt40lJRfPVQxV6yryZm0cgRvAj5fMF/mdRZbL2ptwbs5i2g==}
     dev: true
 
-  /router_js@8.0.3(route-recognizer@0.3.4)(rsvp@4.8.5):
+  /router_js@8.0.3(route-recognizer@0.3.4):
     resolution: {integrity: sha512-lSgNMksk/wp8nspLX3Pn6QD499FUjwYMkgP99RxqKEScil4DKC/59YezpEZ318zGtkq8WR01VBhH+/u3InlLgg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -13795,7 +13793,6 @@ packages:
     dependencies:
       '@glimmer/env': 0.1.7
       route-recognizer: 0.3.4
-      rsvp: 4.8.5
     dev: true
 
   /rsvp@3.2.1:
@@ -13958,7 +13955,7 @@ packages:
     dependencies:
       '@types/json-schema': 7.0.13
       ajv: 8.11.0
-      ajv-formats: 2.1.1(ajv@8.11.0)
+      ajv-formats: 2.1.1
       ajv-keywords: 5.1.0(ajv@8.11.0)
     dev: true
 
