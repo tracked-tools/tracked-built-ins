@@ -1,43 +1,45 @@
+'use strict';
+
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module',
   },
   plugins: ['ember', '@typescript-eslint'],
   extends: [
     'eslint:recommended',
     'plugin:ember/recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
   env: {
     browser: true,
   },
-  rules: {
-    'prefer-const': 'off',
-    // Use the default `ban-types` rule *except* for allowing `object`, which is
-    // used throughout. We may switch to using `Record<PropertyKey, unknown>` on
-    // a future (breaking) release, but this choice allows us to preserve the
-    // current types while landing a robust linting config in general.
-    '@typescript-eslint/ban-types': [
-      'error',
-      {
-        extendDefaults: true,
-        types: {
-          object: false,
-        },
-      },
-    ],
-    '@typescript-eslint/no-empty-function': 'off',
-  },
+  rules: {},
   overrides: [
-    // JS files where TS rules don't make sense
+    // ts files
     {
-      files: ['tests/**/*.js'],
+      files: ['**/*.ts'],
+      extends: [
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+      ],
       rules: {
-        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        'prefer-const': 'off',
+        // Use the default `ban-types` rule *except* for allowing `object`, which is
+        // used throughout. We may switch to using `Record<PropertyKey, unknown>` on
+        // a future (breaking) release, but this choice allows us to preserve the
+        // current types while landing a robust linting config in general.
+        '@typescript-eslint/ban-types': [
+          'error',
+          {
+            extendDefaults: true,
+            types: {
+              object: false,
+            },
+          },
+        ],
+        '@typescript-eslint/no-empty-function': 'off',
       },
     },
     // node files
@@ -54,17 +56,11 @@ module.exports = {
         './lib/*/index.js',
         './server/**/*.js',
       ],
-      parserOptions: {
-        sourceType: 'script',
-      },
       env: {
         browser: false,
         node: true,
       },
       extends: ['plugin:n/recommended'],
-      rules: {
-        '@typescript-eslint/no-var-requires': 'off',
-      },
     },
     {
       // test files
@@ -72,6 +68,8 @@ module.exports = {
       // extends: ['plugin:qunit/recommended'],
       rules: {
         '@typescript-eslint/ban-ts-comment': 'off',
+        // JS files where TS rules don't make sense
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
       },
     },
   ],
