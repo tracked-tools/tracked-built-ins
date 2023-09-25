@@ -71,13 +71,13 @@ class TrackedArray<T = unknown> {
   static from<T, U>(
     iterable: Iterable<T> | ArrayLike<T>,
     mapfn: (v: T, k: number) => U,
-    thisArg?: unknown
+    thisArg?: unknown,
   ): TrackedArray<U>;
 
   static from<T, U>(
     iterable: Iterable<T> | ArrayLike<T>,
     mapfn?: (v: T, k: number) => U,
-    thisArg?: unknown
+    thisArg?: unknown,
   ): TrackedArray<T> | TrackedArray<U> {
     return mapfn
       ? new TrackedArray(Array.from(iterable, mapfn, thisArg))
@@ -89,11 +89,11 @@ class TrackedArray<T = unknown> {
   }
 
   constructor(arr: T[] = []) {
-    let clone = arr.slice();
+    const clone = arr.slice();
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    let self = this;
+    const self = this;
 
-    let boundFns = new Map<string | symbol, (...args: any[]) => any>();
+    const boundFns = new Map<string | symbol, (...args: any[]) => any>();
 
     /**
       Flag to track whether we have *just* intercepted a call to `.push()` or
@@ -104,7 +104,7 @@ class TrackedArray<T = unknown> {
 
     return new Proxy(clone, {
       get(target, prop /*, _receiver */) {
-        let index = convertToInt(prop);
+        const index = convertToInt(prop);
 
         if (index !== null) {
           self.#readStorageFor(index);
@@ -159,7 +159,7 @@ class TrackedArray<T = unknown> {
       set(target, prop, value /*, _receiver */) {
         (target as any)[prop] = value;
 
-        let index = convertToInt(prop);
+        const index = convertToInt(prop);
 
         if (index !== null) {
           self.#dirtyStorageFor(index);

@@ -1,0 +1,9 @@
+{
+  "presets": [["@babel/preset-typescript", { "allExtensions": true, "onlyRemoveTypeImports": true }]],
+  "plugins": [
+    "@babel/plugin-proposal-private-methods",
+    "@babel/plugin-transform-class-static-block",
+    ["@babel/plugin-proposal-decorators", { "version": "legacy" }],
+    "@babel/plugin-proposal-class-properties"
+  ]
+}
