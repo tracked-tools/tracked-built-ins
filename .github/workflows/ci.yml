@@ -33,7 +33,7 @@ jobs:
 
       - name: Lint Addon
         run: pnpm lint
-        working-directory: addon
+        working-directory: tracked-built-ins
 
       - name: Lint Test App
         run: pnpm lint
@@ -166,8 +166,8 @@ jobs:
 
       - name: Install TS version under test
         run: pnpm add --save-dev typescript@${{ matrix.ts-version }}
-        working-directory: addon
+        working-directory: tracked-built-ins
 
       - name: Type check
         run: pnpm tsc --noEmit
-        working-directory: addon
+        working-directory: tracked-built-ins
