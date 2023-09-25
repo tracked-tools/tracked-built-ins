@@ -1,0 +1,95 @@
+{
+  "name": "tracked-built-ins",
+  "version": "3.3.0",
+  "description": "Tracked versions of JavaScript's built-in classes!",
+  "keywords": [
+    "ember-addon"
+  ],
+  "homepage": "https://github.com/tracked-tools/tracked-built-ins",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tracked-tools/tracked-built-ins.git"
+  },
+  "license": "MIT",
+  "author": "Chris Hewell Garrett",
+  "exports": {
+    ".": {
+      "types": "./declarations/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./declarations/*.d.ts",
+      "default": "./dist/*.js"
+    },
+    "./addon-main.js": "./addon-main.cjs"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "declarations/*"
+      ]
+    }
+  },
+  "files": [
+    "addon-main.cjs",
+    "declarations",
+    "dist"
+  ],
+  "scripts": {
+    "build": "concurrently 'npm:build:*'",
+    "build:js": "rollup --config",
+    "build:types": "glint --declaration",
+    "lint": "concurrently 'npm:lint:*(!fix)' --names 'lint:'",
+    "lint:fix": "concurrently 'npm:lint:*:fix' --names 'fix:'",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
+    "lint:types": "glint",
+    "prepack": "rollup --config",
+    "start": "concurrently 'npm:start:*'",
+    "start:js": "rollup --config --watch --no-watch.clearScreen",
+    "start:types": "glint --declaration --watch",
+    "test": "echo 'A v2 addon does not have tests, run tests in test-app'"
+  },
+  "dependencies": {
+    "@embroider/addon-shim": "^1.8.3",
+    "ember-tracked-storage-polyfill": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.20",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-decorators": "^7.22.15",
+    "@babel/plugin-proposal-private-methods": "^7.18.6",
+    "@babel/plugin-transform-class-static-block": "^7.22.11",
+    "@babel/preset-typescript": "^7.22.15",
+    "@babel/runtime": "^7.20.1",
+    "@embroider/addon-dev": "^4.1.0",
+    "@glint/core": "^1.1.0",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@tsconfig/ember": "^3.0.1",
+    "@types/ember__debug": "^4.0.5",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "concurrently": "^8.2.1",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-ember": "^11.11.1",
+    "eslint-plugin-n": "^16.1.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.3",
+    "expect-type": "^0.13.0",
+    "rollup": "^3.29.3",
+    "typescript": "~5.2.2"
+  },
+  "volta": {
+    "extends": "../package.json"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "main": "addon-main.cjs",
+    "type": "addon",
+    "version": 2,
+    "app-js": {}
+  }
+}

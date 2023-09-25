@@ -40,7 +40,7 @@ export class TrackedMap<K = unknown, V = unknown> implements Map<K, V> {
       | readonly (readonly [K, V])[]
       | Iterable<readonly [K, V]>
       | null
-      | undefined
+      | undefined,
   ) {
     // TypeScript doesn't correctly resolve the overloads for calling the `Map`
     // constructor for the no-value constructor. This resolves that.
@@ -162,7 +162,7 @@ export class TrackedWeakMap<K extends object = object, V = unknown>
   constructor(iterable: Iterable<readonly [K, V]>);
   constructor(entries: readonly [K, V][] | null);
   constructor(
-    existing?: readonly [K, V][] | Iterable<readonly [K, V]> | null | undefined
+    existing?: readonly [K, V][] | Iterable<readonly [K, V]> | null | undefined,
   ) {
     // TypeScript doesn't correctly resolve the overloads for calling the `Map`
     // constructor for the no-value constructor. This resolves that.
