@@ -86,6 +86,33 @@ module('TrackedArray', function (hooks) {
     assert.equal(arr[0], undefined);
   });
 
+  test('Can perform well compared to native array', (assert) => {
+    const itemsCount = 1000000;
+    const initialData = Array(itemsCount).fill(null);
+
+    const array1 = Array.from(initialData);
+    const t1 = performance.now();
+    array1.splice(0, 1);
+    const t2 = performance.now();
+    const controlWindow = t2 - t1;
+
+    const array2 = new TrackedArray(initialData);
+    const t3 = performance.now();
+    array2.splice(0, 1);
+    const t4 = performance.now();
+    const experimentWindow = t4 - t3;
+
+    const deviation = 1.2; // 20%
+    assert.ok(
+      experimentWindow < controlWindow * deviation,
+      `${experimentWindow} < ${controlWindow} * ${deviation}`,
+    );
+
+    assert.equal(initialData.length, itemsCount);
+    assert.equal(array1.length, itemsCount - 1);
+    assert.equal(array2.length, itemsCount - 1);
+  });
+
   module('methods', () => {
     test('isArray', (assert) => {
       let arr = new TrackedArray();
