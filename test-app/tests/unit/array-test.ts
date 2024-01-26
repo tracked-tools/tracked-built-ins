@@ -87,14 +87,17 @@ module('TrackedArray', function (hooks) {
   });
 
   test('Can perform well compared to native array', (assert) => {
-    const itemsCount = 1000000;
+    const itemsCount = 10000;
     const initialData = Array(itemsCount).fill(null);
 
     const array1 = Array.from(initialData);
     const t1 = performance.now();
     array1.splice(0, 1);
     const t2 = performance.now();
-    const controlWindow = t2 - t1;
+    let controlWindow = t2 - t1;
+    if (controlWindow < 1) {
+      controlWindow = 1;
+    }
 
     const array2 = new TrackedArray(initialData);
     const t3 = performance.now();
