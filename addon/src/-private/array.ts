@@ -106,6 +106,18 @@ class TrackedArray<T = unknown> {
       get(target, prop /*, _receiver */) {
         let index = convertToInt(prop);
 
+        if (prop === 'splice') {
+          return (
+            ...args: [start: number, deleteCount?: number | undefined]
+          ) => {
+            try {
+              return target.splice(...args);
+            } finally {
+              setValue(self.#collection, null);
+            }
+          };
+        }
+
         if (index !== null) {
           self.#readStorageFor(index);
           getValue(self.#collection);
