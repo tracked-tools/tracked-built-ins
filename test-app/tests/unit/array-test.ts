@@ -540,82 +540,86 @@ module('TrackedArray', function (hooks) {
       },
     );
 
-    ARRAY_GETTER_METHODS.forEach((method) => {
-      reactivityTest(
-        `${method} individual index`,
-        class extends Component {
-          arr = new TrackedArray(['foo', 'bar']);
+    module('getter methods', () => {
+      ARRAY_GETTER_METHODS.forEach((method) => {
+        reactivityTest(
+          `${method} individual index`,
+          class extends Component {
+            arr = new TrackedArray(['foo', 'bar']);
 
-          get value() {
-            // @ts-ignore -- this can't be represented easily in TS, and we
-            // don't actually care that it is; we're *just* testing reactivity.
-            return this.arr[method](() => {
-              /* no op */
-            });
-          }
+            get value() {
+              // @ts-ignore -- this can't be represented easily in TS, and we
+              // don't actually care that it is; we're *just* testing reactivity.
+              return this.arr[method](() => {
+                /* no op */
+              });
+            }
 
-          update() {
-            this.arr[0] = 'bar';
-          }
-        },
-      );
+            update() {
+              this.arr[0] = 'bar';
+            }
+          },
+        );
 
-      reactivityTest(
-        `${method} collection tag`,
-        class extends Component {
-          arr = new TrackedArray(['foo', 'bar']);
+        reactivityTest(
+          `${method} collection tag`,
+          class extends Component {
+            arr = new TrackedArray(['foo', 'bar']);
 
-          get value() {
-            // @ts-ignore -- this can't be represented easily in TS, and we
-            // don't actually care that it is; we're *just* testing reactivity.
-            return this.arr[method](() => {
-              /* no op */
-            });
-          }
+            get value() {
+              // @ts-ignore -- this can't be represented easily in TS, and we
+              // don't actually care that it is; we're *just* testing reactivity.
+              return this.arr[method](() => {
+                /* no op */
+              });
+            }
 
-          update() {
-            this.arr.sort();
-          }
-        },
-      );
+            update() {
+              this.arr.sort();
+            }
+          },
+        );
+      });
     });
 
-    ARRAY_SETTER_METHODS.forEach((method) => {
-      reactivityTest(
-        `${method} individual index`,
-        class extends Component {
-          arr = new TrackedArray(['foo', 'bar']);
+    module('setter methods', () => {
+      ARRAY_SETTER_METHODS.forEach((method) => {
+        reactivityTest(
+          `${method} individual index`,
+          class extends Component {
+            arr = new TrackedArray(['foo', 'bar']);
 
-          get value() {
-            return this.arr[0];
-          }
+            get value() {
+              return this.arr[0];
+            }
 
-          update() {
-            // @ts-ignore -- this can't be represented easily in TS, and we
-            // don't actually care that it is; we're *just* testing reactivity.
-            this.arr[method](undefined);
-          }
-        },
-      );
+            update() {
+              // @ts-ignore -- this can't be represented easily in TS, and we
+              // don't actually care that it is; we're *just* testing reactivity.
+              this.arr[method](undefined);
+            }
+          },
+        );
 
-      reactivityTest(
-        `${method} collection tag`,
-        class extends Component {
-          arr = new TrackedArray(['foo', 'bar']);
+        reactivityTest(
+          `${method} collection tag`,
+          class extends Component {
+            arr = new TrackedArray(['foo', 'bar']);
 
-          get value() {
-            return this.arr.forEach(() => {
-              /* no op */
-            });
-          }
+            get value() {
+              return this.arr.forEach(() => {
+                /* no op */
+              });
+            }
 
-          update() {
-            // @ts-ignore -- this can't be represented easily in TS, and we
-            // don't actually care that it is; we're *just* testing reactivity.
-            this.arr[method](undefined);
-          }
-        },
-      );
+            update() {
+              // @ts-ignore -- this can't be represented easily in TS, and we
+              // don't actually care that it is; we're *just* testing reactivity.
+              this.arr[method](undefined);
+            }
+          },
+        );
+      });
     });
   });
 });
