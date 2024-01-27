@@ -418,6 +418,21 @@ module('TrackedArray', function (hooks) {
     );
 
     reactivityTest(
+      'calling splice',
+      class extends Component {
+        arr = new TrackedArray(['foo', 'bar', 'baz']);
+
+        get value() {
+          return this.arr[0];
+        }
+
+        update() {
+          this.arr.splice(0, 1);
+        }
+      },
+    );
+
+    reactivityTest(
       'Can push into a newly created TrackedArray during construction',
       class extends Component {
         arr = new TrackedArray<string>();
@@ -481,6 +496,17 @@ module('TrackedArray', function (hooks) {
       },
     );
 
+    eachReactivityTest(
+      '{{each}} works when calling splice',
+      class extends Component {
+        collection = new TrackedArray([1, 2, 3]);
+
+        update() {
+          this.collection.splice(0, 1);
+        }
+      },
+    );
+
     eachInReactivityTest(
       '{{each-in}} works with new items',
       class extends Component {
@@ -499,6 +525,17 @@ module('TrackedArray', function (hooks) {
 
         update() {
           this.collection[2] = 5;
+        }
+      },
+    );
+
+    eachInReactivityTest(
+      '{{each-in}} works when calling splice',
+      class extends Component {
+        collection = new TrackedArray([1, 2, 3]);
+
+        update() {
+          this.collection.splice(0, 1);
         }
       },
     );
