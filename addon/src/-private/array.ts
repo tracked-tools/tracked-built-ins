@@ -55,6 +55,14 @@ function convertToInt(prop: number | string | symbol): number | null {
   return num % 1 === 0 ? num : null;
 }
 
+export function getSpliceMutatedIndexes(
+  array: any[],
+  start: number,
+  deleteCount?: number | undefined
+) {
+  return [...array.keys()].splice(start, deleteCount);
+}
+
 class TrackedArray<T = unknown> {
   /**
    * Creates an array from an iterable object.
@@ -107,14 +115,20 @@ class TrackedArray<T = unknown> {
         let index = convertToInt(prop);
 
         if (prop === 'splice') {
-          return (
-            ...args: [start: number, deleteCount?: number | undefined]
-          ) => {
-            try {
-              return target.splice(...args);
-            } finally {
-              setValue(self.#collection, null);
-            }
+          return (start: number, deleteCount?: number | undefined) => {
+            const mutatedIndexes = getSpliceMutatedIndexes(
+              target,
+              start,
+              deleteCount
+            );
+
+            const part = target.splice(start, deleteCount);
+            setValue(self.#collection, null);
+
+            mutatedIndexes.forEach((index) => {
+              self.#dirtyStorageFor(index);
+            });
+            return part;
           };
         }
 

@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { TrackedArray } from 'tracked-built-ins';
 import { expectTypeOf } from 'expect-type';
+import { getSpliceMutatedIndexes } from 'tracked-built-ins/-private/array';
 
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -43,6 +44,14 @@ const ARRAY_SETTER_METHODS = [
   'sort',
   'splice',
   'unshift',
+];
+
+const SPLICE_MUTATED_INDEXES = [
+  { array: [0, 1, 2], start: 0, deleteCount: undefined, expected: [] },
+  { array: [0, 1, 2], start: 0, deleteCount: 0, expected: [] },
+  { array: [0, 1, 2], start: 0, deleteCount: 1, expected: [0] },
+  { array: [0, 1, 2], start: 1, deleteCount: 1, expected: [1] },
+  { array: [0, 1, 2], start: -1, deleteCount: 1, expected: [2] },
 ];
 
 // We can use a `TrackedArray<T>` anywhere we can use an `Array<T>` (but not
@@ -114,6 +123,19 @@ module('TrackedArray', function (hooks) {
     assert.equal(initialData.length, itemsCount);
     assert.equal(array1.length, itemsCount - 1);
     assert.equal(array2.length, itemsCount - 1);
+  });
+
+  module('getSpliceMutatedIndexes', () => {
+    SPLICE_MUTATED_INDEXES.forEach((check) => {
+      test(`splice mutated indexes ${check.start}, ${check.deleteCount}, ${check.array.length}`, (assert) => {
+        const actual = getSpliceMutatedIndexes(
+          check.array,
+          check.start,
+          check.deleteCount,
+        );
+        assert.deepEqual(actual, check.expected);
+      });
+    });
   });
 
   module('methods', () => {
@@ -556,7 +578,7 @@ module('TrackedArray', function (hooks) {
             }
 
             update() {
-              this.arr[0] = 'bar';
+              this.arr[0] = 'baz';
             }
           },
         );
