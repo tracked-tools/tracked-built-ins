@@ -97,7 +97,7 @@
     "stylelint-prettier": "^4.0.2",
     "tracked-built-ins": "workspace:*",
     "typescript": "~4.9.5",
-    "webpack": "^5.88.2"
+    "webpack": "^5.94.0"
   },
   "engines": {
     "node": "16.* || >= 18"
