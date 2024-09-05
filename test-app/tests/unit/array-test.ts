@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { TrackedArray } from 'tracked-built-ins';
 import { expectTypeOf } from 'expect-type';
+import { getSpliceMutatedIndexes } from 'tracked-built-ins/-private/array';
 
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -45,6 +46,14 @@ const ARRAY_SETTER_METHODS = [
   'unshift',
 ];
 
+const SPLICE_MUTATED_INDEXES = [
+  { array: [0, 1, 2], start: 0, deleteCount: undefined, expected: [] },
+  { array: [0, 1, 2], start: 0, deleteCount: 0, expected: [] },
+  { array: [0, 1, 2], start: 0, deleteCount: 1, expected: [0] },
+  { array: [0, 1, 2], start: 1, deleteCount: 1, expected: [1] },
+  { array: [0, 1, 2], start: -1, deleteCount: 1, expected: [2] },
+];
+
 // We can use a `TrackedArray<T>` anywhere we can use an `Array<T>` (but not
 // vice versa).
 expectTypeOf<TrackedArray<unknown>>().toMatchTypeOf<Array<unknown>>();
@@ -84,6 +93,49 @@ module('TrackedArray', function (hooks) {
 
     assert.equal(arr.length, 0);
     assert.equal(arr[0], undefined);
+  });
+
+  test('Can perform well compared to native array', (assert) => {
+    const itemsCount = 10000;
+    const initialData = Array(itemsCount).fill(null);
+
+    const array1 = Array.from(initialData);
+    const t1 = performance.now();
+    array1.splice(0, 1);
+    const t2 = performance.now();
+    let controlWindow = t2 - t1;
+    if (controlWindow < 1) {
+      controlWindow = 1;
+    }
+
+    const array2 = new TrackedArray(initialData);
+    const t3 = performance.now();
+    array2.splice(0, 1);
+    const t4 = performance.now();
+    const experimentWindow = t4 - t3;
+
+    const deviation = 1.2; // 20%
+    assert.ok(
+      experimentWindow < controlWindow * deviation,
+      `${experimentWindow} < ${controlWindow} * ${deviation}`,
+    );
+
+    assert.equal(initialData.length, itemsCount);
+    assert.equal(array1.length, itemsCount - 1);
+    assert.equal(array2.length, itemsCount - 1);
+  });
+
+  module('getSpliceMutatedIndexes', () => {
+    SPLICE_MUTATED_INDEXES.forEach((check) => {
+      test(`splice mutated indexes ${check.start}, ${check.deleteCount}, ${check.array.length}`, (assert) => {
+        const actual = getSpliceMutatedIndexes(
+          check.array,
+          check.start,
+          check.deleteCount,
+        );
+        assert.deepEqual(actual, check.expected);
+      });
+    });
   });
 
   module('methods', () => {
@@ -388,6 +440,21 @@ module('TrackedArray', function (hooks) {
     );
 
     reactivityTest(
+      'calling splice',
+      class extends Component {
+        arr = new TrackedArray(['foo', 'bar', 'baz']);
+
+        get value() {
+          return this.arr[0];
+        }
+
+        update() {
+          this.arr.splice(0, 1);
+        }
+      },
+    );
+
+    reactivityTest(
       'Can push into a newly created TrackedArray during construction',
       class extends Component {
         arr = new TrackedArray<string>();
@@ -451,6 +518,17 @@ module('TrackedArray', function (hooks) {
       },
     );
 
+    eachReactivityTest(
+      '{{each}} works when calling splice',
+      class extends Component {
+        collection = new TrackedArray([1, 2, 3]);
+
+        update() {
+          this.collection.splice(0, 1);
+        }
+      },
+    );
+
     eachInReactivityTest(
       '{{each-in}} works with new items',
       class extends Component {
@@ -473,82 +551,97 @@ module('TrackedArray', function (hooks) {
       },
     );
 
-    ARRAY_GETTER_METHODS.forEach((method) => {
-      reactivityTest(
-        `${method} individual index`,
-        class extends Component {
-          arr = new TrackedArray(['foo', 'bar']);
+    eachInReactivityTest(
+      '{{each-in}} works when calling splice',
+      class extends Component {
+        collection = new TrackedArray([1, 2, 3]);
 
-          get value() {
-            // @ts-ignore -- this can't be represented easily in TS, and we
-            // don't actually care that it is; we're *just* testing reactivity.
-            return this.arr[method](() => {
-              /* no op */
-            });
-          }
+        update() {
+          this.collection.splice(0, 1);
+        }
+      },
+    );
 
-          update() {
-            this.arr[0] = 'bar';
-          }
-        },
-      );
+    module('getter methods', () => {
+      ARRAY_GETTER_METHODS.forEach((method) => {
+        reactivityTest(
+          `${method} individual index`,
+          class extends Component {
+            arr = new TrackedArray(['foo', 'bar']);
 
-      reactivityTest(
-        `${method} collection tag`,
-        class extends Component {
-          arr = new TrackedArray(['foo', 'bar']);
+            get value() {
+              // @ts-ignore -- this can't be represented easily in TS, and we
+              // don't actually care that it is; we're *just* testing reactivity.
+              return this.arr[method](() => {
+                /* no op */
+              });
+            }
 
-          get value() {
-            // @ts-ignore -- this can't be represented easily in TS, and we
-            // don't actually care that it is; we're *just* testing reactivity.
-            return this.arr[method](() => {
-              /* no op */
-            });
-          }
+            update() {
+              this.arr[0] = 'baz';
+            }
+          },
+        );
 
-          update() {
-            this.arr.sort();
-          }
-        },
-      );
+        reactivityTest(
+          `${method} collection tag`,
+          class extends Component {
+            arr = new TrackedArray(['foo', 'bar']);
+
+            get value() {
+              // @ts-ignore -- this can't be represented easily in TS, and we
+              // don't actually care that it is; we're *just* testing reactivity.
+              return this.arr[method](() => {
+                /* no op */
+              });
+            }
+
+            update() {
+              this.arr.sort();
+            }
+          },
+        );
+      });
     });
 
-    ARRAY_SETTER_METHODS.forEach((method) => {
-      reactivityTest(
-        `${method} individual index`,
-        class extends Component {
-          arr = new TrackedArray(['foo', 'bar']);
+    module('setter methods', () => {
+      ARRAY_SETTER_METHODS.forEach((method) => {
+        reactivityTest(
+          `${method} individual index`,
+          class extends Component {
+            arr = new TrackedArray(['foo', 'bar']);
 
-          get value() {
-            return this.arr[0];
-          }
+            get value() {
+              return this.arr[0];
+            }
 
-          update() {
-            // @ts-ignore -- this can't be represented easily in TS, and we
-            // don't actually care that it is; we're *just* testing reactivity.
-            this.arr[method](undefined);
-          }
-        },
-      );
+            update() {
+              // @ts-ignore -- this can't be represented easily in TS, and we
+              // don't actually care that it is; we're *just* testing reactivity.
+              this.arr[method](undefined);
+            }
+          },
+        );
 
-      reactivityTest(
-        `${method} collection tag`,
-        class extends Component {
-          arr = new TrackedArray(['foo', 'bar']);
+        reactivityTest(
+          `${method} collection tag`,
+          class extends Component {
+            arr = new TrackedArray(['foo', 'bar']);
 
-          get value() {
-            return this.arr.forEach(() => {
-              /* no op */
-            });
-          }
+            get value() {
+              return this.arr.forEach(() => {
+                /* no op */
+              });
+            }
 
-          update() {
-            // @ts-ignore -- this can't be represented easily in TS, and we
-            // don't actually care that it is; we're *just* testing reactivity.
-            this.arr[method](undefined);
-          }
-        },
-      );
+            update() {
+              // @ts-ignore -- this can't be represented easily in TS, and we
+              // don't actually care that it is; we're *just* testing reactivity.
+              this.arr[method](undefined);
+            }
+          },
+        );
+      });
     });
   });
 });
