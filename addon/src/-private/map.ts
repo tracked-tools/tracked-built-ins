@@ -62,19 +62,19 @@ export class TrackedMap<K = unknown, V = unknown> implements Map<K, V> {
   }
 
   // **** ALL GETTERS ****
-  entries(): IterableIterator<[K, V]> {
+  entries(): MapIterator<[K, V]> {
     getValue(this.collection);
 
     return this.vals.entries();
   }
 
-  keys(): IterableIterator<K> {
+  keys(): MapIterator<K> {
     getValue(this.collection);
 
     return this.vals.keys();
   }
 
-  values(): IterableIterator<V> {
+  values(): MapIterator<V> {
     getValue(this.collection);
 
     return this.vals.values();
@@ -92,7 +92,7 @@ export class TrackedMap<K = unknown, V = unknown> implements Map<K, V> {
     return this.vals.size;
   }
 
-  [Symbol.iterator](): IterableIterator<[K, V]> {
+  [Symbol.iterator](): MapIterator<[K, V]> {
     getValue(this.collection);
 
     return this.vals[Symbol.iterator]();
