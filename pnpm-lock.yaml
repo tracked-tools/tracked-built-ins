@@ -15,7 +15,7 @@ importers:
         specifier: ^0.11.0
         version: 0.11.0(encoding@0.1.13)
       typescript:
-        specifier: ^5.4.2
+        specifier: ^5.5.4
         version: 5.7.2
 
   addon:
@@ -61,10 +61,10 @@ importers:
         specifier: ^3.0.6
         version: 3.0.8
       '@typescript-eslint/eslint-plugin':
-        specifier: ^7.7.1
+        specifier: ^7.14.1
         version: 7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1)(typescript@5.7.2)
       '@typescript-eslint/parser':
-        specifier: ^7.7.1
+        specifier: ^7.14.1
         version: 7.18.0(eslint@8.57.1)(typescript@5.7.2)
       babel-plugin-ember-template-compilation:
         specifier: ^2.2.5
@@ -106,7 +106,7 @@ importers:
         specifier: ^3.5.0
         version: 3.5.0
       typescript:
-        specifier: ^5.4.2
+        specifier: ^5.5.4
         version: 5.7.2
 
   test-app:
@@ -265,7 +265,7 @@ importers:
         specifier: workspace:*
         version: link:../addon
       typescript:
-        specifier: ^5.4.2
+        specifier: ^5.5.4
         version: 5.7.2
       webpack:
         specifier: ^5.94.0
