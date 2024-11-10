@@ -1,10 +1,10 @@
 import { tracked as glimmerTracked } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
 
-import { TrackedMap, TrackedWeakMap } from './map';
-import { TrackedSet, TrackedWeakSet } from './set';
-import TrackedArray from './array';
-import TrackedObject from './object';
+import { TrackedMap, TrackedWeakMap } from './map.ts';
+import { TrackedSet, TrackedWeakSet } from './set.ts';
+import TrackedArray from './array.ts';
+import TrackedObject from './object.js';
 
 export default function tracked<T>(obj: T[] | typeof Array): TrackedArray<T>;
 
@@ -36,7 +36,7 @@ export default function tracked(
   desc?: PropertyDescriptor
 ): unknown {
   if (key !== undefined && desc !== undefined) {
-    return glimmerTracked(obj, key, desc);
+    return glimmerTracked(obj, key);
   }
 
   if (Array.isArray(obj)) {

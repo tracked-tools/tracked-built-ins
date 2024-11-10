@@ -7,7 +7,7 @@
 // that properties within the getter have the correct type in TS.
 
 import {
-  TrackedStorage,
+  type TrackedStorage,
   createStorage,
   getValue,
   setValue,

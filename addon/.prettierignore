@@ -1,5 +1,9 @@
+# unconventional js
+/blueprints/*/files/
+
 # compiled output
 /dist/
+/declarations/
 
 # dependencies
 /node_modules/
@@ -9,3 +13,7 @@
 !.*
 .eslintcache
 .lint-todo/
+
+# ember-try
+/.node_modules.ember-try/
+/pnpm-lock.ember-try.yaml
