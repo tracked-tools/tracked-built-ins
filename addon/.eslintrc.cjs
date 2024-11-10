@@ -1,51 +1,86 @@
+'use strict';
+
 module.exports = {
   root: true,
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module',
-  },
-  plugins: ['ember', '@typescript-eslint'],
-  extends: [
-    'eslint:recommended',
-    'plugin:ember/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
-  env: {
-    browser: true,
-  },
-  rules: {
-    'prefer-const': 'off',
-    // Use the default `ban-types` rule *except* for allowing `object`, which is
-    // used throughout. We may switch to using `Record<PropertyKey, unknown>` on
-    // a future (breaking) release, but this choice allows us to preserve the
-    // current types while landing a robust linting config in general.
-    '@typescript-eslint/ban-types': [
-      'error',
-      {
-        extendDefaults: true,
-        types: {
-          object: false,
-        },
-      },
-    ],
-  },
+  // Only use overrides
+  // https://github.com/ember-cli/eslint-plugin-ember?tab=readme-ov-file#gtsgjs
   overrides: [
-    // JS files where TS rules don't make sense
     {
-      files: ['addon/**/*.js'],
+      files: ['**/*.js', '**/*.ts'],
+      env: { browser: true },
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaVersion: 'latest',
+      },
+      plugins: ['ember', 'import'],
+      extends: [
+        'eslint:recommended',
+        'plugin:ember/recommended',
+        'plugin:prettier/recommended',
+      ],
       rules: {
-        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        // require relative imports use full extensions
+        'import/extensions': ['error', 'always', { ignorePackages: true }],
+        // Add any custom rules here
+      },
+    },
+    // ts files
+    {
+      files: ['**/*.ts'],
+      extends: [
+        'eslint:recommended',
+        'plugin:ember/recommended',
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:prettier/recommended',
+      ],
+      rules: {
+        // require relative imports use full extensions
+        'import/extensions': ['error', 'always', { ignorePackages: true }],
+        // Add any custom rules here
+      },
+    },
+    {
+      files: ['**/*.gts'],
+      parser: 'ember-eslint-parser',
+      plugins: ['ember', 'import'],
+      extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:ember/recommended',
+        'plugin:ember/recommended-gts',
+        'plugin:prettier/recommended',
+      ],
+      rules: {
+        // require relative imports use full extensions
+        'import/extensions': ['error', 'always', { ignorePackages: true }],
+        // Add any custom rules here
+      },
+    },
+    {
+      files: ['**/*.gjs'],
+      parser: 'ember-eslint-parser',
+      plugins: ['ember', 'import'],
+      extends: [
+        'eslint:recommended',
+        'plugin:ember/recommended',
+        'plugin:ember/recommended-gjs',
+        'plugin:prettier/recommended',
+      ],
+      rules: {
+        // require relative imports use full extensions
+        'import/extensions': ['error', 'always', { ignorePackages: true }],
+        // Add any custom rules here
       },
     },
     // node files
     {
       files: [
-        './.eslintrc.js',
-        './.prettierrc.js',
-        './config/**/*.js',
-        './addon-main.js',
+        './.eslintrc.cjs',
+        './.prettierrc.cjs',
+        './.template-lintrc.cjs',
+        './addon-main.cjs',
       ],
       parserOptions: {
         sourceType: 'script',
@@ -54,14 +89,12 @@ module.exports = {
         browser: false,
         node: true,
       },
-      plugins: ['node'],
-      extends: ['plugin:node/recommended'],
-      rules: {
-        // this can be removed once the following is fixed
-        // https://github.com/mysticatea/eslint-plugin-node/issues/77
-        'node/no-unpublished-require': 'off',
-        '@typescript-eslint/no-var-requires': 'off',
-      },
+      plugins: ['n'],
+      extends: [
+        'eslint:recommended',
+        'plugin:n/recommended',
+        'plugin:prettier/recommended',
+      ],
     },
   ],
 };
