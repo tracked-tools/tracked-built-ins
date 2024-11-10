@@ -36,7 +36,7 @@ export default function tracked(
   desc?: PropertyDescriptor
 ): unknown {
   if (key !== undefined && desc !== undefined) {
-    return glimmerTracked(obj, key);
+    return glimmerTracked(obj, key, desc);
   }
 
   if (Array.isArray(obj)) {
