@@ -4,6 +4,22 @@ module.exports = {
   root: true,
   // Only use overrides
   // https://github.com/ember-cli/eslint-plugin-ember?tab=readme-ov-file#gtsgjs
+  rules: {
+    'prefer-const': 'off',
+    // Use the default `ban-types` rule *except* for allowing `object`, which is
+    // used throughout. We may switch to using `Record<PropertyKey, unknown>` on
+    // a future (breaking) release, but this choice allows us to preserve the
+    // current types while landing a robust linting config in general.
+    '@typescript-eslint/ban-types': [
+      'error',
+      {
+        extendDefaults: true,
+        types: {
+          object: false,
+        },
+      },
+    ],
+  },
   overrides: [
     {
       files: ['**/*.js', '**/*.ts'],
