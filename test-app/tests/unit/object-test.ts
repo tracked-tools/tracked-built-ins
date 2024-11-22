@@ -9,7 +9,6 @@ import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import { reactivityTest } from '../helpers/reactivity';
 import { eachInReactivityTest } from '../helpers/collection-reactivity';
-import { assert } from '@ember/debug';
 
 // The whole point here is that Object *is* the thing we are matching, ESLint!
 // eslint-disable-next-line @typescript-eslint/ban-types

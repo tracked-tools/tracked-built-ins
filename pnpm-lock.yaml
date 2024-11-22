@@ -18,7 +18,7 @@ importers:
         specifier: ^15.5.0
         version: 15.5.0
       typescript:
-        specifier: ^5.6.3
+        specifier: ^5.4.2
         version: 5.6.3
 
   addon:
@@ -172,7 +172,7 @@ importers:
         specifier: ^3.5.0
         version: 3.5.0
       typescript:
-        specifier: ^5.6.3
+        specifier: ^5.4.2
         version: 5.6.3
 
   test-app:
@@ -388,7 +388,7 @@ importers:
         specifier: workspace:*
         version: link:../addon
       typescript:
-        specifier: ^5.6.3
+        specifier: ^5.4.2
         version: 5.6.3
       webpack:
         specifier: ^5.94.0
