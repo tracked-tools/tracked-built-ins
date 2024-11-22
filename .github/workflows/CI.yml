@@ -169,7 +169,7 @@ jobs:
         id: extra-args
         run: |
           # In later TS versions noEmit takes precedence over emitDeclarationOnly
-          if [ "${{ matrix.ts-version }}" == "5.4" || "${{ matrix.ts-version }}" == "5.5" ]; then
+          if [[ "${{ matrix.ts-version }}" == "5.4" || "${{ matrix.ts-version }}" == "5.5" ]]; then
             echo "extra-args=--emitDeclarationOnly false" >> $GITHUB_OUTPUT
           fi
 
