@@ -167,6 +167,14 @@ jobs:
         run: pnpm add --save-dev typescript@${{ matrix.ts-version }}
         working-directory: addon
 
+      - name: Calculate extra args
+        id: extra-args
+        run: |
+          # In later TS versions noEmit takes precedence over emitDeclarationOnly
+          if [ "${{ matrix.ts-version }}" == "5.4" || "${{ matrix.ts-version }}" == "5.5" ]; then
+            echo "extra-args=--emitDeclarationOnly false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Type check
-        run: pnpm tsc --noEmit
+        run: pnpm tsc --noEmit ${{ steps.extra-args.outputs.extra-args }}
         working-directory: addon
