@@ -4,7 +4,7 @@ import { assert } from '@ember/debug';
 import { TrackedMap, TrackedWeakMap } from './map.ts';
 import { TrackedSet, TrackedWeakSet } from './set.ts';
 import TrackedArray from './array.ts';
-import TrackedObject from './object.js';
+import TrackedObject from './object.ts';
 
 export default function tracked<T>(obj: T[] | typeof Array): TrackedArray<T>;
 

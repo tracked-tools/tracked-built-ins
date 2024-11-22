@@ -4,44 +4,54 @@ import {
   setValue,
 } from 'ember-tracked-storage-polyfill';
 
-export default class TrackedObject {
-  static fromEntries(entries) {
+// @ts-expect-error This does not make TS happy
+export default interface TrackedObject<
+  T extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
+> extends T {}
+// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging -- We are doing this intentionally
+export default class TrackedObject<
+  T extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
+> {
+  static fromEntries<T = unknown>(
+    entries: Iterable<readonly [PropertyKey, T]>,
+  ) {
     return new TrackedObject(Object.fromEntries(entries));
   }
 
+  constructor(...args: Record<PropertyKey, never> extends T ? [] | [T] : [T]);
   constructor(obj = {}) {
-    let proto = Object.getPrototypeOf(obj);
-    let descs = Object.getOwnPropertyDescriptors(obj);
+    const proto = Object.getPrototypeOf(obj);
+    const descs = Object.getOwnPropertyDescriptors(obj);
 
-    let clone = Object.create(proto);
+    const clone = Object.create(proto);
 
-    for (let prop in descs) {
-      Object.defineProperty(clone, prop, descs[prop]);
+    for (const prop in descs) {
+      Object.defineProperty(clone, prop, descs[prop]!);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    let self = this;
+    const self = this;
 
     return new Proxy(clone, {
-      get(target, prop) {
+      get(target: T, prop: PropertyKey) {
         self.#readStorageFor(prop);
 
         return target[prop];
       },
 
-      has(target, prop) {
+      has(target: T, prop: PropertyKey) {
         self.#readStorageFor(prop);
 
         return prop in target;
       },
 
-      ownKeys(target) {
+      ownKeys(target: T) {
         getValue(self.#collection);
 
         return Reflect.ownKeys(target);
       },
 
-      set(target, prop, value) {
+      set<K extends keyof T & PropertyKey>(target: T, prop: K, value: T[K]) {
         target[prop] = value;
 
         self.#dirtyStorageFor(prop);
@@ -50,7 +60,7 @@ export default class TrackedObject {
         return true;
       },
 
-      deleteProperty(target, prop) {
+      deleteProperty(target: T, prop: PropertyKey) {
         if (prop in target) {
           delete target[prop];
           self.#dirtyStorageFor(prop);
@@ -70,7 +80,7 @@ export default class TrackedObject {
 
   #collection = createStorage(null, () => false);
 
-  #readStorageFor(key) {
+  #readStorageFor(key: PropertyKey) {
     let storage = this.#storages.get(key);
 
     if (storage === undefined) {
@@ -81,7 +91,7 @@ export default class TrackedObject {
     getValue(storage);
   }
 
-  #dirtyStorageFor(key) {
+  #dirtyStorageFor(key: PropertyKey) {
     const storage = this.#storages.get(key);
 
     if (storage) {

@@ -1,12 +1,14 @@
-interface Collection {
+interface Collection<
+  T extends
+    | Array<unknown>
+    | Record<PropertyKey, unknown>
+    | Set<unknown>
+    | WeakSet<object>
+    | Map<unknown, unknown>
+    | WeakMap<object, unknown>,
+> {
   new (...args: never[]): {
-    collection:
-      | Array<unknown>
-      | Record<PropertyKey, unknown>
-      | Set<unknown>
-      | WeakSet<object>
-      | Map<unknown, unknown>
-      | WeakMap<object, unknown>;
+    collection: T;
   };
 }
 
