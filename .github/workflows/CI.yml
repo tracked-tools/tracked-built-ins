@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!
@@ -47,7 +47,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!
@@ -72,7 +72,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!
@@ -106,7 +106,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!
@@ -140,7 +140,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!
