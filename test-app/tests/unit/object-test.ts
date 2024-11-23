@@ -15,7 +15,9 @@ import { eachInReactivityTest } from '../helpers/collection-reactivity';
 expectTypeOf<TrackedObject>().toMatchTypeOf<Object>();
 
 // @ts-expect-error - Required keys should require a value
-new TrackedObject<{ foo: number }>();
+let a = new TrackedObject<{ foo: number }>();
+// @ts-expect-error - Required keys should require a value
+new TrackedObject<{ foo: number }>({});
 
 // Optional keys should not require a value
 new TrackedObject<{ foo?: number }>();

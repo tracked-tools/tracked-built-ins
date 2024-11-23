@@ -9,6 +9,7 @@
   "scripts": {
     "prepare": "cd addon && pnpm run build",
     "release": "release-it",
+    "lint": "pnpm --filter '*' lint",
     "test": "cd test-app && pnpm run test:ember"
   },
   "devDependencies": {

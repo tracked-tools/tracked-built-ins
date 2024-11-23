@@ -4,14 +4,7 @@ import {
   setValue,
 } from 'ember-tracked-storage-polyfill';
 
-// @ts-expect-error This does not make TS happy
-export default interface TrackedObject<
-  T extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
-> extends T {}
-// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging -- We are doing this intentionally
-export default class TrackedObject<
-  T extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
-> {
+class TrackedObjectImplementation<T extends object> {
   static fromEntries<T = unknown>(
     entries: Iterable<readonly [PropertyKey, T]>,
   ) {
@@ -33,13 +26,13 @@ export default class TrackedObject<
     const self = this;
 
     return new Proxy(clone, {
-      get(target: T, prop: PropertyKey) {
+      get(target, prop) {
         self.#readStorageFor(prop);
 
         return target[prop];
       },
 
-      has(target: T, prop: PropertyKey) {
+      has(target, prop) {
         self.#readStorageFor(prop);
 
         return prop in target;
@@ -51,7 +44,7 @@ export default class TrackedObject<
         return Reflect.ownKeys(target);
       },
 
-      set<K extends keyof T & PropertyKey>(target: T, prop: K, value: T[K]) {
+      set(target, prop, value) {
         target[prop] = value;
 
         self.#dirtyStorageFor(prop);
@@ -60,7 +53,7 @@ export default class TrackedObject<
         return true;
       },
 
-      deleteProperty(target: T, prop: PropertyKey) {
+      deleteProperty(target, prop) {
         if (prop in target) {
           delete target[prop];
           self.#dirtyStorageFor(prop);
@@ -71,7 +64,7 @@ export default class TrackedObject<
       },
 
       getPrototypeOf() {
-        return TrackedObject.prototype;
+        return TrackedObjectImplementation.prototype;
       },
     });
   }
@@ -103,3 +96,20 @@ export default class TrackedObject<
     setValue(this.#collection, null);
   }
 }
+
+export interface TrackedObject {
+  fromEntries<T = unknown>(
+    entries: Iterable<readonly [PropertyKey, T]>,
+  ): {
+    [k: string]: T;
+  };
+
+  new <T extends Record<PropertyKey, unknown>>(
+    ...args: Record<PropertyKey, never> extends T ? [] | [T] : [T]
+  ): T;
+}
+
+export const TrackedObject: TrackedObject =
+  TrackedObjectImplementation as unknown as TrackedObject;
+
+export default TrackedObject;
