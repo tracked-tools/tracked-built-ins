@@ -11,9 +11,6 @@ concurrency:
   group: ci-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
-env:
-  PNPM_VERSION: '8'
-
 jobs:
   lint:
     name: Check Linting and TS
@@ -21,8 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
-        with:
-          version: '${{ env.PNPM_VERSION }}'
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!
@@ -53,8 +48,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
-        with:
-          version: '${{ env.PNPM_VERSION }}'
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!
@@ -67,7 +60,7 @@ jobs:
         run: pnpm test:ember --launch ${{ matrix.browser }}
         working-directory: test-app
 
-  floating-dependencies:
+  floaing-dependencies:
     name: "Floating Dependencies"
     runs-on: ${{ matrix.os }}
     needs: "lint"
@@ -80,8 +73,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
-        with:
-          version: '${{ env.PNPM_VERSION }}'
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!
@@ -116,8 +107,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
-        with:
-          version: '${{ env.PNPM_VERSION }}'
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!
@@ -152,8 +141,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
-        with:
-          version: '${{ env.PNPM_VERSION }}'
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!

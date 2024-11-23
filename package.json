@@ -19,9 +19,9 @@
     "typescript": "^5.4.2"
   },
   "volta": {
-    "node": "18.18.0"
+    "node": ">= 22"
   },
-  "packageManager": "pnpm@8.7.6",
+  "packageManager": "pnpm@9.14.2",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
