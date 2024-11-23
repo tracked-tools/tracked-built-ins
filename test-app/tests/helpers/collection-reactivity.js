@@ -2,6 +2,7 @@
 import hbs from 'htmlbars-inline-precompile';
 import { render, settled, findAll } from '@ember/test-helpers';
 import { test } from 'qunit';
+import { setComponentTemplate } from '@ember/component';
 
 function compareResults(assert, items) {
   findAll('.test-item').forEach((el, index) => {
@@ -27,9 +28,7 @@ export function eachReactivityTest(desc, Klass) {
       }
     }
 
-    this.owner.register('component:test-component', TestComponent);
-    this.owner.register(
-      'template:components/test-component',
+    setComponentTemplate(
       hbs`
         <ul>
           {{#each this.collection as |value index|}}
@@ -37,7 +36,9 @@ export function eachReactivityTest(desc, Klass) {
           {{/each}}
         </ul>
       `,
+      TestComponent,
     );
+    this.owner.register('component:test-component', TestComponent);
 
     await render(hbs`<TestComponent/>`);
 
