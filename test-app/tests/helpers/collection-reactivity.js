@@ -73,9 +73,7 @@ export function eachInReactivityTest(desc, Klass) {
       }
     }
 
-    this.owner.register('component:test-component', TestComponent);
-    this.owner.register(
-      'template:components/test-component',
+    setComponentTemplate(
       hbs`
         <ul>
           {{#each-in this.collection as |lhs rhs|}}
@@ -83,7 +81,10 @@ export function eachInReactivityTest(desc, Klass) {
           {{/each-in}}
         </ul>
       `,
+      TestComponent,
     );
+
+    this.owner.register('component:test-component', TestComponent);
 
     await render(hbs`<TestComponent/>`);
 
