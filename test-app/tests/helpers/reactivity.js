@@ -1,6 +1,7 @@
 import hbs from 'htmlbars-inline-precompile';
 import { render, settled } from '@ember/test-helpers';
 import { test } from 'qunit';
+import { setComponentTemplate } from '@ember/component';
 
 export function reactivityTest(desc, Klass, shouldUpdate = true) {
   test(`${desc} reactivity`, async function (assert) {
@@ -21,20 +22,24 @@ export function reactivityTest(desc, Klass, shouldUpdate = true) {
       }
     }
 
-    this.owner.register('component:test-component', TestComponent);
-    this.owner.register(
-      'template:components/test-component',
+    setComponentTemplate(
       hbs`<div class="test">{{this.value}}</div>`,
+      TestComponent,
     );
+    this.owner.register('component:test-component', TestComponent);
 
     await render(hbs`<TestComponent/>`);
 
-    assert.equal(count, 1);
+    assert.equal(count, 1, 'The count is 1');
 
     instance.update();
 
     await settled();
 
-    assert.equal(count, shouldUpdate ? 2 : 1);
+    assert.equal(
+      count,
+      shouldUpdate ? 2 : 1,
+      shouldUpdate ? `The count is updated` : `The could should not update`,
+    );
   });
 }
