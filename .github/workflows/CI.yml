@@ -60,7 +60,7 @@ jobs:
         run: pnpm test:ember --launch ${{ matrix.browser }}
         working-directory: test-app
 
-  floaing-dependencies:
+  floating-dependencies:
     name: "Floating Dependencies"
     runs-on: ${{ matrix.os }}
     needs: "lint"
