@@ -15,7 +15,7 @@ module.exports = async function () {
             '@glimmer/component': '^1.0.0',
             'ember-cli': '~3.28.0',
             'ember-qunit': '^6.0.0',
-            'ember-resolver': '~9.0.0',
+            'ember-resolver': '~8.0.0',
             'ember-source': '~3.28.11',
           },
         },
@@ -24,6 +24,7 @@ module.exports = async function () {
         name: 'ember-lts-4.12',
         npm: {
           devDependencies: {
+            '@glimmer/component': '^1.0.0',
             'ember-source': '~4.12.0',
           },
         },
@@ -32,6 +33,7 @@ module.exports = async function () {
         name: 'ember-lts-5.4',
         npm: {
           devDependencies: {
+            '@glimmer/component': '^1.0.0',
             'ember-source': '~5.4.0',
           },
         },
@@ -40,6 +42,7 @@ module.exports = async function () {
         name: 'ember-lts-5.8',
         npm: {
           devDependencies: {
+            '@glimmer/component': '^1.0.0',
             'ember-source': '~5.8.0',
           },
         },
