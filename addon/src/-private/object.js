@@ -54,6 +54,7 @@ export default class TrackedObject {
         if (prop in target) {
           delete target[prop];
           self.#dirtyStorageFor(prop);
+          self.#storages.delete(prop);
           self.#dirtyCollection();
         }
 

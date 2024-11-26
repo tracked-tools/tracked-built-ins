@@ -101,6 +101,7 @@ export class TrackedSet<T = unknown> implements Set<T> {
     this.dirtyStorageFor(value);
     setValue(this.collection, null);
 
+    this.storages.delete(value);
     return this.vals.delete(value);
   }
 
@@ -109,6 +110,7 @@ export class TrackedSet<T = unknown> implements Set<T> {
     this.storages.forEach((s) => setValue(s, null));
     setValue(this.collection, null);
 
+    this.storages.clear();
     this.vals.clear();
   }
 }
@@ -163,6 +165,7 @@ export class TrackedWeakSet<T extends object = object> implements WeakSet<T> {
   delete(value: T): boolean {
     this.dirtyStorageFor(value);
 
+    this.storages.delete(value);
     return this.vals.delete(value);
   }
 

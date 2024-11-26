@@ -116,14 +116,16 @@ export class TrackedMap<K = unknown, V = unknown> implements Map<K, V> {
     this.dirtyStorageFor(key);
     setValue(this.collection, null);
 
+    this.storages.delete(key);
     return this.vals.delete(key);
   }
 
   // **** ALL SETTERS ****
   clear(): void {
     this.storages.forEach((s) => setValue(s, null));
-    setValue(this.collection, null);
+    this.storages.clear();
 
+    setValue(this.collection, null);
     this.vals.clear();
   }
 }
@@ -192,6 +194,7 @@ export class TrackedWeakMap<K extends object = object, V = unknown>
   delete(key: K): boolean {
     this.dirtyStorageFor(key);
 
+    this.storages.delete(key);
     return this.vals.delete(key);
   }
 
