@@ -164,9 +164,9 @@ class TrackedArray<T = unknown> {
 
         if (index !== null) {
           self.#dirtyStorageFor(index);
-          setValue(self.#collection, null);
+          self.#dirtyCollection();
         } else if (prop === 'length') {
-          setValue(self.#collection, null);
+          self.#dirtyCollection();
         }
 
         return true;
@@ -199,6 +199,11 @@ class TrackedArray<T = unknown> {
     if (storage) {
       setValue(storage, null);
     }
+  }
+
+  #dirtyCollection() {
+    setValue(this.#collection, null);
+    this.#storages.clear();
   }
 }
 
