@@ -14,7 +14,7 @@ module.exports = async function () {
             '@ember/test-helpers': '^2.9.3',
             '@glimmer/component': '^1.0.0',
             'ember-cli': '~3.28.0',
-            'ember-qunit': '^6.0.0',
+            'ember-qunit': '^5.0.0',
             'ember-resolver': '~8.0.0',
             'ember-source': '~3.24.0',
           },
