@@ -13,6 +13,11 @@ module.exports = function (defaults) {
     // Add options here
   });
 
+  if (process.env.EMBER_TRY_CURRENT_SCENARIO === 'ember-lts-3.24') {
+    // Embroider does not support 3.24
+    return app.toTree();
+  }
+
   const { Webpack } = require('@embroider/webpack');
   return require('@embroider/compat').compatBuild(app, Webpack, {
     staticAddonTestSupportTrees: true,
