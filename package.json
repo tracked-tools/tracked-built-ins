@@ -8,10 +8,9 @@
   "author": "Chris Hewell Garrett",
   "scripts": {
     "build": "pnpm --filter tracked-built-ins build",
-    "prepare": "cd addon && pnpm run build",
-    "release": "release-it",
     "lint": "pnpm --filter '*' lint",
     "lint:fix": "pnpm --filter '*' lint:fix",
+    "prepare": "cd addon && pnpm run build",
     "test": "cd test-app && pnpm run test:ember"
   },
   "devDependencies": {
@@ -19,12 +18,13 @@
     "@release-it-plugins/workspaces": "^3.2.0",
     "release-it": "^15.5.0",
     "ember-source": "^6.0.0",
+    "release-plan": "^0.11.0",
     "typescript": "^5.4.2"
   },
+  "packageManager": "pnpm@9.14.2",
   "volta": {
     "node": ">= 22"
   },
-  "packageManager": "pnpm@9.14.2",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
