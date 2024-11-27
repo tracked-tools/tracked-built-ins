@@ -1,25 +1,25 @@
 import { tracked as glimmerTracked } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
 
-import { TrackedMap, TrackedWeakMap } from './map';
-import { TrackedSet, TrackedWeakSet } from './set';
-import TrackedArray from './array';
-import TrackedObject from './object';
+import { TrackedMap, TrackedWeakMap } from './map.ts';
+import { TrackedSet, TrackedWeakSet } from './set.ts';
+import TrackedArray from './array.ts';
+import TrackedObject from './object.ts';
 
 export default function tracked<T>(obj: T[] | typeof Array): TrackedArray<T>;
 
 export default function tracked<T>(obj: Set<T> | typeof Set): TrackedSet<T>;
 
 export default function tracked<T, U>(
-  obj: Map<T, U> | typeof Map
+  obj: Map<T, U> | typeof Map,
 ): TrackedMap<T, U>;
 
 export default function tracked<T extends object>(
-  obj: WeakSet<T> | typeof WeakSet
+  obj: WeakSet<T> | typeof WeakSet,
 ): TrackedWeakSet<T>;
 
 export default function tracked<T extends object, U>(
-  obj: WeakMap<T, U> | typeof WeakMap
+  obj: WeakMap<T, U> | typeof WeakMap,
 ): TrackedWeakMap<T, U>;
 
 export default function tracked<T extends object>(obj: T | typeof Object): T;
@@ -27,13 +27,13 @@ export default function tracked<T extends object>(obj: T | typeof Object): T;
 export default function tracked(
   obj: object,
   key: string | symbol,
-  desc?: PropertyDescriptor
+  desc?: PropertyDescriptor,
 ): void;
 
 export default function tracked(
   obj: object,
   key?: string | symbol,
-  desc?: PropertyDescriptor
+  desc?: PropertyDescriptor,
 ): unknown {
   if (key !== undefined && desc !== undefined) {
     return glimmerTracked(obj, key, desc);
@@ -76,7 +76,7 @@ export default function tracked(
         map = tracked(Map);
         map = tracked(new Map());
       }`,
-      typeof obj === 'object' && obj !== null
+      typeof obj === 'object' && obj !== null,
     );
 
     return new TrackedObject(obj as Record<PropertyKey, unknown>);

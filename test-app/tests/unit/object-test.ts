@@ -14,6 +14,14 @@ import { eachInReactivityTest } from '../helpers/collection-reactivity';
 // eslint-disable-next-line @typescript-eslint/ban-types
 expectTypeOf<TrackedObject>().toMatchTypeOf<Object>();
 
+// @ts-expect-error - Required keys should require a value
+let a = new TrackedObject<{ foo: number }>();
+// @ts-expect-error - Required keys should require a value
+new TrackedObject<{ foo: number }>({});
+
+// Optional keys should not require a value
+new TrackedObject<{ foo?: number }>();
+
 module('TrackedObject', function (hooks) {
   setupRenderingTest(hooks);
 
@@ -62,7 +70,7 @@ module('TrackedObject', function (hooks) {
   test('it works when used directly in a template', async function (this: TestContext & {
     obj: Record<PropertyKey, unknown>;
   }, assert) {
-    this.obj = new TrackedObject({ foo: 123 });
+    this.obj = new TrackedObject<Record<PropertyKey, unknown>>({ foo: 123 });
 
     await render(hbs`{{this.obj.foo}}`);
 

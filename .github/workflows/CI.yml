@@ -11,18 +11,13 @@ concurrency:
   group: ci-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
-env:
-  PNPM_VERSION: '8'
-
 jobs:
   lint:
     name: Check Linting and TS
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: '${{ env.PNPM_VERSION }}'
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!
@@ -52,9 +47,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: '${{ env.PNPM_VERSION }}'
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!
@@ -79,9 +72,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: '${{ env.PNPM_VERSION }}'
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!
@@ -104,21 +95,18 @@ jobs:
       fail-fast: false
       matrix:
         try-scenario:
-          - ember-lts-3.24
           - ember-lts-3.28
-          - ember-lts-4.4
+          - ember-lts-4.12
+          - ember-lts-5.4
+          - ember-lts-5.8
+          - ember-lts-5.12
           - ember-release
           - ember-beta
           - ember-canary
-          - ember-classic
-          - embroider-safe
-          - embroider-optimized
 
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: '${{ env.PNPM_VERSION }}'
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!
@@ -142,20 +130,17 @@ jobs:
       fail-fast: false
       matrix:
         ts-version:
-          - '4.4'
-          - '4.5'
-          - '4.6'
-          - '4.7'
-          - '4.8'
+          - '5.4'
+          - '5.5'
+          - '5.6'
+          - '5.7'
           - 'next'
 
     continue-on-error: ${{ matrix.ts-version == 'next' }}
 
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: '${{ env.PNPM_VERSION }}'
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json' # uses Volta!
@@ -168,6 +153,14 @@ jobs:
         run: pnpm add --save-dev typescript@${{ matrix.ts-version }}
         working-directory: addon
 
+      - name: Calculate extra args
+        id: extra-args
+        run: |
+          # In later TS versions noEmit takes precedence over emitDeclarationOnly
+          if [[ "${{ matrix.ts-version }}" == "5.4" || "${{ matrix.ts-version }}" == "5.5" ]]; then
+            echo "extra-args=--emitDeclarationOnly false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Type check
-        run: pnpm tsc --noEmit
+        run: pnpm tsc --noEmit ${{ steps.extra-args.outputs.extra-args }}
         working-directory: addon

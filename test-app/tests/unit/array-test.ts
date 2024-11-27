@@ -1,3 +1,4 @@
+import type Owner from '@ember/owner';
 import Component from '@glimmer/component';
 import { TrackedArray } from 'tracked-built-ins';
 import { expectTypeOf } from 'expect-type';
@@ -392,8 +393,7 @@ module('TrackedArray', function (hooks) {
       class extends Component {
         arr = new TrackedArray<string>();
 
-        // eslint-disable-next-line @typescript-eslint/ban-types
-        constructor(owner: unknown, args: {}) {
+        constructor(owner: Owner, args: object) {
           super(owner, args);
           this.arr.push('hello');
         }
@@ -413,8 +413,7 @@ module('TrackedArray', function (hooks) {
       class extends Component {
         arr = new TrackedArray<string>();
 
-        // eslint-disable-next-line @typescript-eslint/ban-types
-        constructor(owner: unknown, args: {}) {
+        constructor(owner: Owner, args: object) {
           super(owner, args);
           this.arr.unshift('hello');
         }
