@@ -50,6 +50,6 @@
       can do the proper transformations on those files.
     */
     "allowImportingTsExtensions": true,
-    "types": ["ember-source/types"]
+    "types": ["../node_modules/ember-source/types/stable"]
   }
 }

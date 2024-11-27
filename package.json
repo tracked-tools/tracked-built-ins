@@ -7,6 +7,7 @@
   "license": "MIT",
   "author": "Chris Hewell Garrett",
   "scripts": {
+    "build": "pnpm --filter tracked-built-ins build",
     "prepare": "cd addon && pnpm run build",
     "release": "release-it",
     "lint": "pnpm --filter '*' lint",
@@ -16,6 +17,7 @@
     "@release-it-plugins/lerna-changelog": "^5.0.0",
     "@release-it-plugins/workspaces": "^3.2.0",
     "release-it": "^15.5.0",
+    "ember-source": "^6.0.0",
     "typescript": "^5.4.2"
   },
   "volta": {
