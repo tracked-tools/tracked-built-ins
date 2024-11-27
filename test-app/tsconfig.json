@@ -10,7 +10,8 @@
       "test-app/*": ["app/*"],
       "*": ["types/*"]
     },
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["ember-source/types"]
   },
   "include": ["app/**/*", "tests/**/*", "types/**/*"]
 }
