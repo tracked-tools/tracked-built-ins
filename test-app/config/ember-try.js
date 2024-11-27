@@ -7,6 +7,20 @@ module.exports = async function () {
     usePnpm: true,
     scenarios: [
       {
+        name: 'ember-lts-3.24',
+        npm: {
+          devDependencies: {
+            '@ember/string': '^3.0.0',
+            '@ember/test-helpers': '^2.9.3',
+            '@glimmer/component': '^1.0.0',
+            'ember-cli': '~3.28.0',
+            'ember-qunit': '^5.0.0',
+            'ember-resolver': '~8.0.0',
+            'ember-source': '~3.24.0',
+          },
+        },
+      },
+      {
         name: 'ember-lts-3.28',
         npm: {
           devDependencies: {
