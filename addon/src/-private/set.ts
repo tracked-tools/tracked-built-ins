@@ -47,19 +47,19 @@ export class TrackedSet<T = unknown> implements Set<T> {
   }
 
   // **** ALL GETTERS ****
-  entries(): SetIterator<[T, T]> {
+  entries() {
     getValue(this.collection);
 
     return this.vals.entries();
   }
 
-  keys(): SetIterator<T> {
+  keys() {
     getValue(this.collection);
 
     return this.vals.keys();
   }
 
-  values(): SetIterator<T> {
+  values() {
     getValue(this.collection);
 
     return this.vals.values();
@@ -119,7 +119,7 @@ export class TrackedSet<T = unknown> implements Set<T> {
     return this.vals.size;
   }
 
-  [Symbol.iterator](): MapIterator<T> {
+  [Symbol.iterator]() {
     getValue(this.collection);
 
     return this.vals[Symbol.iterator]();
