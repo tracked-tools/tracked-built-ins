@@ -1,0 +1,20 @@
+name: Push dist
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  push-dist:
+    name: Push dist
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: wyvox/action-setup-pnpm@v3
+      - uses: kategengler/put-built-npm-package-contents-on-branch@v2.1.0
+        with:
+          branch: dist
+          token: ${{ secrets.GITHUB_TOKEN }}
+          working-directory: addon
