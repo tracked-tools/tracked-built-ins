@@ -47,22 +47,64 @@ export class TrackedSet<T = unknown> implements Set<T> {
   }
 
   // **** ALL GETTERS ****
-  entries(): IterableIterator<[T, T]> {
+  entries() {
     getValue(this.collection);
 
     return this.vals.entries();
   }
 
-  keys(): IterableIterator<T> {
+  keys() {
     getValue(this.collection);
 
     return this.vals.keys();
   }
 
-  values(): IterableIterator<T> {
+  values() {
     getValue(this.collection);
 
     return this.vals.values();
+  }
+
+  union<U>(other: ReadonlySetLike<U>): Set<T | U> {
+    getValue(this.collection);
+
+    return this.vals.union(other);
+  }
+
+  intersection<U>(other: ReadonlySetLike<U>): Set<T & U> {
+    getValue(this.collection);
+
+    return this.vals.intersection(other);
+  }
+
+  difference<U>(other: ReadonlySetLike<U>): Set<T> {
+    getValue(this.collection);
+
+    return this.vals.difference(other);
+  }
+
+  symmetricDifference<U>(other: ReadonlySetLike<U>): Set<T | U> {
+    getValue(this.collection);
+
+    return this.vals.symmetricDifference(other);
+  }
+
+  isSubsetOf(other: ReadonlySetLike<unknown>): boolean {
+    getValue(this.collection);
+
+    return this.vals.isSubsetOf(other);
+  }
+
+  isSupersetOf(other: ReadonlySetLike<unknown>): boolean {
+    getValue(this.collection);
+
+    return this.vals.isSupersetOf(other);
+  }
+
+  isDisjointFrom(other: ReadonlySetLike<unknown>): boolean {
+    getValue(this.collection);
+
+    return this.vals.isDisjointFrom(other);
   }
 
   forEach(fn: (value1: T, value2: T, set: Set<T>) => void): void {
@@ -77,7 +119,7 @@ export class TrackedSet<T = unknown> implements Set<T> {
     return this.vals.size;
   }
 
-  [Symbol.iterator](): IterableIterator<T> {
+  [Symbol.iterator]() {
     getValue(this.collection);
 
     return this.vals[Symbol.iterator]();
