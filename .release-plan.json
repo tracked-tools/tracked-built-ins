@@ -1,0 +1,25 @@
+{
+  "solution": {
+    "tracked-built-ins": {
+      "impact": "minor",
+      "oldVersion": "3.3.0",
+      "newVersion": "3.4.0",
+      "constraints": [
+        {
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :house: Internal"
+        }
+      ],
+      "pkgJSONPath": "./addon/package.json"
+    }
+  },
+  "description": "## Release (2024-12-02)\n\ntracked-built-ins 3.4.0 (minor)\n\n#### :rocket: Enhancement\n* `tracked-built-ins`, `test-app`\n  * [#424](https://github.com/tracked-tools/tracked-built-ins/pull/424) Upgrades: TypeScript, Sync with Blueprint ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :bug: Bug Fix\n* `tracked-built-ins`\n  * [#430](https://github.com/tracked-tools/tracked-built-ins/pull/430) Fix memory leak: clean up `storages` when elements removed ([@davidtaylorhq](https://github.com/davidtaylorhq))\n* `test-app`\n  * [#426](https://github.com/tracked-tools/tracked-built-ins/pull/426) Re-add support for 3.24 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* Other\n  * [#431](https://github.com/tracked-tools/tracked-built-ins/pull/431) Add push-dist workflow so folks can point at unreleased GH code if they wish ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#428](https://github.com/tracked-tools/tracked-built-ins/pull/428) Setup release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#411](https://github.com/tracked-tools/tracked-built-ins/pull/411) Update Node.js to 18 in CI ([@SergeAstapov](https://github.com/SergeAstapov))\n  * [#412](https://github.com/tracked-tools/tracked-built-ins/pull/412) add .npmrc ([@SergeAstapov](https://github.com/SergeAstapov))\n* `tracked-built-ins`, `test-app`\n  * [#427](https://github.com/tracked-tools/tracked-built-ins/pull/427) Remove DT Types (@types/*) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 3\n- David Taylor ([@davidtaylorhq](https://github.com/davidtaylorhq))\n- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+}
