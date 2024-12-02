@@ -1,4 +1,4 @@
-tracked-built-ins [![GitHub Actions Build Status](https://github.com/tracked-tools/tracked-built-ins/workflows/CI/badge.svg)](https://github.com/tracked-tools/tracked-built-ins/actions/workflows/CI.yml?query=branch%3Amaster)
+tracked-built-ins [![GitHub Actions Build Status](https://github.com/tracked-tools/tracked-built-ins/actions/workflows/CI.yml/badge.svg)](https://github.com/tracked-tools/tracked-built-ins/actions/workflows/CI.yml)
 ==============================================================================
 
 This addon provides tracked versions of JavaScript's built-ins:
