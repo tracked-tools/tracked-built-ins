@@ -2,6 +2,16 @@
 
 ## Release (2024-12-02)
 
+
+
+#### :memo: Documentation
+* [#432](https://github.com/tracked-tools/tracked-built-ins/pull/432) Update CI status badge ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 1
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
+## Release (2024-12-02)
+
 tracked-built-ins 3.4.0 (minor)
 
 #### :rocket: Enhancement
