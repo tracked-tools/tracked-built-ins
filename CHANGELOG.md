@@ -1,5 +1,33 @@
 # Changelog
 
+## Release (2024-12-02)
+
+tracked-built-ins 3.4.0 (minor)
+
+#### :rocket: Enhancement
+* `tracked-built-ins`, `test-app`
+  * [#424](https://github.com/tracked-tools/tracked-built-ins/pull/424) Upgrades: TypeScript, Sync with Blueprint ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :bug: Bug Fix
+* `tracked-built-ins`
+  * [#430](https://github.com/tracked-tools/tracked-built-ins/pull/430) Fix memory leak: clean up `storages` when elements removed ([@davidtaylorhq](https://github.com/davidtaylorhq))
+* `test-app`
+  * [#426](https://github.com/tracked-tools/tracked-built-ins/pull/426) Re-add support for 3.24 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* Other
+  * [#431](https://github.com/tracked-tools/tracked-built-ins/pull/431) Add push-dist workflow so folks can point at unreleased GH code if they wish ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#428](https://github.com/tracked-tools/tracked-built-ins/pull/428) Setup release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#411](https://github.com/tracked-tools/tracked-built-ins/pull/411) Update Node.js to 18 in CI ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#412](https://github.com/tracked-tools/tracked-built-ins/pull/412) add .npmrc ([@SergeAstapov](https://github.com/SergeAstapov))
+* `tracked-built-ins`, `test-app`
+  * [#427](https://github.com/tracked-tools/tracked-built-ins/pull/427) Remove DT Types (@types/*) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 3
+- David Taylor ([@davidtaylorhq](https://github.com/davidtaylorhq))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 
 ## v3.3.0 (2023-09-22)
 
