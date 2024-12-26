@@ -1,5 +1,20 @@
 # Changelog
 
+## Release (2024-12-26)
+
+tracked-built-ins 4.0.0 (major)
+
+#### :boom: Breaking Change
+* `tracked-built-ins`, `test-app`
+  * [#434](https://github.com/tracked-tools/tracked-built-ins/pull/434) Drop support for TypeScript < 5.5 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :memo: Documentation
+* [#432](https://github.com/tracked-tools/tracked-built-ins/pull/432) Update CI status badge ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 2
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2024-12-02)
 
 tracked-built-ins 3.4.0 (minor)
