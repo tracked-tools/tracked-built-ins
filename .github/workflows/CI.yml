@@ -16,13 +16,12 @@ jobs:
     name: Check Linting and TS
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json' # uses Volta!
-          cache: 'pnpm'
-
+          node-version: 20
+          cache: pnpm
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
@@ -46,13 +45,12 @@ jobs:
         browser: [chrome]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json' # uses Volta!
-          cache: 'pnpm'
-
+          node-version: 20
+          cache: pnpm
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
@@ -71,13 +69,12 @@ jobs:
         browser: [chrome]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json' # uses Volta!
-          cache: 'pnpm'
-
+          node-version: 20
+          cache: pnpm
       - name: Install Dependencies (without lockfile)
         run: rm pnpm-lock.yaml && pnpm install --no-lockfile
 
@@ -106,13 +103,12 @@ jobs:
           - ember-canary
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json' # uses Volta!
-          cache: 'pnpm'
-
+          node-version: 20
+          cache: pnpm
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
@@ -139,13 +135,12 @@ jobs:
     continue-on-error: ${{ matrix.ts-version == 'next' }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json' # uses Volta!
-          cache: 'pnpm'
-
+          node-version: 20
+          cache: pnpm
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
