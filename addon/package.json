@@ -60,7 +60,7 @@
   "devDependencies": {
     "@babel/core": "^7.24.4",
     "@babel/plugin-transform-typescript": "^7.24.4",
-    "@babel/runtime": "^7.24.4",
+    "@babel/runtime": "^7.26.10",
     "@embroider/addon-dev": "^4.3.1",
     "@glint/core": "^1.4.0",
     "@glint/environment-ember-loose": "^1.4.0",
