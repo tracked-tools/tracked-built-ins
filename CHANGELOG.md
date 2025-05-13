@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-05-13)
+
+
+
+#### :house: Internal
+* [#438](https://github.com/tracked-tools/tracked-built-ins/pull/438) Bump release-plan from v0.11 to v0.16 ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#436](https://github.com/tracked-tools/tracked-built-ins/pull/436) Bump pnpm to v10 ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 1
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 ## Release (2025-01-17)
 
 tracked-built-ins 4.0.0 (major)
