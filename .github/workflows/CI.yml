@@ -152,5 +152,8 @@ jobs:
         working-directory: test-app
 
       - name: Type check
-        run: pnpm lint:types
+        run: |
+          pnpm tsc --version
+          pnpm lint:types
+
         working-directory: test-app
