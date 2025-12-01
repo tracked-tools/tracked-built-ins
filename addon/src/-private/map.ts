@@ -133,9 +133,10 @@ export class TrackedMap<K = unknown, V = unknown> implements Map<K, V> {
 // So instanceof works
 Object.setPrototypeOf(TrackedMap.prototype, Map.prototype);
 
-export class TrackedWeakMap<K extends object = object, V = unknown>
-  implements WeakMap<K, V>
-{
+export class TrackedWeakMap<
+  K extends object = object,
+  V = unknown,
+> implements WeakMap<K, V> {
   private storages: WeakMap<K, TrackedStorage<null>> = new WeakMap();
 
   private vals: WeakMap<K, V>;
