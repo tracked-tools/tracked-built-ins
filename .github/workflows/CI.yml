@@ -127,10 +127,11 @@ jobs:
       fail-fast: false
       matrix:
         ts-version:
-          - '5.5'
-          - '5.6'
-          - '5.7'
-          - 'next'
+          - "5.5"
+          - "5.6"
+          - "5.7"
+          - "5.8"
+          - "5.9"
 
     continue-on-error: ${{ matrix.ts-version == 'next' }}
 
@@ -142,20 +143,17 @@ jobs:
           node-version: 20
           cache: pnpm
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm build
 
       - name: Install TS version under test
         run: pnpm add --save-dev typescript@${{ matrix.ts-version }}
-        working-directory: addon
-
-      - name: Calculate extra args
-        id: extra-args
-        run: |
-          # In later TS versions noEmit takes precedence over emitDeclarationOnly
-          if [[ "${{ matrix.ts-version }}" == "5.4" || "${{ matrix.ts-version }}" == "5.5" ]]; then
-            echo "extra-args=--emitDeclarationOnly false" >> $GITHUB_OUTPUT
-          fi
+        working-directory: test-app
 
       - name: Type check
-        run: pnpm tsc --noEmit ${{ steps.extra-args.outputs.extra-args }}
-        working-directory: addon
+        run: |
+          pnpm tsc --version
+          pnpm lint:types
+
+        working-directory: test-app
