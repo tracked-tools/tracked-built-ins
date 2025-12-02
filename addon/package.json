@@ -36,16 +36,14 @@
     "dist"
   ],
   "scripts": {
-    "build": "concurrently 'npm:build:*'",
-    "build:js": "rollup --config",
-    "build:types": "glint --declaration",
+    "build": "rollup --config",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\"",
     "lint:hbs": "ember-template-lint . --no-error-on-unmatched-pattern",
     "lint:hbs:fix": "ember-template-lint . --fix --no-error-on-unmatched-pattern",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
-    "lint:types": "glint",
+    "lint:types": "tsc --noEmit",
     "prepack": "concurrently 'npm:build:*'",
     "start": "concurrently 'npm:start:*'",
     "start:js": "rollup --config --watch --no-watch.clearScreen",
@@ -53,7 +51,7 @@
     "test": "echo 'A v2 addon does not have tests, run tests in test-app'"
   },
   "dependencies": {
-    "@embroider/addon-shim": "^1.8.7",
+    "@embroider/addon-shim": "^1.10.2",
     "decorator-transforms": "^2.0.0",
     "ember-tracked-storage-polyfill": "^1.0.0"
   },
@@ -62,6 +60,7 @@
     "@babel/plugin-transform-typescript": "^7.24.4",
     "@babel/runtime": "^7.26.10",
     "@embroider/addon-dev": "^4.3.1",
+    "@embroider/macros": "^1.19.5",
     "@glint/core": "^1.4.0",
     "@glint/environment-ember-loose": "^1.4.0",
     "@glint/environment-ember-template-imports": "^1.4.0",

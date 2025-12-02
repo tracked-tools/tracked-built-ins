@@ -112,5 +112,11 @@ module.exports = {
         'plugin:prettier/recommended',
       ],
     },
+    {
+      files: ['src/-private/*', 'src/-private/new/*'],
+      rules: {
+        '@typescript-eslint/no-explicit-any': 'off',
+      },
+    },
   ],
 };
