@@ -1,5 +1,23 @@
 # Changelog
 
+## Release (2025-12-23)
+
+* tracked-built-ins 4.1.0 (minor)
+
+#### :rocket: Enhancement
+* `tracked-built-ins`
+  * [#440](https://github.com/tracked-tools/tracked-built-ins/pull/440) This library is now a partial-polyfill for RFC#1068 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* [#443](https://github.com/tracked-tools/tracked-built-ins/pull/443) Re-roll lockfile ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#444](https://github.com/tracked-tools/tracked-built-ins/pull/444) Fix TS Matrix ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#438](https://github.com/tracked-tools/tracked-built-ins/pull/438) Bump release-plan from v0.11 to v0.16 ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#436](https://github.com/tracked-tools/tracked-built-ins/pull/436) Bump pnpm to v10 ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 2
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-01-17)
 
 tracked-built-ins 4.0.0 (major)

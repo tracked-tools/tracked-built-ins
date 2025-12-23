@@ -1,14 +1,11 @@
 {
   "solution": {
     "tracked-built-ins": {
-      "impact": "major",
-      "oldVersion": "3.4.0",
-      "newVersion": "4.0.0",
+      "impact": "minor",
+      "oldVersion": "4.0.0",
+      "newVersion": "4.1.0",
+      "tagName": "latest",
       "constraints": [
-        {
-          "impact": "major",
-          "reason": "Appears in changelog section :boom: Breaking Change"
-        },
         {
           "impact": "minor",
           "reason": "Appears in changelog section :rocket: Enhancement"
@@ -17,5 +14,5 @@
       "pkgJSONPath": "./addon/package.json"
     }
   },
-  "description": "## Release (2025-01-17)\n\ntracked-built-ins 4.0.0 (major)\n\n#### :boom: Breaking Change\n* `tracked-built-ins`, `test-app`\n  * [#434](https://github.com/tracked-tools/tracked-built-ins/pull/434) Drop support for TypeScript < 5.5 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :rocket: Enhancement\n* `tracked-built-ins`, `test-app`\n  * [#421](https://github.com/tracked-tools/tracked-built-ins/pull/421) feat: fix set issues for TypeScript 5.5+ ([@chrisvdp](https://github.com/chrisvdp))\n\n#### :memo: Documentation\n* [#432](https://github.com/tracked-tools/tracked-built-ins/pull/432) Update CI status badge ([@SergeAstapov](https://github.com/SergeAstapov))\n\n#### Committers: 3\n- Chris van der Ploeg ([@chrisvdp](https://github.com/chrisvdp))\n- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-12-23)\n\n* tracked-built-ins 4.1.0 (minor)\n\n#### :rocket: Enhancement\n* `tracked-built-ins`\n  * [#440](https://github.com/tracked-tools/tracked-built-ins/pull/440) This library is now a partial-polyfill for RFC#1068 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* [#443](https://github.com/tracked-tools/tracked-built-ins/pull/443) Re-roll lockfile ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* [#444](https://github.com/tracked-tools/tracked-built-ins/pull/444) Fix TS Matrix ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* [#438](https://github.com/tracked-tools/tracked-built-ins/pull/438) Bump release-plan from v0.11 to v0.16 ([@SergeAstapov](https://github.com/SergeAstapov))\n* [#436](https://github.com/tracked-tools/tracked-built-ins/pull/436) Bump pnpm to v10 ([@SergeAstapov](https://github.com/SergeAstapov))\n\n#### Committers: 2\n- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
