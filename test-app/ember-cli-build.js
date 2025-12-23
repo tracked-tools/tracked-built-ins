@@ -4,10 +4,19 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function (defaults) {
   const app = new EmberApp(defaults, {
-    'ember-cli-babel': { enableTypeScriptTransform: true },
+    'ember-cli-babel': {
+      enableTypeScriptTransform: true,
+      disableDecoratorTransforms: true,
+    },
     autoImport: {
       forbidEval: true,
       watchDependencies: ['tracked-built-ins'],
+    },
+    babel: {
+      plugins: [
+        // add the new transform.
+        require.resolve('decorator-transforms'),
+      ],
     },
 
     // Add options here
@@ -22,9 +31,7 @@ module.exports = function (defaults) {
   return require('@embroider/compat').compatBuild(app, Webpack, {
     staticAddonTestSupportTrees: true,
     staticAddonTrees: true,
-    staticHelpers: true,
-    staticModifiers: true,
-    staticComponents: true,
+    staticInvokables: true,
     staticEmberSource: true,
     packageRules: [
       {
@@ -41,5 +48,10 @@ module.exports = function (defaults) {
         package: 'qunit',
       },
     ],
+    packagerOptions: {
+      webpackConfig: {
+        devtool: 'source-map',
+      },
+    },
   });
 };
