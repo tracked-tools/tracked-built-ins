@@ -10,7 +10,7 @@ on:
       - main
       - master
     paths:
-      - '.release-plan.json'
+      - ".release-plan.json"
 
 concurrency:
   group: publish-${{ github.head_ref || github.ref }}
@@ -33,8 +33,9 @@ jobs:
         with:
           node-version: 18
           # This creates an .npmrc that reads the NODE_AUTH_TOKEN environment variable
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: "https://registry.npmjs.org"
           cache: pnpm
+      - run: npm install -g npm@latest # npm >= 11.5.1 is needed for OIDC
       - run: pnpm install --frozen-lockfile
       - name: Publish to NPM
         run: NPM_CONFIG_PROVENANCE=true pnpm release-plan publish
