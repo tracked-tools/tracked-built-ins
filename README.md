@@ -107,8 +107,9 @@ used as fully transparent replacements in most circumstances.
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.28 (LTS) or above
-* Embroider v3 and greater or ember-auto-import v2.7.0 and greater
+* `ember-source` v3.28 (LTS) or above
+* Embroider v3 and greater or `ember-auto-import` v2.7.0 and greater
+* `@embroider/macros` 1.19.5 or above
 
 ### TypeScript
 
