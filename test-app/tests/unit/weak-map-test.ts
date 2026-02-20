@@ -8,6 +8,14 @@ import { reactivityTest } from '../helpers/reactivity';
 module('TrackedWeakMap', function (hooks) {
   setupRenderingTest(hooks);
 
+  test('can create an empty instance via constructor (for cloning compatibility)', (assert) => {
+    const map = new TrackedWeakMap();
+
+    // WeakMaps are not iterable so their entries cannot be copied,
+    // but constructing an empty one should not throw.
+    assert.ok(map instanceof WeakMap);
+  });
+
   test('constructor', (assert) => {
     const obj = {};
     const map = new TrackedWeakMap([[obj, 123]]);

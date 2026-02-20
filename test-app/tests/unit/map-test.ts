@@ -19,6 +19,19 @@ expectTypeOf<Map<string, number>>().not.toMatchTypeOf<
 module('TrackedMap', function (hooks) {
   setupRenderingTest(hooks);
 
+  test('can be cloned via new Map()', (assert) => {
+    const map = new TrackedMap([
+      ['a', 1],
+      ['b', 2],
+    ]);
+    const cloned = new Map(map as unknown as Map<string, number>);
+
+    assert.deepEqual([...cloned], [
+      ['a', 1],
+      ['b', 2],
+    ]);
+  });
+
   test('constructor', (assert) => {
     const map = new TrackedMap([['foo', 123]]);
 

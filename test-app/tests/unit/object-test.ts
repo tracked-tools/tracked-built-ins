@@ -25,6 +25,13 @@ new TrackedObject<{ foo?: number }>();
 module('TrackedObject', function (hooks) {
   setupRenderingTest(hooks);
 
+  test('can be cloned via object spread', (assert) => {
+    const obj = new TrackedObject({ foo: 123, bar: 456 });
+    const cloned = { ...(obj as unknown as { foo: number; bar: number }) };
+
+    assert.deepEqual(cloned, { foo: 123, bar: 456 });
+  });
+
   test('basic usage', (assert) => {
     let original = { foo: 123 };
     let obj = new TrackedObject(original);

@@ -87,6 +87,46 @@ module('TrackedArray', function (hooks) {
     assert.equal(arr[0], undefined);
   });
 
+  module('cloning', () => {
+    test('constructor property is TrackedArray', (assert) => {
+      let arr = new TrackedArray([1, 2, 3]);
+
+      assert.equal(arr.constructor, TrackedArray);
+    });
+
+    test('can be cloned via constructor (lodash cloneDeep style)', (assert) => {
+      let arr = new TrackedArray([1, 2, 3]);
+
+      // This is what lodash's cloneDeep does internally: it calls
+      // `new array.constructor(array.length)` to create the clone target.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let Ctor = arr.constructor as any;
+      let result = new Ctor(arr.length);
+
+      for (let i = 0; i < arr.length; i++) {
+        result[i] = arr[i];
+      }
+
+      assert.deepEqual([...result], [1, 2, 3]);
+      assert.ok(result instanceof TrackedArray);
+    });
+
+    test('can be cloned via spread', (assert) => {
+      let arr = new TrackedArray([1, 2, 3]);
+      let cloned = [...arr];
+
+      assert.deepEqual(cloned, [1, 2, 3]);
+      assert.notOk(cloned instanceof TrackedArray);
+    });
+
+    test('constructor called with a number creates an array of that length', (assert) => {
+      let arr = new TrackedArray(3);
+
+      assert.equal(arr.length, 3);
+      assert.ok(arr instanceof TrackedArray);
+    });
+  });
+
   module('methods', () => {
     test('isArray', (assert) => {
       let arr = new TrackedArray();

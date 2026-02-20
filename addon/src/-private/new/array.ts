@@ -17,10 +17,20 @@ export class TrackedArray {
   static of(...arr: unknown[]) {
     return new TrackedArray(arr);
   }
-  constructor(arr: unknown[] = []) {
+
+  constructor(arr?: unknown[]);
+  constructor(length: number);
+  constructor(arr: unknown[] | number = []) {
+    // Handle the case where a cloning library (e.g. lodash's cloneDeep) calls
+    // `new array.constructor(array.length)` to pre-allocate the clone target.
+    if (typeof arr === 'number') {
+      arr = new Array(arr);
+    }
+
     const reactive = trackedArray(arr, config);
 
     const boundFns = new WeakMap();
+    const ctor = TrackedArray;
 
     function call(
       target: object,
@@ -47,6 +57,14 @@ export class TrackedArray {
 
     return new Proxy(reactive, {
       get(target, prop, receiver) {
+        // Return the TrackedArray constructor directly so that cloning libraries
+        // (e.g. lodash's cloneDeep) can call `new array.constructor(length)`
+        // successfully. Arrow functions (used by the `call` wrapper) are not
+        // constructors, so we must bypass the wrapper for `constructor`.
+        if (prop === 'constructor') {
+          return ctor;
+        }
+
         const value = Reflect.get(target, prop, target);
 
         if (typeof value === 'function') {

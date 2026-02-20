@@ -17,6 +17,13 @@ type AnyFn = (...args: any[]) => any;
 module('TrackedSet', function (hooks) {
   setupRenderingTest(hooks);
 
+  test('can be cloned via new Set()', (assert) => {
+    const set = new TrackedSet([1, 2, 3]);
+    const cloned = new Set(set as unknown as Set<number>);
+
+    assert.deepEqual([...cloned], [1, 2, 3]);
+  });
+
   test('constructor', (assert) => {
     const set = new TrackedSet(['foo', 123]);
 
