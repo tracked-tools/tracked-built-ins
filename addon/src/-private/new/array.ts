@@ -21,8 +21,6 @@ export class TrackedArray {
   constructor(arr?: unknown[]);
   constructor(length: number);
   constructor(arr: unknown[] | number = []) {
-    // Handle the case where a cloning library (e.g. lodash's cloneDeep) calls
-    // `new array.constructor(array.length)` to pre-allocate the clone target.
     if (typeof arr === 'number') {
       arr = new Array(arr);
     }
@@ -57,10 +55,9 @@ export class TrackedArray {
 
     return new Proxy(reactive, {
       get(target, prop, receiver) {
-        // Return the TrackedArray constructor directly so that cloning libraries
-        // (e.g. lodash's cloneDeep) can call `new array.constructor(length)`
-        // successfully. Arrow functions (used by the `call` wrapper) are not
-        // constructors, so we must bypass the wrapper for `constructor`.
+        // Return the TrackedArray constructor directly. Arrow functions (used
+        // by the `call` wrapper below) are not constructors, so we must bypass
+        // the wrapper for `constructor`.
         if (prop === 'constructor') {
           return ctor;
         }
