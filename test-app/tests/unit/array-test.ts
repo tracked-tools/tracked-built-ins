@@ -2,6 +2,7 @@ import type Owner from '@ember/owner';
 import Component from '@glimmer/component';
 import { TrackedArray } from 'tracked-built-ins';
 import { expectTypeOf } from 'expect-type';
+import { cloneDeep } from 'lodash-es';
 
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -94,21 +95,12 @@ module('TrackedArray', function (hooks) {
       assert.equal(arr.constructor, TrackedArray);
     });
 
-    test('can be cloned via constructor (lodash cloneDeep style)', (assert) => {
+    test('can be cloned with lodash cloneDeep', (assert) => {
       let arr = new TrackedArray([1, 2, 3]);
+      let cloned = cloneDeep(arr);
 
-      // This is what lodash's cloneDeep does internally: it calls
-      // `new array.constructor(array.length)` to create the clone target.
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      let Ctor = arr.constructor as any;
-      let result = new Ctor(arr.length);
-
-      for (let i = 0; i < arr.length; i++) {
-        result[i] = arr[i];
-      }
-
-      assert.deepEqual([...result], [1, 2, 3]);
-      assert.ok(result instanceof TrackedArray);
+      assert.deepEqual([...cloned], [1, 2, 3]);
+      assert.ok(cloned instanceof TrackedArray);
     });
 
     test('can be cloned via spread', (assert) => {

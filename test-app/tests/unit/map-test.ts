@@ -4,6 +4,7 @@ import { TrackedMap } from 'tracked-built-ins';
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import { expectTypeOf } from 'expect-type';
+import { cloneDeep } from 'lodash-es';
 
 import { reactivityTest } from '../helpers/reactivity';
 import {
@@ -19,12 +20,12 @@ expectTypeOf<Map<string, number>>().not.toMatchTypeOf<
 module('TrackedMap', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('can be cloned via new Map()', (assert) => {
+  test('can be cloned with lodash cloneDeep', (assert) => {
     const map = new TrackedMap([
       ['a', 1],
       ['b', 2],
     ]);
-    const cloned = new Map(map as unknown as Map<string, number>);
+    const cloned = cloneDeep(map);
 
     assert.deepEqual([...cloned], [
       ['a', 1],
