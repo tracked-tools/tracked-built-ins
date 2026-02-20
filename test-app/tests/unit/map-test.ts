@@ -27,10 +27,13 @@ module('TrackedMap', function (hooks) {
     ]);
     const cloned = cloneDeep(map);
 
-    assert.deepEqual([...cloned], [
-      ['a', 1],
-      ['b', 2],
-    ]);
+    assert.deepEqual(
+      [...cloned],
+      [
+        ['a', 1],
+        ['b', 2],
+      ],
+    );
   });
 
   test('constructor', (assert) => {
