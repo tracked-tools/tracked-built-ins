@@ -4,6 +4,7 @@ import { TrackedSet } from 'tracked-built-ins';
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import { expectTypeOf } from 'expect-type';
+import { cloneDeep } from 'lodash-es';
 
 import { reactivityTest } from '../helpers/reactivity';
 import { eachReactivityTest } from '../helpers/collection-reactivity';
@@ -16,6 +17,13 @@ type AnyFn = (...args: any[]) => any;
 
 module('TrackedSet', function (hooks) {
   setupRenderingTest(hooks);
+
+  test('can be cloned with lodash cloneDeep', (assert) => {
+    const set = new TrackedSet([1, 2, 3]);
+    const cloned = cloneDeep(set);
+
+    assert.deepEqual([...cloned], [1, 2, 3]);
+  });
 
   test('constructor', (assert) => {
     const set = new TrackedSet(['foo', 123]);

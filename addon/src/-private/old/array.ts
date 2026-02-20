@@ -89,7 +89,13 @@ class TrackedArray<T = unknown> {
     return new TrackedArray(arr);
   }
 
-  constructor(arr: T[] = []) {
+  constructor(arr?: T[]);
+  constructor(length: number);
+  constructor(arr: T[] | number = []) {
+    if (typeof arr === 'number') {
+      arr = new Array(arr);
+    }
+
     const clone = arr.slice();
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
@@ -105,6 +111,10 @@ class TrackedArray<T = unknown> {
 
     return new Proxy(clone, {
       get(target, prop /*, _receiver */) {
+        if (prop === 'constructor') {
+          return TrackedArray;
+        }
+
         const index = convertToInt(prop);
 
         if (index !== null) {

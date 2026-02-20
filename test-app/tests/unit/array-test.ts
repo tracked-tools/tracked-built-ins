@@ -2,6 +2,7 @@ import type Owner from '@ember/owner';
 import Component from '@glimmer/component';
 import { TrackedArray } from 'tracked-built-ins';
 import { expectTypeOf } from 'expect-type';
+import { cloneDeep } from 'lodash-es';
 
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -85,6 +86,37 @@ module('TrackedArray', function (hooks) {
 
     assert.equal(arr.length, 0);
     assert.equal(arr[0], undefined);
+  });
+
+  module('cloning', () => {
+    test('constructor property is TrackedArray', (assert) => {
+      let arr = new TrackedArray([1, 2, 3]);
+
+      assert.equal(arr.constructor, TrackedArray);
+    });
+
+    test('can be cloned with lodash cloneDeep', (assert) => {
+      let arr = new TrackedArray([1, 2, 3]);
+      let cloned = cloneDeep(arr);
+
+      assert.deepEqual([...cloned], [1, 2, 3]);
+      assert.ok(cloned instanceof TrackedArray);
+    });
+
+    test('can be cloned via spread', (assert) => {
+      let arr = new TrackedArray([1, 2, 3]);
+      let cloned = [...arr];
+
+      assert.deepEqual(cloned, [1, 2, 3]);
+      assert.notOk(cloned instanceof TrackedArray);
+    });
+
+    test('constructor called with a number creates an array of that length', (assert) => {
+      let arr = new TrackedArray(3);
+
+      assert.equal(arr.length, 3);
+      assert.ok(arr instanceof TrackedArray);
+    });
   });
 
   module('methods', () => {

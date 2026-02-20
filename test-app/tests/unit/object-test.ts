@@ -4,6 +4,7 @@ import { TrackedObject } from 'tracked-built-ins';
 import { render, settled } from '@ember/test-helpers';
 import type { TestContext } from '@ember/test-helpers';
 import { expectTypeOf } from 'expect-type';
+import { cloneDeep } from 'lodash-es';
 
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -24,6 +25,15 @@ new TrackedObject<{ foo?: number }>();
 
 module('TrackedObject', function (hooks) {
   setupRenderingTest(hooks);
+
+  test('can be cloned with lodash cloneDeep', (assert) => {
+    const obj = new TrackedObject({ foo: 123, bar: 456 });
+    const cloned = cloneDeep(obj) as { foo: number; bar: number };
+
+    assert.equal(cloned.foo, 123);
+    assert.equal(cloned.bar, 456);
+    assert.deepEqual(Object.keys(cloned).sort(), ['bar', 'foo']);
+  });
 
   test('basic usage', (assert) => {
     let original = { foo: 123 };

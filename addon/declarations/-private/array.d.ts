@@ -14,6 +14,7 @@ declare class TrackedArray<T = unknown> {
     static from<T, U>(iterable: Iterable<T> | ArrayLike<T>, mapfn: (v: T, k: number) => U, thisArg?: unknown): TrackedArray<U>;
     static of<T>(...arr: T[]): TrackedArray<T>;
     constructor(arr?: T[]);
+    constructor(length: number);
 }
 interface TrackedArray<T = unknown> extends Array<T> {
 }

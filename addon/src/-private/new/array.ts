@@ -17,10 +17,18 @@ export class TrackedArray {
   static of(...arr: unknown[]) {
     return new TrackedArray(arr);
   }
-  constructor(arr: unknown[] = []) {
+
+  constructor(arr?: unknown[]);
+  constructor(length: number);
+  constructor(arr: unknown[] | number = []) {
+    if (typeof arr === 'number') {
+      arr = new Array(arr);
+    }
+
     const reactive = trackedArray(arr, config);
 
     const boundFns = new WeakMap();
+    const ctor = TrackedArray;
 
     function call(
       target: object,
@@ -47,6 +55,13 @@ export class TrackedArray {
 
     return new Proxy(reactive, {
       get(target, prop, receiver) {
+        // Return the TrackedArray constructor directly. Arrow functions (used
+        // by the `call` wrapper below) are not constructors, so we must bypass
+        // the wrapper for `constructor`.
+        if (prop === 'constructor') {
+          return ctor;
+        }
+
         const value = Reflect.get(target, prop, target);
 
         if (typeof value === 'function') {
