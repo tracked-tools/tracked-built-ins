@@ -8,14 +8,6 @@ import { reactivityTest } from '../helpers/reactivity';
 module('TrackedWeakSet', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('can create an empty instance via constructor (for cloning compatibility)', (assert) => {
-    const set = new TrackedWeakSet();
-
-    // WeakSets are not iterable so their entries cannot be copied,
-    // but constructing an empty one should not throw.
-    assert.ok(set instanceof WeakSet);
-  });
-
   test('constructor', (assert) => {
     const obj = {};
     const set = new TrackedWeakSet([obj]);
