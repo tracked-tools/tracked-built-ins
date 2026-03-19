@@ -550,4 +550,13 @@ module('TrackedArray', function (hooks) {
       );
     });
   });
+
+  module('item types', () => {
+    test('Function', (assert) => {
+      let arr = new TrackedArray<() => void>([]);
+      let item = function theItem() {};
+      arr.push(item);
+      assert.equal(arr[0], item);
+    });
+  });
 });
