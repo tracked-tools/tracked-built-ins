@@ -19,42 +19,7 @@ export class TrackedArray {
   }
   constructor(arr: unknown[] = []) {
     const reactive = trackedArray(arr, config);
-
-    const boundFns = new WeakMap();
-
-    function call(
-      target: object,
-      receiver: object,
-      fn: (...args: unknown[]) => unknown,
-    ) {
-      let existing = boundFns.get(fn);
-
-      if (!existing) {
-        existing = (...args: unknown[]) => {
-          const result = fn.apply(target, args);
-
-          if (result === reactive) {
-            return receiver;
-          }
-
-          return result;
-        };
-        boundFns.set(fn, existing);
-      }
-
-      return existing;
-    }
-
     return new Proxy(reactive, {
-      get(target, prop, receiver) {
-        const value = Reflect.get(target, prop, target);
-
-        if (typeof value === 'function') {
-          return call(target, receiver, value);
-        }
-
-        return value;
-      },
       getPrototypeOf() {
         return TrackedArray.prototype;
       },
