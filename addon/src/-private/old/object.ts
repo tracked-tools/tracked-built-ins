@@ -1,8 +1,4 @@
-import {
-  createStorage,
-  getValue,
-  setValue,
-} from 'ember-tracked-storage-polyfill';
+import { createStorage, getValue, setValue } from '../tracked-storage.ts';
 
 class TrackedObjectImplementation<T extends object> {
   static fromEntries<T = unknown>(
