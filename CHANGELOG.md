@@ -2,6 +2,17 @@
 
 ## Release (2026-03-20)
 
+* tracked-built-ins 4.1.2 (patch)
+
+#### :bug: Bug Fix
+* `tracked-built-ins`
+  * [#453](https://github.com/tracked-tools/tracked-built-ins/pull/453) Bugfix: TrackedArray breaks when it contains functions ([@ef4](https://github.com/ef4))
+
+#### Committers: 1
+- Edward Faulkner ([@ef4](https://github.com/ef4))
+
+## Release (2026-03-20)
+
 * tracked-built-ins 4.1.1 (patch)
 
 #### :bug: Bug Fix

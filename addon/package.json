@@ -1,6 +1,6 @@
 {
   "name": "tracked-built-ins",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "description": "Tracked versions of JavaScript's built-in classes!",
   "keywords": [
     "ember-addon"
