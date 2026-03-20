@@ -24,8 +24,8 @@ importers:
         specifier: ^2.0.0
         version: 2.3.0(@babel/core@7.28.4)
       ember-tracked-storage-polyfill:
-        specifier: github:ember-polyfills/ember-tracked-storage-polyfill#c9fd59d
-        version: https://codeload.github.com/ember-polyfills/ember-tracked-storage-polyfill/tar.gz/c9fd59d(@babel/core@7.28.4)
+        specifier: github:ember-polyfills/ember-tracked-storage-polyfill#4ba5cc6
+        version: https://codeload.github.com/ember-polyfills/ember-tracked-storage-polyfill/tar.gz/4ba5cc6(@babel/core@7.28.4)
     devDependencies:
       '@babel/core':
         specifier: ^7.24.4
@@ -3364,9 +3364,9 @@ packages:
     engines: {node: 12.* || 14.* || >= 16.*}
     hasBin: true
 
-  ember-tracked-storage-polyfill@https://codeload.github.com/ember-polyfills/ember-tracked-storage-polyfill/tar.gz/c9fd59d:
-    resolution: {tarball: https://codeload.github.com/ember-polyfills/ember-tracked-storage-polyfill/tar.gz/c9fd59d}
-    version: 0.0.0
+  ember-tracked-storage-polyfill@https://codeload.github.com/ember-polyfills/ember-tracked-storage-polyfill/tar.gz/4ba5cc6:
+    resolution: {tarball: https://codeload.github.com/ember-polyfills/ember-tracked-storage-polyfill/tar.gz/4ba5cc6}
+    version: 1.0.0
 
   ember-try-config@4.0.0:
     resolution: {integrity: sha512-jAv7fqYJK7QYYekPc/8Nr7KOqDpv/asqM6F8xcRnbmf9UrD35BkSffY63qUuiD9e0aR5qiMNBIQzH8f65rGDqw==}
@@ -11419,7 +11419,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-tracked-storage-polyfill@https://codeload.github.com/ember-polyfills/ember-tracked-storage-polyfill/tar.gz/c9fd59d(@babel/core@7.28.4):
+  ember-tracked-storage-polyfill@https://codeload.github.com/ember-polyfills/ember-tracked-storage-polyfill/tar.gz/4ba5cc6(@babel/core@7.28.4):
     dependencies:
       '@embroider/addon-shim': 1.10.2
       decorator-transforms: 2.3.0(@babel/core@7.28.4)
