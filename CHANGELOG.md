@@ -1,5 +1,19 @@
 # Changelog
 
+## Release (2026-03-20)
+
+* tracked-built-ins 4.1.1 (patch)
+
+#### :bug: Bug Fix
+* `tracked-built-ins`
+  * [#455](https://github.com/tracked-tools/tracked-built-ins/pull/455) Inline tracked-storage-polyfill ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :memo: Documentation
+* [#446](https://github.com/tracked-tools/tracked-built-ins/pull/446) Be more specific about compatibility ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-12-23)
 
 * tracked-built-ins 4.1.0 (minor)
