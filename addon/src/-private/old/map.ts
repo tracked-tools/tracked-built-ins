@@ -3,7 +3,7 @@ import {
   createStorage,
   getValue,
   setValue,
-} from 'ember-tracked-storage-polyfill';
+} from '../tracked-storage.ts';
 
 export class TrackedMap<K = unknown, V = unknown> implements Map<K, V> {
   private collection = createStorage(null, () => false);

@@ -11,7 +11,7 @@ import {
   createStorage,
   getValue,
   setValue,
-} from 'ember-tracked-storage-polyfill';
+} from '../tracked-storage.ts';
 
 const ARRAY_GETTER_METHODS = new Set<string | symbol | number>([
   Symbol.iterator,
