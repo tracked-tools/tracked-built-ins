@@ -17,7 +17,7 @@
     "release-plan": "^0.16.0",
     "typescript": "^5.5.2"
   },
-  "packageManager": "pnpm@9.14.2",
+  "packageManager": "pnpm@10.32.1",
   "volta": {
     "node": "22.15.0",
     "pnpm": "10.10.0"
