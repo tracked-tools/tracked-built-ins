@@ -1,3 +1,6 @@
 packages:
-  - 'addon'
-  - 'test-app'
+  - "addon"
+  - "test-app"
+
+onlyBuiltDependencies:
+  - "ember-tracked-storage-polyfill"
